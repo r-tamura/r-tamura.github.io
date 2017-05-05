@@ -11,6 +11,7 @@ deployment:
       - git config --global user.name "CircleCI"
       - git config --global user.email "rtamura30@gmail.com"
       - npm run clean
+      - npm run build:prefix
       - npm run deploy
 general:
   branches:

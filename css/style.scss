@@ -1,0 +1,146 @@
+@import "variables";
+@import "fonts";
+
+
+$primaryColor: #24292e;
+$secondaryColor: #586365;
+
+header {
+  font-family: 'Tauri';
+  font-size: 22px;
+  background: $primaryColor;
+  color: #fff;
+  padding: 20px;
+}
+
+footer {
+  background: $secondaryColor;
+  color: #fff;
+  padding: 20px;
+}
+
+.container {
+  padding: 40px 0;
+  min-height: calc(100vh - 137px);
+}
+
+.index {
+  ul {
+    font-size: 120%;
+  }
+  li {
+    margin-bottom: 35px;
+  }
+}
+
+.article-list hr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  width: 35px;
+  margin: 30px 45%;
+}
+
+.wysiwyg {
+  font-size: 110%;
+  a {
+    color: $primaryColor;
+  }
+  p {
+    font-weight: 400;
+  }
+  pre {
+    background: transparent;
+    padding: 0;
+  }
+  code {
+    padding: 20px 25px;
+  }
+  :not(pre) code {
+    font-size: 0.9em;
+    color: rgba(0,0,0,.7);
+    background: #f8f8f8;
+  }
+}
+
+.bio {
+  margin: 0 auto;
+  margin-top: 50px;
+  img {
+    width: 80px;
+    height: auto;
+    margin-right: 15px;
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    width: 35px;
+    margin: 30px 45%;
+  }
+}
+
+.bio-img {
+  display: table-cell;
+  padding: 30px 10px;
+}
+
+.bio-detail {
+  display: table-cell;
+  vertical-align: top;
+  padding: 20px 0px;
+  font-size: 90%;
+}
+
+.social-buttons {
+  display: table;
+  margin-top: 10px;
+  border-collapse: separate;
+  border-spacing: 15px 0px;
+  margin-left: -15px;
+  li {
+    display: table-cell;
+    font-size: 20px;
+  }
+}
+
+.section > .inner {
+  font-size: 95%;
+}
+
+@media screen and (min-width: 576px) {
+  .bio {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bio {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .section > .inner {
+    width: 900px;
+    max-width: 100%;
+    font-size: 100%;
+  }
+  .bio {
+    // margin: 0 auto;
+    // margin-top: 50px;
+    width: 500px;
+    img {
+      width: 100px;
+    }
+  }
+  .bio-img {
+    padding: 30px 20px;
+  }
+  .social-buttons {
+    li {
+      font-size: 22px;
+    }
+  }
+}
+
+// @media screen and (min-width: 1200px) {
+// }

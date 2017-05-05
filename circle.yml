@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: 7.9.0
+test:
+  override:
+    - echo "skip test..."
+deployment:
+  production:
+    branch: master
+    commands:
+      - git config --global user.name "CircleCI"
+      - git config --global user.email "rtamura30@gmail.com"
+      - npm run clean
+      - npm run deploy
+general:
+  branches:
+    ignore:
+      - master

@@ -32,11 +32,17 @@ class MarkdownWrapper extends React.Component {
         >
           {moment(post.date).format('YYYY.MM.DD')}
         </div>
-        <div>
-          {
-            post.tags.map(t => <Tag key={t}>{t}</Tag>)
-          }
-        </div>
+        {/* タグがある場合はタグを表示 */}
+        {
+          post.tags ?
+          <div>
+            {
+                post.tags.map(t => <Tag key={t}>{t}</Tag>)
+            }
+          </div>
+          : ""
+        }
+
         <Highlight innerHTML={true} className="wysiwyg">{post.body}</Highlight>
         <Bio />
       </article>

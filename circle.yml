@@ -6,7 +6,7 @@ test:
     - echo "skip test..."
 deployment:
   production:
-    branch: master
+    branch: source
     commands:
       - git config --global user.name "CircleCI"
       - git config --global user.email "rtamura30@gmail.com"

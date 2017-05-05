@@ -1,31 +1,44 @@
-# gatsby-starter-undefined
-Gatsby starter for creating a blog
+# Blog
+[web site](https://r-tamura.github.io/)
 
-## Features
-* Simple Layout
-* Select a theme (primary/secondary color)
-* Select a syntax highlight theme (based on highlight.js)
-* Support for Google Analytics
-* Support for Japanese Font
-* Author Bio
+# Stack
+ - SSG: Gatsby
+ - Hosting: GitHub Pages
+ - CDN: Cloudflare
+ - CI: CircleCI
 
-## Demo
-[https://undefined.netlify.com/](https://undefined.netlify.com/)
+# Todos
 
-## Install
-Install this starter (assuming Gatsby is installed) by running from your CLI: `gatsby new blog https://github.com/kentaro-m/gatsby-starter-undefined`
+## Required
+- [x] Deploy with Gatsbys
+- [x] Deploy via CircleCI
+- [x] Set up Custom domain name
+- [x] Set up Cloudflare
 
-## Running in development
+## Optional
+- [ ] Introduce markdown lint tool
+- [ ] Customize Theme
+- [ ] Check page speed
+
+# Installation
+
 ```
-$ gatsby develop
+git clone https://github.com/r-tamura/r-tamura.github.io.git
+npm i
 ```
 
-## Screen Shots
-![](./images/gatsbyjs001.png)
-Top page
+# Scripts
 
-![](./images/gatsbyjs002.png)
-Single page
+```
+// Generate HTML for publish
+npm run build
 
-## License
-MIT
+// Clean directory for publish
+npm run clean
+
+// Run dev server(http://localhost:8000/)
+npm run develop
+
+// Deploy
+npm run deploy
+```

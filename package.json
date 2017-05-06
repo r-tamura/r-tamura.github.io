@@ -53,6 +53,7 @@
     "build": "gatsby build",
     "build:prefix": "gatsby build --prefix-links",
     "deploy": "node ./utils/deploy.js",
-    "clean": "node ./utils/clean.js"
+    "clean": "node ./utils/clean.js",
+    "server": "node server.js public"
   }
 }

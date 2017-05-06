@@ -10,8 +10,27 @@ Gatsbyを使って静的WebサイトをMarkdownで作成し、CircleCI経由でG
 
 ## Gatsbyの導入
 
-Coming...
+### インストール
 
+```bash
+npm install -g gatsby
+```
+
+### config.toml設定
+
+config.tomlはgatsbyの設定ファイル
+
+```yml
+blogTitle = "技術忘備録"
+authorName = "r-tamura"
+authorDetail = "Web関連多めのソフトウェアエンジニアです。"
+linkPrefix = ""
+googleAnalyticsId = ""
+syntaxTheme = "ocean"
+twitterId = "r_tamura30"
+facebookId = ""
+githubId = "r-tamura"
+```
 
 ## カスタムドメインの取得
 

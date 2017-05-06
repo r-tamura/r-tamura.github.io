@@ -32,12 +32,17 @@ test:
     - echo "skip test..."
 deployment:
   production:
-    branch: master
+    branch: source # sourceブランチでビルドされた場合のみdeployを行う
     commands:
       - git config --global user.name "CircleCI"
       - git config --global user.email "rtamura30@gmail.com"
       - npm run clean
+      - npm run build:prefix
       - npm run deploy
+general:
+  branches:
+    ignore:
+      - master # masterレポジトリpush時はcheckoutしない
 ```
 
 デプロイ先のレポジトリへのDeploy keyがないので、作成してGitHub側に公開鍵, CircleCI側に秘密鍵を登録する

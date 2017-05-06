@@ -8,6 +8,7 @@
     "lodash": "^4.17.2",
     "moment": "^2.17.1",
     "musubii": "^1.2.0",
+    "prop-types": "^15.5.8",
     "react-addons-shallow-compare": "^15.4.1",
     "react-dates": "^4.1.0",
     "react-ga": "^2.1.2",

@@ -19,7 +19,7 @@ const server = http.createServer((request, response) => {
   const reqUrl = url.parse(request.url).pathname
   let filepath = path.join(context, reqUrl)
 
-  fs.exists(filepath, function(exists) {
+  fs.exists(filepath, exists => {
     if(!exists) {
       response.writeHead(404, {"Content-Type": "text/plain"});
       response.write(`404 Not Found (${filepath})\n`);
@@ -29,7 +29,7 @@ const server = http.createServer((request, response) => {
 
     if (fs.statSync(filepath).isDirectory()) filepath += '/index.html'
 
-    fs.readFile(filepath, "binary", function(err, file) {
+    fs.readFile(filepath, "binary", err, file => {
       if(err) {
         response.writeHead(500, {"Content-Type": "text/plain"})
         response.write(err + "\n")
@@ -40,7 +40,7 @@ const server = http.createServer((request, response) => {
       response.writeHead(200)
       response.write(file, "binary")
       response.end()
-    });
+    })
   })
 })
   .on('error', err => {

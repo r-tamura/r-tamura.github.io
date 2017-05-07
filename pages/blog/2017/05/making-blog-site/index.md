@@ -46,6 +46,9 @@ CircleCIの設定ファイル`circle.yml`にデプロイ用設定を入力
 machine:
   node:
     version: 7.9.0
+dependencies:
+  override:
+    - yarn install
 test:
   override:
     - echo "skip test..."

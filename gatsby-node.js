@@ -1,10 +1,17 @@
 const fs = require('fs')
 const path = require('path')
 
+exports.modifyWebpackConfig = function(config, stage) {
+  config.loader('images', cfg => {
+    cfg.test = /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/
+    cfg.loader = 'url?limit=1000'
+    return cfg
+  })
+  return config
+}
+
 function copyFile(source, target, cb) {
   let cbCalled = false
-
-  console.log(`Copying file [${source}] => [${target}]`)
 
   const rd =
     fs.createReadStream(source)
@@ -19,7 +26,6 @@ function copyFile(source, target, cb) {
 
   function done(err) {
     if (!cbCalled) {
-      console.log('Copied successfully!')
       cb(err);
       cbCalled = true;
     }
@@ -32,5 +38,9 @@ exports.postBuild = (pages, end) => {
   // デプロイ(masterへのpush)時にCircleCIがmasterブランチをチェックアウトを行わないようにするため
   const src = path.join(__dirname, 'circle.yml')
   const dest = path.join(__dirname, 'public', 'circle.yml')
-  copyFile(src, dest, end)
+  console.log(`Copying file [${src}] => [${dest}]`)
+  copyFile(src, dest, () => {
+    console.log('Copied successfully!')
+    end()
+  })
 }

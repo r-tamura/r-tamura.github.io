@@ -20,15 +20,15 @@ const Bio = () => (
       <ul className="social-buttons">
         {
           config.twitterId ?
-          <li><a href={`https://twitter.com/${config.twitterId}`}><i className="icon-twitter"></i></a></li> : ""
+          <li><a href={`https://twitter.com/${config.twitterId}`}><i className="fa fa-twitter"></i></a></li> : ""
         }
         {
           config.facebookId ?
-          <li><a href={`https://www.facebook.com/${config.facebookId}`}><i className="icon-facebook"></i></a></li> : ""
+          <li><a href={`https://www.facebook.com/${config.facebookId}`}><i className="fa fa-facebook"></i></a></li> : ""
         }
         {
           config.githubId ?
-          <li><a href={`https://github.com/${config.githubId}`}><i className="icon-github"></i></a></li> : ""
+          <li><a href={`https://github.com/${config.githubId}`}><i className="fa fa-github"></i></a></li> : ""
         }
       </ul>
     </div>

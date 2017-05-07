@@ -1,20 +1,17 @@
+@import "../node_modules/font-awesome/scss/font-awesome.scss";
 @import "variables";
-@import "fonts";
-
-
-$primaryColor: #24292e;
-$secondaryColor: #586365;
+/* @import "fonts"; */
 
 header {
   font-family: 'Tauri';
-  font-size: 22px;
-  background: $primaryColor;
+  font-size: 24px;
+  background: $color-primary-light;
   color: #fff;
-  padding: 20px;
+  line-height: 68px;
 }
 
 footer {
-  background: $secondaryColor;
+  background: $color-secondary;
   color: #fff;
   padding: 20px;
 }
@@ -43,7 +40,7 @@ footer {
 .wysiwyg {
   font-size: 110%;
   a {
-    color: $primaryColor;
+    color: $color-primary-light;
   }
   p {
     font-weight: 400;

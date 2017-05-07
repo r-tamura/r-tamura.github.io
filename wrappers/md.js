@@ -37,6 +37,7 @@ class MarkdownWrapper extends React.Component {
         {
           post.tags ?
           <div>
+            <i className="fa fa-tags" aria-hidden="true"></i>
             {
                 post.tags.map(t => <Tag key={t}>{t}</Tag>)
             }

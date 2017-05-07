@@ -1,14 +1,14 @@
 const fs = require('fs')
 const path = require('path')
 
-exports.modifyWebpackConfig = function(config, stage) {
-  config.loader('images', cfg => {
-    cfg.test = /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/
-    cfg.loader = 'url?limit=1000'
-    return cfg
-  })
-  return config
-}
+// exports.modifyWebpackConfig = function(config, stage) {
+//   config.loader('images', cfg => {
+//     cfg.test = /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/
+//     cfg.loader = 'url?limit=1000'
+//     return cfg
+//   })
+//   return config
+// }
 
 function copyFile(source, target, cb) {
   let cbCalled = false

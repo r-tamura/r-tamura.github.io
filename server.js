@@ -29,7 +29,7 @@ const server = http.createServer((request, response) => {
 
     if (fs.statSync(filepath).isDirectory()) filepath += '/index.html'
 
-    fs.readFile(filepath, "binary", err, file => {
+    fs.readFile(filepath, "binary", (err, file) => {
       if(err) {
         response.writeHead(500, {"Content-Type": "text/plain"})
         response.write(err + "\n")

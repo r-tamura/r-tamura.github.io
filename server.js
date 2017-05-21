@@ -1,6 +1,4 @@
 /* eslint no-console: 0 */
-const http = require('http')
-const url = require('url')
 /**
  * 簡易Staticファイルサーバツール
  *
@@ -11,10 +9,18 @@ const url = require('url')
  *  // カレントディレクトリ内のpublicディレクトリをルートディレクトリとして指定
  *  node server.js public
  */
+const http = require('http')
+const url = require('url')
 const path = require('path')
 const fs = require('fs')
 const context = process.argv[2] ? path.resolve(process.cwd(), process.argv[2]) : process.cwd()
 const port = process.argv[3] || 8888
+
+const knownContentTypes = {
+  js: "text/javascript",
+  html: "text/html",
+  css: "text/css",
+}
 
 const server = http.createServer((request, response) => {
   const reqUrl = url.parse(request.url).pathname
@@ -40,7 +46,10 @@ const server = http.createServer((request, response) => {
         return
       }
 
-      response.writeHead(200)
+      // ファイル名の拡張子でレスポンスヘッダのContent-Typeを判断する
+      const ext = path.extname(filepath).slice(1)
+      const headers = knownContentTypes[ext] ? { "Content-Type": knownContentTypes[ext] } : undefined
+      response.writeHead(200, headers)
       response.write(file, "binary")
       response.end()
     })

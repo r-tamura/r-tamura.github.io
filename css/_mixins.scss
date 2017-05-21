@@ -1,0 +1,30 @@
+/*
+ * Media Query
+ */
+@mixin break($bp) {
+  @media (min-width: map-get($breakpoints, $bp)) {
+    @content;
+  }
+}
+
+/**
+ * ホバーエフェクトを設定します
+ * ホバー時に透過度を高くし、ホバー状態であることを明示します
+ * @param $opacity ホバー時の透過度
+ */
+@mixin hover-effect($opacity) {
+  transition: opacity 0.35s;
+
+  &:hover {
+    opacity: $opacity;
+    transition: opacity 0.35s;
+  }
+}
+
+/**
+ * 中央寄せスタイル
+ */
+@mixin center() {
+  margin-left: auto;
+  margin-right: auto;
+}

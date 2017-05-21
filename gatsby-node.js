@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const fs = require('fs')
 const path = require('path')
 
@@ -20,20 +21,19 @@ function copyFile(source, target, cb) {
   const wr =
     fs.createWriteStream(target)
       .on("error", err => done(err))
-      .on("close", ex => done())
+      .on("close", () => done())
 
   rd.pipe(wr)
 
   function done(err) {
     if (!cbCalled) {
-      cb(err);
-      cbCalled = true;
+      cb(err)
+      cbCalled = true
     }
   }
 }
 
 exports.postBuild = (pages, end) => {
-
   // circle.ymlをmasterにコピー
   // デプロイ(masterへのpush)時にCircleCIがmasterブランチをチェックアウトを行わないようにするため
   const src = path.join(__dirname, 'circle.yml')

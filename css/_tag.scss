@@ -1,5 +1,9 @@
-.post-tag {
-  display: inline-block;
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.article-tag {
   color: #e53935;
   background: #ffebee;
   border-radius: 3px;

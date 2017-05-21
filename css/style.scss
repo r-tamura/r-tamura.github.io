@@ -1,17 +1,12 @@
 @import "../node_modules/font-awesome/scss/font-awesome.scss";
 @import "variables";
+@import "mixins";
 @import "tag";
-
-header {
-  font-family: 'Tauri';
-  font-size: 24px;
-  background: $color-primary;
-  color: #fff;
-  line-height: 68px;
-}
+@import "header";
+@import "article";
 
 footer {
-  background: $color-secondary;
+  background: $color-secondary-dark;
   color: #fff;
   padding: 20px;
 }
@@ -28,13 +23,6 @@ footer {
   li {
     margin-bottom: 35px;
   }
-}
-
-.article-list hr {
-  border: 0;
-  border-top: 1px solid #ccc;
-  width: 35px;
-  margin: 30px 45%;
 }
 
 .wysiwyg {

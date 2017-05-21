@@ -6,7 +6,7 @@ dependencies:
     - yarn install
 test:
   override:
-    - echo "skip test..."
+    - yarn run lint
 deployment:
   production:
     branch: source

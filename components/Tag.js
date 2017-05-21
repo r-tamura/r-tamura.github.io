@@ -1,10 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-const Tag = ({children = ''} = {}) => (
-  <div className={'post-tag'}>
+const Tag = ({children = ''} = {}) =>
+  <div className={'article-tag'}>
     {children}
   </div>
-)
 
 export default Tag

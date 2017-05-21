@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import sortBy from 'lodash/sortBy'
 import get from 'lodash/get'
+import map from 'lodash/map'
 import { prefixLink } from 'gatsby-helpers'
 import Helmet from "react-helmet"
 import { config } from 'config'
 import include from 'underscore.string/include'
-import Bio from 'components/Bio'
+import Tags from 'components/Tags'
 import moment from 'moment'
 
 class BlogIndex extends React.Component {
@@ -15,11 +16,12 @@ class BlogIndex extends React.Component {
     // Sort pages.
     const sortedPages = sortBy(this.props.route.pages, 'data.date').reverse()
     // Posts are those with md extension that are not 404 pages OR have a date (meaning they're a react component post).
-    const visiblePages = sortedPages.filter(page => (
-      get(page, 'file.ext') === 'md' && !include(page.path, '/404') || get(page, 'data.date')
-    ))
+    const visiblePages =
+      sortedPages
+        .filter(page => get(page, 'file.ext') === 'md' && !include(page.path, '/404') || get(page, 'data.date'))
+
     return (
-      <div className="index">
+      <div>
       <Helmet
         title={config.blogTitle}
         meta={[
@@ -31,16 +33,30 @@ class BlogIndex extends React.Component {
         ]}
       />
       <ul className="article-list">
-          {visiblePages.map((page) => (
-              <li
-                key={page.path}
-              >
-                <div className="is-sm">{moment(page.data.date).format('YYYY.MM.DD')}</div>
-                <Link className="text is-lg" style={{boxShadow: 'none'}} to={prefixLink(page.path)}>
-                    {get(page, 'data.title', page.path)}
+          {map(visiblePages, page => (
+            <li
+              className="article-list__item article"
+              key={page.path}
+            >
+              <div className="is-sm">{moment(page.data.date).format('YYYY.MM.DD')}</div>
+              <Link
+                className="text is-lg is-strong article__title"
+                style={{boxShadow: 'none'}}
+                to={prefixLink(page.path)}>
+                  {get(page, 'data.title', page.path)}
+              </Link>
+              <Tags
+                tags={page.data.tags || ['test']}
+              />
+              <p className="texts is-xs article__abstract">
+                {page.data.body.match(/.*\n/)[0].replace(/<\/?p>/g,'')}
+              </p>
+              <div className="btns is-right artile__read-btns">
+                <Link className="btn is-melt is-round" to={prefixLink(page.path)}>
+                  {'READ'}
                 </Link>
-                <hr/>
-              </li>
+              </div>
+            </li>
           ))}
         </ul>
       </div>

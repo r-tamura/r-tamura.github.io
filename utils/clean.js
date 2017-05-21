@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 /**
  * gatsby build で生成されたディレクトリを削除する
  */

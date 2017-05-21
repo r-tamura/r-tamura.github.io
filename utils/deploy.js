@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const ghpages = require('gh-pages')
 const path = require('path')
 const moment = require('moment')
@@ -8,8 +9,8 @@ const options = {
   message: `Site updated: ${moment().format('YYYY-MM-DD hh:mm:ss')}`
 }
 
-ghpages.publish(path.resolve(__dirname, '../public'), options, (err) => {
-  if(err) {
+ghpages.publish(path.resolve(__dirname, '../public'), options, err => {
+  if (err) {
     console.log(err)
     throw new Error('Deploying failed')
   } else {

@@ -6,19 +6,16 @@ import { prefixLink } from 'gatsby-helpers'
 const BUILD_TIME = new Date().getTime()
 
 class Root extends Component {
-  displayName = 'HTML'
-
   render () {
     const { body } = this.props
-    const head = Helmet.rewind();
+    const head = Helmet.rewind()
 
-    let css
-    if (process.env.NODE_ENV === 'production') {
-      css = <style dangerouslySetInnerHTML={{ __html: require('!raw!./public/styles.css') }} />
-    }
+    const css = process.env.NODE_ENV === 'production'
+      ? <style dangerouslySetInnerHTML={{ __html: require('!raw!./public/styles.css') }} />
+      : undefined
 
     return (
-      <html lang="en">
+      <html lang="ja">
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -38,6 +35,8 @@ class Root extends Component {
     )
   }
 }
+
+Root.displayName = 'HTML'
 
 Root.propTypes = {
   body: PropTypes.string,

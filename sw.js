@@ -1,4 +1,4 @@
-/* eslint no-console: 0 */
+/* eslint no-console: 0, no-unused-vars: 0 */
 self.addEventListener('install', event => {
   console.log('V1 installing…')
 })

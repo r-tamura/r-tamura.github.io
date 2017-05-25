@@ -14,15 +14,17 @@ class Root extends Component {
       ? <style dangerouslySetInnerHTML={{ __html: require('!raw!./public/styles.css') }} />
       : undefined
 
+    const manifest = process.env.NODE_ENV === 'production'
+      ? '/manifest.json'
+      : '/_manifest.json'
+
     return (
       <html lang="ja">
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <link rel="manifest" href={manifest} />
           {head.title.toComponent()}
           {head.meta.toComponent()}
           {css}

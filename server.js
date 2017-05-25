@@ -14,6 +14,7 @@ const url = require('url')
 const path = require('path')
 const fs = require('fs')
 const context = process.argv[2] ? path.resolve(process.cwd(), process.argv[2]) : process.cwd()
+const address = "0.0.0.0"
 const port = process.argv[3] || 8888
 
 const knownContentTypes = {
@@ -59,5 +60,5 @@ const server = http.createServer((request, response) => {
     throw err
   })
 
-server.listen(port)
-console.log(`Static file server running at\n  => http://localhost:${port}\nContext: ${context}\nCTRL + C to shutdown`)
+server.listen(port, address)
+console.log(`Static file server running at\n  => http://${address}:${port}\nContext: ${context}\nCTRL + C to shutdown`)

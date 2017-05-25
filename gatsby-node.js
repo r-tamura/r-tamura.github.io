@@ -41,6 +41,7 @@ exports.postBuild = (_, end) => {
     // デプロイ(masterへのpush)時にCircleCIがmasterブランチをチェックアウトを行わないようにするため
     copyToPublic('circle.yml'),
     copyToPublic('pages/_sw.js', 'sw.js'),
+    copyToPublic('pages/_manifest.json', 'manifest.json'),
   ])
   .then(() => console.log('All files have been copied successfully!'))
   .catch(err => console.log(err))

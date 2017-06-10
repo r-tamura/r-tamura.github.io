@@ -48,7 +48,7 @@ class BlogIndex extends React.Component {
               <Tags
                 tags={page.data.tags || ['test']}
               />
-              <p className="texts is-xs article__abstract">
+              <p className="texts .is-md article__abstract">
                 {page.data.body.match(/.*\n/)[0].replace(/<\/?p>/g,'')}
               </p>
               <div className="btns is-right artile__read-btns">

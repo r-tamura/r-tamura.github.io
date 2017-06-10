@@ -20,7 +20,7 @@ class MarkdownWrapper extends React.Component {
         <Helmet
           title={`${post.title} | ${config.blogTitle}`}
           link={[
-            {"rel": "stylesheet", "href": "https://fonts.googleapis.com/css?family=Tauri"},
+            { "rel": "stylesheet", "href": "https://fonts.googleapis.com/css?family=Tauri" },
             {
               "rel": "stylesheet",
               "href": `//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/${config.syntaxTheme || 'default'}.min.css` // eslint-disable-line

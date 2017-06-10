@@ -25,11 +25,11 @@ class BlogIndex extends React.Component {
       <Helmet
         title={config.blogTitle}
         meta={[
-          {"name": "description", "content": "Sample blog"},
-          {"name": "keywords", "content": "blog, articles"},
+          { "name": "description", "content": "Sample blog" },
+          { "name": "keywords", "content": "blog, articles" },
         ]}
         link={[
-          {"rel": "stylesheet", "href": "https://fonts.googleapis.com/css?family=Tauri"},
+          { "rel": "stylesheet", "href": "https://fonts.googleapis.com/css?family=Tauri" },
         ]}
       />
       <ul className="article-list">
@@ -41,7 +41,7 @@ class BlogIndex extends React.Component {
               <div className="is-sm">{moment(page.data.date).format('YYYY.MM.DD')}</div>
               <Link
                 className="text is-lg is-strong article__title"
-                style={{boxShadow: 'none'}}
+                style={{ boxShadow: 'none' }}
                 to={prefixLink(page.path)}>
                   {get(page, 'data.title', page.path)}
               </Link>

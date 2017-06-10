@@ -29,7 +29,7 @@ const server = http.createServer((request, response) => {
 
   fs.exists(filepath, exists => {
     if (!exists) {
-      response.writeHead(404, {"Content-Type": "text/plain"})
+      response.writeHead(404, { "Content-Type": "text/plain" })
       response.write(`404 Not Found (${filepath})\n`)
       response.end()
       return
@@ -41,7 +41,7 @@ const server = http.createServer((request, response) => {
 
     fs.readFile(filepath, "binary", (err, file) => {
       if (err) {
-        response.writeHead(500, {"Content-Type": "text/plain"})
+        response.writeHead(500, { "Content-Type": "text/plain" })
         response.write(err + "\n")
         response.end()
         return

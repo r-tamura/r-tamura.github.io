@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Tag from './Tag'
 import map from 'lodash/map'
 
-const Tags = ({tags = [], styles = {}, className = ''} = {}) =>
+const Tags = ({ tags = [], styles = {}, className = '' } = {}) =>
     <ul className={'article-tags ' + className}>
       <li><i className="fa fa-tags" aria-hidden="true"></i></li>
       {

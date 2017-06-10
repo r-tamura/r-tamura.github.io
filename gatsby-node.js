@@ -1,6 +1,7 @@
 /* eslint no-console: 0 */
 const fs = require('fs')
 const path = require('path')
+const map = require('lodash/map')
 
 // exports.modifyWebpackConfig = function(config, stage) {
 //   config.loader('images', cfg => {
@@ -25,7 +26,15 @@ function copyFile(source, target) {
   })
 }
 
-function copyToPublic(src, dest) {
+/**
+ * srcファイルをpublicディレクトリにコピーします
+ * destが指定されない場合はsrcファイルと同名のファイルを作成します
+ *
+ * @param {string} src srcファイルパス
+ * @param {string} dest コピー先パス (デフォルトではsrcファイル名)
+ * @return {promise}
+ */
+function copyToPublic(src, dest = null) {
   const _src = path.resolve(__dirname, src)
   const _dest = path.resolve(__dirname, 'public', dest || path.basename(_src))
 
@@ -34,14 +43,28 @@ function copyToPublic(src, dest) {
     .then(() => console.log(`"${path.basename(_src)}" was copied successfully!`))
 }
 
+/**
+ *  srcファイルリストのファイルをPublicディレクトリへコピーします
+ * @param {array} files srcファイルリスト
+ * {
+ *   src: srcファイルパス
+ *   dest:  コピー先パス (デフォルトではsrcファイル名)
+ * }
+ * @return {promise}
+ */
+function copyFilesToPublic(files) {
+  return Promise.all(map(files, ({ src, dest }) => copyToPublic(src, dest)))
+}
+
 exports.postBuild = (_, end) => {
-  // copyFile(path.join(__dirname, 'circle.yml'), path.join(__dirname, 'public', 'circle.yml'))
-  Promise.all([
+  copyFilesToPublic([
     // circle.ymlをmasterにコピー
     // デプロイ(masterへのpush)時にCircleCIがmasterブランチをチェックアウトを行わないようにするため
-    copyToPublic('circle.yml'),
-    copyToPublic('pages/_sw.js', 'sw.js'),
-    copyToPublic('pages/_manifest.json', 'manifest.json'),
+    { src: 'circle.yml' },
+    { src:'pages/_root/_sw.js', dest:'sw.js' },
+    { src:'pages/_root/_manifest.json', dest:'manifest.json' },
+    // Google Serach Console Webページの認証用ファイル
+    { src:'pages/_root/_google9af3f4ed19ef44d9.html', dest: 'google9af3f4ed19ef44d9.html' }
   ])
   .then(() => console.log('All files have been copied successfully!'))
   .catch(err => console.log(err))

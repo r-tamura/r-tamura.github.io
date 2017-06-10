@@ -12,6 +12,7 @@ const Header = ({
         <div className="inner">
           <h1>
             <Link
+              className="app-header__title"
               to={prefixLink('/')}
             >
               {title}

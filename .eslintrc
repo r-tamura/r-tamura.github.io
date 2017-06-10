@@ -30,6 +30,8 @@
     "arrow-parens": [2, "as-needed"],
     // ビット演算子: "<<", ">>"のみ使用可
     "no-bitwise": [2, { "allow": ["<<", ">>"] }],
+    // Curly brace"{","}"と要素の間にスペースが必須: error
+    "object-curly-spacing": [2, "always"],
     // 行末のスペース: error
     "no-trailing-spaces": 2,
     // ファイル末尾の改行: error

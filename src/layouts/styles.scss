@@ -1,0 +1,60 @@
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+@import "reset";
+@import "variables";
+@import "mixins";
+@import "button";
+// @import "tag";
+// @import "header";
+@import "remark";
+@import "article";
+// @import "bio";
+
+h1,h2,h3,h4,h5,h6,div,p {
+  font-family: 'Noto Sans Japanese', sans-serif;
+}
+
+code[class*=language-] span, 
+pre[class*=language-] span {
+    color: #f8f8f2;
+    text-shadow: 0 1px rgba(0,0,0,.3);
+    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+footer {
+  background: $color-secondary-dark;
+  color: #fff;
+  padding: 20px;
+}
+
+.container {
+  padding: 40px 0;
+  min-height: calc(100vh - 137px);
+}
+
+.index {
+  ul {
+    font-size: 120%;
+  }
+  li {
+    margin-bottom: 35px;
+  }
+}
+
+.section > .inner {
+  font-size: 95%;
+  max-width: 100%;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+.pointable {
+  @include hover-effect(0.85);
+}
+
+.main-column {
+  width: 95vw;
+  max-width: var(--main-column-max-width);
+  min-width: var(--main-column-min-width);
+}

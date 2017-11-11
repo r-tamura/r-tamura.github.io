@@ -1,0 +1,35 @@
+/* Colors */
+$color-primary-light: #e7755c;
+$color-primary: #b04632;
+$color-primary-dark: #7b150a;
+$color-strong: #f92300;
+$color-secondary: #b0bec5;
+$color-secondary-light: #e2f1f8;
+$color-secondary-dark: #808e95;
+
+$items: 12;
+$breakpoints: (
+  xs: 480px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+);
+
+:root {
+  --color-primary-light: #e7755c;
+  --color-primary: #b04632;
+  --color-strong: #f92300;
+
+  /* レイアウトのカラム幅 */
+  --main-column-max-width: 860px;
+  --main-column-min-width: 320px;
+}
+
+/* margin-bottom */
+$mb-xs: 10px;
+$mb-s: 20px;
+$mb-m: 35px;
+$mb-l: 50px;
+
+$section-mb: $mb-l !default;
+

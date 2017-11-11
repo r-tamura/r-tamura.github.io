@@ -1,0 +1,20 @@
+.bio {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+
+  & img {
+    margin-bottom: 0;
+  }
+}
+
+.bioSocialButtons {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  border-collapse: separate;
+  border-spacing: 15px 0px;
+  margin-left: -15px;
+  li {
+    display: table-cell;
+    font-size: 20px;
+  }
+}

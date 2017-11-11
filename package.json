@@ -1,70 +1,44 @@
 {
-  "name": "blog",
-  "description": "Blog",
+  "name": "rtam-blog",
+  "description": "Rtam's tech blog",
   "version": "1.2.1",
-  "author": "r-tamura",
+  "author": "rtamura30 <rtamura30@gmail.com>",
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "gatsby": "^1.9.70",
-    "gatsby-link": "^1.6.21",
-    "gatsby-plugin-sharp": "next",
-    "gatsby-remark-copy-linked-files": "next",
-    "gatsby-remark-images": "next",
-    "gatsby-remark-prismjs": "next",
-    "gatsby-remark-responsive-iframe": "next",
-    "gatsby-remark-smartypants": "next",
-    "gatsby-source-filesystem": "next",
-    "gatsby-transformer-remark": "next",
-    "lodash": "^4.17.2",
-    "moment": "^2.17.1",
-    "musubii": "^1.2.0",
-    "prop-types": "^15.5.8",
-    "react-addons-shallow-compare": "^15.4.1",
-    "react-dates": "^4.1.0",
-    "react-ga": "^2.1.2",
-    "react-helmet": "^3.2.2",
-    "react-highlight": "^0.9.0",
-    "react-responsive-grid": "^0.3.3",
-    "underscore.string": "^3.2.3"
-  },
-  "devDependencies": {
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-0": "^6.22.0",
-    "commander": "^2.9.0",
-    "eslint": "^3.19.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^7.0.1",
-    "gh-pages": "^0.12.0",
-    "mkdirp": "^0.5.1",
-    "rimraf": "^2.6.1"
+    "gatsby": "^1.9.73",
+    "gatsby-link": "^1.6.22",
+    "gatsby-plugin-google-analytics": "^1.0.12",
+    "gatsby-plugin-manifest": "^1.0.8",
+    "gatsby-plugin-offline": "^1.0.10",
+    "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-sass": "^1.0.12",
+    "gatsby-plugin-typography": "^1.7.10",
+    "gatsby-remark-images": "^1.5.20",
+    "gatsby-remark-prismjs": "^1.2.8",
+    "gatsby-source-filesystem": "^1.5.5",
+    "gatsby-transformer-remark": "^1.7.17",
+    "typography-theme-sutro": "^0.15.10"
   },
   "keywords": [
     "gatsby"
   ],
-  "license": "MIT",
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-0",
-      "react"
-    ],
-    "plugins": [
-      "add-module-exports"
-    ]
-  },
+  "license": "ISC",
+  "main": "main",
   "scripts": {
     "create-post": "node utils/create-post",
-    "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
-    "lint:fix": "eslint --fix --ext .js,.jsx --ignore-pattern public .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "gatsby develop",
     "build": "gatsby build",
-    "build:prefix": "gatsby build --prefix-links",
+    "develop": "gatsby develop",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "node ./utils/deploy.js",
     "clean": "node ./utils/clean.js",
     "server": "node server.js public"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.19.1",
+    "prettier": "^1.7.4",
+    "rimraf": "^2.6.2"
   }
 }

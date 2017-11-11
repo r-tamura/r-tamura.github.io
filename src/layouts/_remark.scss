@@ -1,0 +1,18 @@
+/*
+  記事のスタイル
+  Override typography-theme-sutro
+*/
+.remark {
+  margin-bottom: $section-mb;
+  & a {
+    text-decoration: underline dotted;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  & h2, & h3, & h4, & h5, & h6 {
+    margin-top: 2.56rem
+  }
+}
+

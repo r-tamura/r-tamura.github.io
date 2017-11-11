@@ -12,8 +12,8 @@ const options = {
 ghpages.publish(path.resolve(__dirname, '../public'), options, err => {
   if (err) {
     console.log(err)
-    throw new Error('Deploying failed')
+    throw new Error('Deploy failed')
   } else {
-    console.log('Deploying success')
+    console.log('Deploy finished successfully')
   }
 })

@@ -1,0 +1,36 @@
+.btn.is-melt:active, .btn.is-melt:hover {
+  background: rgba(0,0,0,.05);
+}
+
+.btn.is-melt {
+  border: 1px solid transparent;
+}
+
+.btn.is-circle, .btn.is-round {
+  border-radius: 9999em;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  padding: .5em 1em;
+  transition: .2s ease-out;
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+
+  &.is-left {
+    justify-content: flex-start;
+  }
+
+  &.is-right {
+    justify-content: flex-end;
+  }
+}

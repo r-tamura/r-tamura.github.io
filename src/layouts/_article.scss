@@ -1,0 +1,36 @@
+.article {
+  padding: 10px 10px 0 10px;
+}
+
+.article-list {
+  padding-top: 15px;
+}
+
+.article-list__item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.article__title {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: var(--color-strong);
+}
+
+.article__abstract {
+  margin-bottom: 0;
+  @include break(sm) {
+    font-size: 80%;
+    line-height: 1.6;
+  }
+}
+
+.artile__read-btns {
+  text-decoration: underline;
+}
+
+.article-bio-wrapper {
+  @include center();
+  max-width: 450px;
+}

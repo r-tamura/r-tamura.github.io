@@ -1,0 +1,17 @@
+.appBar {
+  font-size: 1.8rem;
+  background: var(--color-primary);
+  color: #fff;
+  line-height: 68px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.26);
+  display: grid;
+}
+
+.section {
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: var(--color-secondary-light);
+}

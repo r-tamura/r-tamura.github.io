@@ -1,0 +1,25 @@
+.articleTags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 0;
+  margin-bottom: 10px;
+  line-height: 18px;
+
+  li {
+    margin-bottom: 0;
+  }
+
+  & .articleTagIcon {
+    margin: 0;
+  }
+
+}
+
+.articleTag {
+  color: #e53935;
+  background: #ffebee;
+  border-radius: 3px;
+  margin: 0 0 0 5px;
+  padding: 0.2em 0.3em;
+  font-size: 12px;
+}

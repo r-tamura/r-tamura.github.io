@@ -1,0 +1,21 @@
+
+* {
+  list-style: none;
+  vertical-align: baseline;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}

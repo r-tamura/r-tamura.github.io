@@ -20,10 +20,6 @@
 
 .article__abstract {
   margin-bottom: 0;
-  @include break(sm) {
-    font-size: 80%;
-    line-height: 1.6;
-  }
 }
 
 .artile__read-btns {

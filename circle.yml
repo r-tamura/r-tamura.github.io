@@ -4,9 +4,6 @@ machine:
 dependencies:
   override:
     - yarn install
-test:
-  override:
-    - yarn run lint
 deployment:
   production:
     branch: source

@@ -8,7 +8,11 @@ export default ({ data }) => {
   const site = data.site
   return (
     <div className="article">
-      <Helmet>
+      <Helmet
+        meta={[
+          { property: 'og:title', content: `${post.frontmatter.title} | 技術忘備録` },
+        ]}
+      >
         <title>{post.frontmatter.title}</title>
       </Helmet>
       <div>{post.frontmatter.date}</div>

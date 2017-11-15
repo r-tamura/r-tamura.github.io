@@ -12,14 +12,15 @@ class TemplateWrapper extends React.Component {
   
   render() {
     const { data, props, children, location } = this.props
+    const title = data.site.siteMetadata.title
     return (
       <div>
         <Helmet
-          titleTemplate="%s | 技術忘備録"
+          titleTemplate={`%s | ${title}`}
           meta={[
             { name: 'description', content: 'r-tamura Tech Blog' },
             { name: 'keywords', content: 'Blog, Web, JavaScript, Browser' },
-            { property: 'og:title', content: 'Home | 技術忘備録' },
+            { property: 'og:title', content: 'Home | ${title}' },
             { property: 'og:type', content: 'blog' },
             { property: 'og:url', content: `https://rtam.xyz${location.pathname}` },
             { property: 'og:image', content: 'https://rtam.xyz/favicons/fox_48x48.png' },
@@ -32,7 +33,7 @@ class TemplateWrapper extends React.Component {
           <title>Home</title>
         </Helmet>
         <Header 
-          title={data.site.siteMetadata.blogTitle}
+          title={title}
         />
         <div
           style={{
@@ -62,8 +63,9 @@ export const query = graphql`
 query  titleQuery {
   site {
     siteMetadata {
-      blogTitle
+      title
       copyright
+      description
     }
   }
 }

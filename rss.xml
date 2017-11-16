@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rtam's Tech Blog]]></title><description><![CDATA[r-tamura Tech Blog]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Thu, 16 Nov 2017 16:18:37 GMT</lastBuildDate><item><title><![CDATA[The pixel pipeline]]></title><description><![CDATA[ブラウザがHTMLをレンダリングする際に何を行っているか The pixel pipeline ブラウザがレンダリングをする際に行っていることは、大きく分けると次の5つになる:  JavaScript : DOM操作で画面の見た目を変更にかかわるスクリプトの処理。 Style…]]></description><link>https://rtam.xyz/articles/2017/06/browser-pixel-pipeline/</link><guid isPermaLink="false">https://rtam.xyz/articles/2017/06/browser-pixel-pipeline/</guid><pubDate>Sat, 17 Jun 2017 18:23:51 GMT</pubDate><content:encoded>&lt;p&gt;ブラウザがHTMLをレンダリングする際に何を行っているか&lt;/p&gt;
+&lt;h2&gt;The pixel pipeline&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;ブラウザがレンダリングをする際に行っていることは、大きく分けると次の5つになる: &lt;/p&gt;
+&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 650px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 14.102564102564102%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsSAAALEgHS3X78AAAAqklEQVQI12NgYGDQIQJbA7E5EerMGf7vZ9z//wDz/t+72ba3hyzY0xm+aH976IL9QPb+1qD5W2FsEF1aWLohcKPs/tDNSvtBNBDvDtmssAPK3h+4Xu4gw7/TBv//ndL7/2C166eOsIX/ZxWs/z89Z+3/9tCFf4EGfZ6asfr/nOKN/yckrfif2R7+Gqjxf+F+9//x2/X/A9mfYrfp/C896PO/YL/r//TdVv8BbsNf91XBBwoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;pixel-pipeline&quot;
+        title=&quot;&quot;
+        src=&quot;/static/pixel-pipeline-4052bd423d508eb6aaebaff495fd0351-83a8b.png&quot;
+        srcset=&quot;/static/pixel-pipeline-4052bd423d508eb6aaebaff495fd0351-8992e.png 163w,
+/static/pixel-pipeline-4052bd423d508eb6aaebaff495fd0351-ae0a7.png 325w,
+/static/pixel-pipeline-4052bd423d508eb6aaebaff495fd0351-83a8b.png 650w,
+/static/pixel-pipeline-4052bd423d508eb6aaebaff495fd0351-4d47c.png 858w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt;: DOM操作で画面の見た目を変更にかかわるスクリプトの処理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Style&lt;/strong&gt;: 要素に対してどのCSSルールが適用されているかを計算するプロセス。
+&lt;code&gt;.class1&lt;/code&gt;や&lt;code&gt;.class2&lt;/code&gt;のように複数CSSセレクタが該当するものは、CSS適用の優先度から最終的にあてはまるルールを決定する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Layout&lt;/strong&gt;: 位置, 幅, 高さなど、要素がスクリーンのどのスペースを占めるかを決定するプロセス。Firefoxでは&lt;code&gt;reflow&lt;/code&gt;と呼ばれる。
+&lt;code&gt;width&lt;/code&gt;, &lt;code&gt;height&lt;/code&gt;, &lt;code&gt;left&lt;/code&gt;, &lt;code&gt;top&lt;/code&gt; を変更するとLayout処理が発生する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Paint&lt;/strong&gt;: 描画処理呼び出しリストの作成と要素ピクセルに色で埋める処理(ラスタライズ)を行う。
+テキスト、色、画像、ボーダー、影を描画する処理を含む。
+&lt;code&gt;color&lt;/code&gt;, &lt;code&gt;background-color&lt;/code&gt;や&lt;code&gt;border-radius&lt;/code&gt;, &lt;code&gt;border&lt;/code&gt;, &lt;code&gt;box-shadow&lt;/code&gt;などを変更するとPaintの処理が発生する。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Composite&lt;/strong&gt;: ブラウザは複数のレイヤ(*1)と呼ばれる単位で描画されている。ページ全体にレイヤが正しい順序で描画を行うプロセス。
+&lt;code&gt;transform&lt;/code&gt;, &lt;code&gt;opacity&lt;/code&gt;の変更はこのプロセスのみを発生させる。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;再描画の際に実行されるプロセスが少ないほど高速となるので、アニメーションやスクロールなどの高負荷処理の部分では
+&lt;strong&gt;Composite&lt;/strong&gt;のみを発生させるようチューニングするのが望ましい。&lt;/p&gt;
+&lt;h2&gt;Side Navigationでパフォーマンス比較&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Side Navigationをアニメーションで表示させてパフォーマンスの違いを確認する&lt;/p&gt;
+&lt;p&gt;使用するHTML&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-html&quot;&gt;&lt;code&gt;  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;app&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;side-menu&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;side-menu&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;header&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;menu-button&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;open&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;1. leftプロパティでアニメーション&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-css&quot;&gt;&lt;code&gt;&lt;span class=&quot;token selector&quot;&gt;.side-menu&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; -102%&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; left 150ms linear&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token selector&quot;&gt;.side-menu--open&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; -70%&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; left 150ms linear&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;2. transformプロパティでアニメーション&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;will-change&lt;/code&gt;プロパティでレイヤーを生成している。(非対応ブラウザには&lt;code&gt;transform: translateZ(0);&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-css&quot;&gt;&lt;code&gt;&lt;span class=&quot;token selector&quot;&gt;.side-menu&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;translateX&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;-102%&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; transform 300ms linear&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;will-change&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; transform&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token selector&quot;&gt;.side-menu--open&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;translateX&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;-30%&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; transform 300ms linear&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;比較結果&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;leftプロパティでアニメーション&lt;br&gt;
+&lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 74px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 137.83783783783784%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAAAAQBAgX/xAAXAQEBAQEAAAAAAAAAAAAAAAABAgAD/9oADAMBAAIQAxAAAAHtbSMAdLMDE4L/AP/EABwQAAICAgMAAAAAAAAAAAAAAAABAhEDIRATMf/aAAgBAQABBQKOo2jJuTyUdg3fDVk9Msn7/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAEDAQE/AUyP/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAGhAAAQUBAAAAAAAAAAAAAAAAAAEQICExof/aAAgBAQAGPwJGopDOPsf/xAAdEAADAQACAwEAAAAAAAAAAAAAAREhMYFRYXGh/9oACAEBAAE/IcZ64ZWfhyvAczVehPNZMJlvn5BWLSCNusFivRcKGvU//9oADAMBAAIAAwAAABDnND//xAAYEQADAQEAAAAAAAAAAAAAAAAAATEQIf/aAAgBAwEBPxDqZGQf/8QAFxEBAQEBAAAAAAAAAAAAAAAAAREAEP/aAAgBAgEBPxAFLm9//8QAHRABAAIDAQADAAAAAAAAAAAAAQARITFBUWGBof/aAAgBAQABPxBmPpusxNpY4WfyFK4MKSnbE6E0w1/ZSTWKlNrp5CWpVHI4CF7apWDfyz1g6HkaL8jEsf/Z&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;non-optimized&quot;
+        title=&quot;&quot;
+        src=&quot;/static/non-optimized-1bc5cfa7f05a8ebce021394083b0344c-3caab.jpg&quot;
+        srcset=&quot;/static/non-optimized-1bc5cfa7f05a8ebce021394083b0344c-3caab.jpg 74w&quot;
+        sizes=&quot;(max-width: 74px) 100vw, 74px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+    &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;transformプロパティでアニメーション&lt;br&gt;
+&lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 91px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 110.98901098901099%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAWABQDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAAAAEDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAACAwD/2gAMAwEAAhADEAAAAe3NDatA11BSzg1//8QAGhAAAwEBAQEAAAAAAAAAAAAAAAECEhEDIf/aAAgBAQABBQJM6enXWaM0NM2jaLr7/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAExEP/aAAgBAwEBPwEUxQ//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAYEAACAwAAAAAAAAAAAAAAAAAAMhAgMf/aAAgBAQAGPwIyGGr/AP/EABwQAQADAAIDAAAAAAAAAAAAAAEAETEhYRCBkf/aAAgBAQABPyGgDeN8RsWnGRZWvyVl0fULV1k6mdTCTuT/2gAMAwEAAgADAAAAEIPwP//EABgRAAIDAAAAAAAAAAAAAAAAAAAxARAR/9oACAEDAQE/EMkVSj//xAAYEQEAAwEAAAAAAAAAAAAAAAABABAxYf/aAAgBAgEBPxAOx2nZ/8QAIBABAAICAQQDAAAAAAAAAAAAAQARIUFhMVGh0XGB4f/aAAgBAQABPxAXBoB7mb15QF+iMFAjmrYl30TTt8xCz5BNvMMeng9zr7eD3FwMKZ+5/9k=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;optimized&quot;
+        title=&quot;&quot;
+        src=&quot;/static/optimized-f94261efed0410d574b6d99a0091ea61-8a231.jpg&quot;
+        srcset=&quot;/static/optimized-f94261efed0410d574b6d99a0091ea61-8a231.jpg 91w&quot;
+        sizes=&quot;(max-width: 91px) 100vw, 91px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;大幅な差は確認できなかったが、transformプロパティでのアニメーションのほうがFPSが安定していることがわかった。
+今回は調査しなかったが&lt;code&gt;will-change&lt;/code&gt;プロパティはGPUメモリにレイヤを格納し続けるのでスマートフォンなどでは電池消費が大きくなるそうで、
+アニメーション直前に&lt;code&gt;will-change&lt;/code&gt;をオンにするのが良い方法らしい。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;*1 レイヤー&lt;/strong&gt;: GPUで処理される領域。GPUへテクスチャとしてアップロードされる。1つのレイヤが大きい場合はより小さいタイルという単位でアップロードされる。&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developers.google.com/web/fundamentals/performance/rendering/&quot;&gt;Rendering Performance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/outsystems-experts/how-to-achieve-60-fps-animations-with-css3-db7b98610108&quot;&gt;Smooth as Butter: Achieving 60 FPS Animations with CSS3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://csstriggers.com/&quot;&gt;CSS Triggers&lt;/a&gt; どのCSSルールがどのプロセスを発生させるか&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.slideshare.net/yoshikawa_t/chrome-developer-tools-17787728&quot;&gt;Chrome Developer Toolsを使いこなそう！&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://qiita.com/cy-mitsuki/items/51a0a4c17b89154a7af2&quot;&gt;DevToolsのTimelineパネルを見ながら、レンダリングの仕組みを理解する&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.html5rocks.com/ja/tutorials/speed/layers/&quot;&gt;Accelerated Rendering in Chrome&lt;/a&gt; Chromeのレイヤー概念とGPUについて&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[SQLでのRandom Selection]]></title><description><![CDATA[MySQLでランダムなデータを取得する場合によく利用されるのがorder by rand()だが、これはインデックスが適用されないので、代替え方法をいくつか調査したまとめ ランダムにソートする方法 MySQLでランダムにデータを選択する方法を調べてみると、よくあるのが order…]]></description><link>https://rtam.xyz/articles/2017/06/sql-randam-selection/</link><guid isPermaLink="false">https://rtam.xyz/articles/2017/06/sql-randam-selection/</guid><pubDate>Fri, 09 Jun 2017 00:34:24 GMT</pubDate><content:encoded>&lt;p&gt;MySQLでランダムなデータを取得する場合によく利用されるのがorder by rand()だが、これはインデックスが適用されないので、代替え方法をいくつか調査したまとめ&lt;/p&gt;
+&lt;h2&gt;ランダムにソートする方法&lt;/h2&gt;
+&lt;p&gt;MySQLでランダムにデータを選択する方法を調べてみると、よくあるのが&lt;code&gt;order by rand()&lt;/code&gt;で
+ランダムにソートして、上から欲しい件数だけ取得する方法が見つかる。SQLは以下のようなもの。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; customer &lt;span class=&quot;token keyword&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;by&lt;/span&gt; rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;この場合、全レコードソートを行われるが&lt;strong&gt;インデックスが使われず、テーブルスキャンでのソート&lt;/strong&gt;となる。&lt;br&gt;
+&lt;code&gt;explain&lt;/code&gt;の結果もtypeが&lt;code&gt;All&lt;/code&gt;, extraが&lt;code&gt;using filesort&lt;/code&gt;かつ&lt;code&gt;using temporary&lt;/code&gt;となっていて、
+SQLとしてはかなり非効率なものであることがわかる。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; customer &lt;span class=&quot;token keyword&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;by&lt;/span&gt; rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;\G
+&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+           id: &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+  select_type: &lt;span class=&quot;token keyword&quot;&gt;SIMPLE&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;table&lt;/span&gt;: customer
+         &lt;span class=&quot;token keyword&quot;&gt;type&lt;/span&gt;: &lt;span class=&quot;token keyword&quot;&gt;ALL&lt;/span&gt;
+possible_keys: &lt;span class=&quot;token boolean&quot;&gt;NULL&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;key&lt;/span&gt;: &lt;span class=&quot;token boolean&quot;&gt;NULL&lt;/span&gt;
+      key_len: &lt;span class=&quot;token boolean&quot;&gt;NULL&lt;/span&gt;
+          ref: &lt;span class=&quot;token boolean&quot;&gt;NULL&lt;/span&gt;
+         &lt;span class=&quot;token keyword&quot;&gt;rows&lt;/span&gt;: &lt;span class=&quot;token number&quot;&gt;646&lt;/span&gt;
+        Extra: &lt;span class=&quot;token keyword&quot;&gt;Using&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;temporary&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;Using&lt;/span&gt; filesort
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;解決法1: 最小値と最大値のランダムなキーを選択する&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt;
+  customer &lt;span class=&quot;token number&quot;&gt;c&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;join&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;-- [IDの最大値 * (0.0-1.0)のランダム値] の切り上げ&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; ceil&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;customer_id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; customer&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; rand_id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; rnd
+&lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; 
+  &lt;span class=&quot;token number&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;customer_id &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; rnd&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;rand_id
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;複数行の中秋する場合はユーザ定義変数を利用する&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; 
+    t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; 
+    ceil&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; 
+          &lt;span class=&quot;token function&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;customer_id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt;
+          customer
+      &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; random_num&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token variable&quot;&gt;@num&lt;/span&gt;:&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token variable&quot;&gt;@num&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token variable&quot;&gt;@num&lt;/span&gt;:&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; customer
+  &lt;span class=&quot;token keyword&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+customer &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; t
+&lt;span class=&quot;token keyword&quot;&gt;where&lt;/span&gt;
+    &lt;span class=&quot;token number&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;random_num &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;customer_id&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;デメリット&lt;/h4&gt;
+&lt;p&gt; IDに欠番がある場合は使用できない&lt;/p&gt;
+&lt;h3&gt;解決策2: 最小値と最大値のランダムなキーを選択する(欠番がある場合は欠番後の最初のキーを選択)&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt;
+  &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt;
+  customer &lt;span class=&quot;token number&quot;&gt;c&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;inner&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;join&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;-- [IDの最大値 * (0.0-1.0)のランダム値] の切り上げ&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; ceil&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;customer_id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; customer&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; rand_id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; rnd
+&lt;span class=&quot;token keyword&quot;&gt;on&lt;/span&gt; 
+  &lt;span class=&quot;token comment&quot;&gt;-- ランダムな位置に最も近いIDを選択&lt;/span&gt;
+  &lt;span class=&quot;token number&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;customer_id &lt;span class=&quot;token operator&quot;&gt;&gt;=&lt;/span&gt; rnd&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;rand_id
+&lt;span class=&quot;token keyword&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;customer_id
+&lt;span class=&quot;token keyword&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;メリット&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;IDに欠番がある場合でも使用可能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;デメリット&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;複数選択する場合はランダムな位置から連番のものが選択される&lt;/li&gt;
+&lt;li&gt;欠番の次のIDがが選択される確率が高い&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;解決策3: オフセットを用いてランダムに選択&lt;/h3&gt;
+&lt;p&gt;SQLのみでなくアプリケーションも使用して、ランダムに行数を選択するSQLとその行数目を&lt;code&gt;offset&lt;/code&gt;で選択する。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token comment&quot;&gt;-- ランダムに行数を選択するSQL&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; floor&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; customer&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; id_offset&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;-- &lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; customer &lt;span class=&quot;token keyword&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;offset&lt;/span&gt; :&lt;span class=&quot;token keyword&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;メリット&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;IDが数値でなくても使用できる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;デメリット&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;2回SQLを発行する必要がある&lt;/li&gt;
+&lt;li&gt;offsetが大きいと&lt;strong&gt;先頭からOFFSETまでの検索も行う&lt;/strong&gt;ので遅くなる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;使用するテーブルについて&lt;/h2&gt;
+&lt;p&gt;この記事で使用するテーブル一覧&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sql&quot;&gt;&lt;code&gt;&lt;span class=&quot;token keyword&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;`&lt;/span&gt;customer&lt;span class=&quot;token punctuation&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;`&lt;/span&gt;customer_id&lt;span class=&quot;token punctuation&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;smallint&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; unsigned &lt;span class=&quot;token keyword&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;`&lt;/span&gt;customer_id&lt;span class=&quot;token punctuation&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;今のところ、それぞれを使う場面は以下のようになる。&lt;/p&gt;
+&lt;p&gt;IDが数値 &amp;#x26; 連番 =&gt; 解決策1&lt;br&gt;
+IDが数値 &amp;#x26; 連番でない =&gt; 解決策2&lt;br&gt;
+IDが数値でない =&gt; 解決策3  &lt;/p&gt;
+&lt;p&gt;他にもワークテーブルを使用した方法もあるようなので、要調査。&lt;/p&gt;
+&lt;h2&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.r-5.org/files/books/computers/languages/sql/style/Bill_Karwin-SQL_Antipatterns-EN.pdf&quot;&gt;SQL Antipattern&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.mysqltutorial.org/select-random-records-database-table.aspx&quot;&gt;MySQL Select Random Records | MySQL Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://jan.kneschke.de/projects/mysql/order-by-rand/&quot;&gt;ORDER BY RAND() &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://deaimobi.com/mbnk-307/&quot;&gt;MySQLのlimitで大量データのパフォーマンスが遅い重い！&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[node_modules/.binのcmdファイルについて]]></title><description><![CDATA[npmでインストールしたコマンドが"node_modules/.bin"ディレクトリにcmdファイルで生成される。そのcmdファイルのソースを読んで理解する。 cmdファイルのソースコード(eslintの場合) 今回はeslintのcmd…]]></description><link>https://rtam.xyz/articles/2017/05/read-node_modules-bin/</link><guid isPermaLink="false">https://rtam.xyz/articles/2017/05/read-node_modules-bin/</guid><pubDate>Sat, 13 May 2017 22:00:00 GMT</pubDate><content:encoded>&lt;p&gt;npmでインストールしたコマンドが&quot;node_modules/.bin&quot;ディレクトリにcmdファイルで生成される。そのcmdファイルのソースを読んで理解する。&lt;/p&gt;
+&lt;h2&gt;cmdファイルのソースコード(eslintの場合)&lt;/h2&gt;
+&lt;p&gt;今回はeslintのcmdファイルを読むが、他のコマンドも同様の形式なので１つ理解すれば問題ない。
+以下がソースコードになる。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-cmd&quot;&gt;&lt;code&gt;@IF EXIST &quot;%~dp0\node.exe&quot; (                           // (1)
+  &quot;%~dp0\node.exe&quot;  &quot;%~dp0\..\eslint\bin\eslint.js&quot; %* // (2)
+) ELSE (
+  @SETLOCAL                                            // (3)
+  @SET PATHEXT=%PATHEXT:;.JS;=;%                       // (4)
+  node  &quot;%~dp0\..\eslint\bin\eslint.js&quot; %*
+)&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;TL;DR&lt;/h4&gt;
+&lt;p&gt;cmdファイル全体では,
+(1) cmdファイルのディレクトリに&lt;code&gt;node.exe&lt;/code&gt;が存在するか
+=&gt; する： node.exeでeslint実行
+=&gt; しない: js拡張子もの含めたパスでnodeコマンドにより、eslint実行&lt;/p&gt;
+&lt;h4&gt;(1)の部分&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;%~dp0&lt;/code&gt;はcmdファイル内で使用できる変数で、「実行されているファイルディレクトリのパス」を表す&lt;/p&gt;
+&lt;h4&gt;(2)の部分&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;%*&lt;/code&gt;はコマンドに続く任意数の引数を表す。
+つまり、(2)はnodejsでeslint.jsを実行しており、cmdファイルの引数を全て渡している。&lt;/p&gt;
+&lt;h4&gt;(3)の部分&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Starts localization of environment variables in a batch file. Localization continues until a matching endlocal command is encountered or the end of the batch file is reached.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;@SETLOCAL&lt;/code&gt;はcmdファイル内でのみ有効な環境変数を定義できるようになる宣言になる。
+&lt;code&gt;@ENDLOCAL&lt;/code&gt;が呼ばれるまでの間の&lt;code&gt;@SET&lt;/code&gt;で設定された設定はcmdファイル内のみ有効になる。&lt;/p&gt;
+&lt;h4&gt;(4)の部分&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PathExt environment variable returns a list of the file extensions that the operating system considers to be executable. When executing a command line that does not contain an extension, the command interpreter (cmd.exe) uses the value of this environment variable to determine which extensions to look for and in what order.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;環境変数&lt;code&gt;PATHEXT&lt;/code&gt;はWindowsが実行可能と判断するファイル拡張子リストである。
+(4)ではPATHEXTに拡張子がJSのファイルを追加している。&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://pentan.info/server/windows/cmd/dp0.html&quot;&gt;%~dp0 とは&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://superuser.com/questions/149951/does-in-batch-file-mean-all-command-line-arguments&quot;&gt;does %* in batch file mean all command line arguments?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://technet.microsoft.com/en-us/library/bb491001.aspx&quot;&gt;Setlocal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://environmentvariables.org/PathExt&quot;&gt;PathExt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Gatsby+GitHub Pages+Cloudflareで静的Webサイト構築]]></title><description><![CDATA[Gatsbyを使って静的WebサイトをMarkdownで作成し、CircleCI経由でGitHub Pagesにデプロイ。GitHub Pagesはカスタムドメインを設定し、Cloudflare経由でSSLアクセスを可能にする。 手順 Gatsby…]]></description><link>https://rtam.xyz/articles/2017/05/making-blog-site/</link><guid isPermaLink="false">https://rtam.xyz/articles/2017/05/making-blog-site/</guid><pubDate>Thu, 04 May 2017 13:12:00 GMT</pubDate><content:encoded>&lt;p&gt;Gatsbyを使って静的WebサイトをMarkdownで作成し、CircleCI経由でGitHub Pagesにデプロイ。GitHub Pagesはカスタムドメインを設定し、Cloudflare経由でSSLアクセスを可能にする。&lt;/p&gt;
+&lt;h1&gt;手順&lt;/h1&gt;
+&lt;h2&gt;Gatsbyの導入&lt;/h2&gt;
+&lt;h3&gt;インストール&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-bash&quot;&gt;&lt;code&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; -g gatsby
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;config.toml設定&lt;/h3&gt;
+&lt;p&gt;config.tomlはgatsbyの設定ファイル&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-yml&quot;&gt;&lt;code&gt;blogTitle = &quot;技術忘備録&quot;
+authorName = &quot;r-tamura&quot;
+authorDetail = &quot;Web関連多めのソフトウェアエンジニアです。&quot;
+linkPrefix = &quot;&quot;
+googleAnalyticsId = &quot;&quot;
+syntaxTheme = &quot;ocean&quot;
+twitterId = &quot;r_tamura30&quot;
+facebookId = &quot;&quot;
+githubId = &quot;r-tamura&quot;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h2&gt;カスタムドメインの取得&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.onamae.com/&quot;&gt;お名前.com&lt;/a&gt;にて取得&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ドメイン名: &lt;code&gt;rtam.xyz&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WHOIS情報: お名前.comに委譲&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;CircleCI経由でのデプロイ&lt;/h2&gt;
+&lt;p&gt;CircleCIの設定ファイル&lt;code&gt;circle.yml&lt;/code&gt;にデプロイ用設定を入力&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-yml circle.yml&quot;&gt;&lt;code&gt;machine:
+  node:
+    version: 7.9.0
+dependencies:
+  override:
+    - yarn install
+test:
+  override:
+    - echo &quot;skip test...&quot;
+deployment:
+  production:
+    branch: source # sourceブランチでビルドされた場合のみdeployを行う
+    commands:
+      - git config --global user.name &quot;CircleCI&quot;
+      - git config --global user.email &quot;rtamura30@gmail.com&quot;
+      - npm run clean
+      - npm run build:prefix
+      - npm run deploy
+general:
+  branches:
+    ignore:
+      - master # masterレポジトリpush時はcheckoutしない&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;デプロイ先のレポジトリへのDeploy keyがないので、作成してGitHub側に公開鍵, CircleCI側に秘密鍵を登録する&lt;/p&gt;
+&lt;h3&gt;鍵の作成&lt;/h3&gt;
+&lt;p&gt;rd&lt;em&gt;rsa, rd&lt;/em&gt;rsa.pubを生成する&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-bash&quot;&gt;&lt;code&gt;// RSA / 2048bit / コメントなし / パスフレーズもなし
+$ ssh-keygen -t rsa -b 2048 -C &lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;
+Enter passphrase &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;empty &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; no passphrase&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;:
+Enter same passphrase again:
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;秘密鍵をCircleへ登録&lt;/h3&gt;
+&lt;p&gt;Circle CIダッシュボード &gt; PROJECTS &gt; [ブログプロジェクト] &gt; 右上の歯車マークの設定ボタン &gt; SSH Permissions &gt; Add SSH Key&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Hostname: github.com
+Private Key: id_rsaのテキスト&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;上記内容を入力して、Add SSH Keyを選択&lt;/p&gt;
+&lt;h3&gt;公開鍵をGitHubへ登録&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;[デプロイ先プロジェクト]&lt;/strong&gt; &gt; Settings &gt; Deploy keys &gt; Add deploy key&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Title: 任意
+Key: id_rsa.pubのテキスト
+Allow write access: チェックする&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;上記内容で設定し、Add keyを選択&lt;/p&gt;
+&lt;h2&gt;Cloudflare設定&lt;/h2&gt;
+&lt;h3&gt;Cloudflareアカウント登録&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cloudflare.com/&quot;&gt;Cloudflare&lt;/a&gt; &gt; Sign up &gt; アカウント情報入力 &gt; Create Account&lt;/p&gt;
+&lt;h3&gt;DNS設定&lt;/h3&gt;
+&lt;h4&gt;ドメイン名スキャン&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;rtam.xyz&lt;/code&gt;をテキストボックスに入力して[Scan DNS Records]でスキャンを開始する(1分弱かかる)&lt;/p&gt;
+&lt;h4&gt;DNS設定&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;設定属性&lt;/th&gt;
+&lt;th&gt;設定値&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Type&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Name&lt;/td&gt;
+&lt;td&gt;rtam.xyz&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Value&lt;/td&gt;
+&lt;td&gt;192.30.252.153, 192.30.252.154&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TTL&lt;/td&gt;
+&lt;td&gt;Automatic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Follow your DNS provider&apos;s instructions to create two A records that point your custom domain to the following IP addresses:&lt;/p&gt;
+&lt;p&gt;192.30.252.153
+192.30.252.154&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider&quot;&gt;Configuring A records with your DNS provider&lt;/a&gt;に記載されているIPを登録する&lt;/p&gt;
+&lt;p&gt;上記設定後、Continueを選択&lt;/p&gt;
+&lt;p&gt;※GitHubのレポジトリ設定画面で&lt;code&gt;Custom domain&lt;/code&gt;にカスタムドメインが設定されていることを確認する&lt;/p&gt;
+&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 650px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 15.983606557377051%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAADABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB3qAH/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQABBQJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJ//8QAFRABAQAAAAAAAAAAAAAAAAAAEEH/2gAIAQEAAT8hj//aAAwDAQACAAMAAAAQA8//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAXEAEAAwAAAAAAAAAAAAAAAAABABAh/9oACAEBAAE/ECAwr//Z&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;custom-domain&quot;
+        title=&quot;&quot;
+        src=&quot;/static/custom-domain-a1a20d1d50db4b9d27ae79dcf7a8b052-55338.jpg&quot;
+        srcset=&quot;/static/custom-domain-a1a20d1d50db4b9d27ae79dcf7a8b052-a21e6.jpg 163w,
+/static/custom-domain-a1a20d1d50db4b9d27ae79dcf7a8b052-4ac53.jpg 325w,
+/static/custom-domain-a1a20d1d50db4b9d27ae79dcf7a8b052-55338.jpg 650w,
+/static/custom-domain-a1a20d1d50db4b9d27ae79dcf7a8b052-e3f7a.jpg 732w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;h4&gt;Cloudflareプラン設定&lt;/h4&gt;
+&lt;p&gt; 無料のFree Websiteを設定 &gt; Continueを選択&lt;/p&gt;
+&lt;h4&gt;ネームサーバの確認&lt;/h4&gt;
+&lt;p&gt;Cloudflareが用意するネームサーバが2つあることを確認し、メモする(次に、DNSレジストラ側でそのDNSサーバを設定するため) &gt; Continueを選択&lt;/p&gt;
+&lt;h3&gt;ドメインレジストラのDNSサーバ設定をCloudflareのDNSに設定&lt;/h3&gt;
+&lt;p&gt;お名前.comへアクセス &gt; ログイン &gt; 取得したドメインのネームサーバ &gt; 他のネームサーバを利用 &gt; Cloudflareで確認したネームサーバを登録&lt;/p&gt;
+&lt;h3&gt;CloudflareでSSL設定&lt;/h3&gt;
+&lt;h4&gt;SSL&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;SSL: Frexible&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;これによりClient &amp;#x3C;=&gt; Cloudflare 間はHTTPS, Cloudflare &amp;#x3C;=&gt; GitHub 間はHTTPとなる
+GitHubにカスタムドメインの証明書を登録できないためa&lt;/p&gt;
+&lt;h4&gt;HTTP Strict Transport Security (HSTS)&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;設定属性&lt;/th&gt;
+&lt;th&gt;設定値&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Status&lt;/td&gt;
+&lt;td&gt;On&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Max-Age&lt;/td&gt;
+&lt;td&gt;6 months (recommended)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Include subdomains&lt;/td&gt;
+&lt;td&gt;On&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Preload&lt;/td&gt;
+&lt;td&gt;On&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;No-sniff&lt;/td&gt;
+&lt;td&gt;On&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4&gt;Automatic HTTPS Rewrites&lt;/h4&gt;
+&lt;p&gt;ONに設定する&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://circleci.com/docs/1.0/adding-read-write-deployment-key/&quot;&gt;Adding read/write deployment key&lt;/a&gt; Deploy keyの登録方法&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.kaitoy.xyz/2016/07/01/https-support-by-cloudflare/&quot;&gt;CloudflareでブログをHTTPS化&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://qiita.com/superbrothers/items/95e5723e9bd320094537&quot;&gt;カスタムドメインの GitHub Pages で HTTPS を使う&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/setting-up-an-apex-domain/#configuring-a-records-with-your-dns-provider&quot;&gt;Configuring A records with your DNS provider&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/setting-up-a-custom-subdomain/&quot;&gt;Setting up a custom subdomain&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>

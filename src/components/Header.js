@@ -8,16 +8,17 @@ const Header = ({
   title = 'NO TITLE',
 } = {}) => {
   return (
-    <header className={s.appBar}>
-      <div className={`${s.section} main-column`}>
-        <div className={s.inner}>
-          <Link
-            className={`${s.title} pointable`}
-            to={'/'}
-          >
-            {title}
-          </Link>
-        </div>
+    <header className={`${s.appBar} list--horizon`}>
+      <div className={`${s.inner} main-column`}>
+        <Link
+          className={`${s.title} pointable`}
+          to={'/'}
+        >
+          {title}
+        </Link>
+        <a href="/rss.xml" target="_brank" className={s.navIcon}>
+          <i className="fa fa-rss" aria-hidden="true"></i>
+        </a>
       </div>
     </header>
   )

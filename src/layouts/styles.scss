@@ -42,6 +42,13 @@ footer {
   }
 }
 
+/* 水平方向リスト */
+.list--horizon {
+  & li {
+    margin-bottom: 0;
+  }
+}
+
 .section > .inner {
   font-size: 95%;
   max-width: 100%;

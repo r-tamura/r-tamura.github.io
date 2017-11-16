@@ -1,18 +1,26 @@
 .appBar {
-  font-size: 1.8rem;
+  font-size: var(--font-size-4);
   background: var(--color-primary);
-  color: #fff;
-  line-height: 68px;
+  color: var(--color-secondary-light);
+  height: 50px;
   box-shadow: 0 2px 5px rgba(0,0,0,.26);
-  display: grid;
-}
 
-.section {
-  margin: 0 auto;
+  & .inner {
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+  }
 }
 
 .title {
-  padding: 10px;
   font-size: 1.8rem;
   color: var(--color-secondary-light);
+  margin-right: auto;
 }
+
+.navIcon {
+  font-size: var(--font-size-5);
+  color: var(--color-secondary-light);
+}
+

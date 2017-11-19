@@ -1,5 +1,5 @@
 {
-  "name": "rtam-blog",
+  "name": "rtam-tech-blog",
   "description": "Rtam's tech blog",
   "version": "1.2.1",
   "author": "rtamura30 <rtamura30@gmail.com>",
@@ -11,13 +11,15 @@
     "gatsby-plugin-google-analytics": "^1.0.12",
     "gatsby-plugin-manifest": "^1.0.8",
     "gatsby-plugin-offline": "^1.0.10",
+    "gatsby-plugin-postcss-sass": "^1.0.13",
     "gatsby-plugin-react-helmet": "^1.0.8",
-    "gatsby-plugin-sass": "^1.0.12",
     "gatsby-plugin-typography": "^1.7.10",
     "gatsby-remark-images": "^1.5.20",
     "gatsby-remark-prismjs": "^1.2.8",
     "gatsby-source-filesystem": "^1.5.5",
     "gatsby-transformer-remark": "^1.7.17",
+    "postcss-apply": "^0.8.0",
+    "postcss-cssnext": "2.8.0",
     "typography-theme-sutro": "^0.15.10"
   },
   "keywords": [
@@ -30,12 +32,13 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
-    "test": "echo \"No test\" && exit 0",
+    "test": "ava **/__test__/*.js",
     "deploy": "node ./utils/deploy.js",
     "clean": "node ./utils/clean.js",
     "server": "node server.js public"
   },
   "devDependencies": {
+    "ava": "^0.23.0",
     "gh-pages": "^1.0.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.19.1",

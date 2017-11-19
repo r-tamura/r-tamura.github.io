@@ -13,7 +13,7 @@
   border-collapse: separate;
   border-spacing: 15px 0px;
   margin-left: -15px;
-  li {
+  & li {
     display: table-cell;
     font-size: 20px;
   }

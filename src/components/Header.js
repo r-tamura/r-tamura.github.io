@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 
-import s from './Header.module.scss'
+import s from './Header.module.css'
 
 const Header = ({
   title = 'NO TITLE',
@@ -16,7 +16,7 @@ const Header = ({
         >
           {title}
         </Link>
-        <a href="/rss.xml" target="_brank" className={s.navIcon}>
+        <a href="/rss.xml" target="_brank" className={s.navIcon} title="RSSへ登録">
           <i className="fa fa-rss" aria-hidden="true"></i>
         </a>
       </div>

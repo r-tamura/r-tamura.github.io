@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import s from './Bio.module.scss'
+import s from './Bio.module.css'
 
 const Bio = ({
   authorName,

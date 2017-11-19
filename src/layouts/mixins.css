@@ -1,0 +1,28 @@
+/*
+ * Media Query
+ */
+:root {
+
+  /**
+ * ホバーエフェクトを設定します
+ * ホバー時に透過度を高くし、ホバー状態であることを明示します
+ * @param $opacity ホバー時の透過度
+ */
+  --hover-effect: {
+    transition: opacity 0.35s;
+  };
+
+  /**
+  * 中央寄せスタイル
+  */
+  --center: {
+    margin-left: auto;
+    margin-right: auto;
+  };
+
+}
+
+
+
+
+

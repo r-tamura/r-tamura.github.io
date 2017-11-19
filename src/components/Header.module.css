@@ -1,20 +1,27 @@
+@import '../layouts/variables.css';
+
 .appBar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
   font-size: var(--font-size-4);
   background: var(--color-primary);
   color: var(--color-secondary-light);
-  height: 50px;
+  height: 60px;
   box-shadow: 0 2px 5px rgba(0,0,0,.26);
 
   & .inner {
     height: 100%;
     margin: 0 auto;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     display: flex;
+    align-items: center;
   }
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: var(--font-size-4);
   color: var(--color-secondary-light);
   margin-right: auto;
 }
@@ -22,5 +29,6 @@
 .navIcon {
   font-size: var(--font-size-5);
   color: var(--color-secondary-light);
+  height: var(--font-size-4);
 }
 

@@ -7,7 +7,7 @@ export default ({ data }) => {
   const post = data.markdownRemark
   const site = data.site
   return (
-    <div className="article">
+    <main className="article">
       <Helmet
         meta={[
           { property: 'og:title', content: `${post.frontmatter.title} | 技術忘備録` },
@@ -24,7 +24,7 @@ export default ({ data }) => {
       <div className={`article-bio-wrapper`}>
         <Bio {...site.siteMetadata} />
       </div>
-    </div>
+    </main>
   )
 }
 

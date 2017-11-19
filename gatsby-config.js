@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Rtam's Tech Blog`,
-    description: 'r-tamura Tech Blog',
+    title: `技術メモR`,
+    description: 'r-tamura\'s Tech Blog',
     siteUrl: `https://rtam.xyz`,
     authorName: `r-tamura`,
     authorDetail: `Web関連多めのソフトウェアエンジニアです。`,
@@ -41,7 +41,18 @@ module.exports = {
         pathToConfigModule: `src/utils/typography.js`,
       }
     },
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-postcss-sass`,
+      options: {
+        postCssPlugins: [
+          require(`postcss-import`)(),
+          /* cssnextから各プラグインを導入する形式に変更する可能性あり */
+          require(`postcss-cssnext`)(),
+          require(`postcss-apply`)
+        ],
+        // precision: 8 // SASS default: 5
+      }
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

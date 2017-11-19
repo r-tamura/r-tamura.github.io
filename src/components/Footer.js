@@ -6,9 +6,9 @@ const Footer = ({
   copyright = 2017,
 } = {}) => {
   return (
-      <footer>
-        <div className="section">
-          <div className="inner">
+      <footer className={`footer`}>
+        <div className={`section`}>
+          <div className={`inner`}>
             <span>&copy; {copyright} r-tamura</span>
             <span>&emsp; Built using Gatsby.js</span>
             <span>&emsp;  Hosted on GitHub Pages</span>

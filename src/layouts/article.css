@@ -1,3 +1,5 @@
+@import "mixins";
+
 .article {
   padding: 10px 10px 0 10px;
 }
@@ -27,6 +29,6 @@
 }
 
 .article-bio-wrapper {
-  @include center();
+  @apply --center;
   max-width: 450px;
 }

@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import './styles.scss'
+import './styles.css'
 import 'prismjs/themes/prism-okaidia.css'
 
 class TemplateWrapper extends React.Component {
@@ -14,7 +14,7 @@ class TemplateWrapper extends React.Component {
     const { data, props, children, location } = this.props
     const title = data.site.siteMetadata.title
     return (
-      <div>
+      <div className="page">
         <Helmet
           titleTemplate={`%s | ${title}`}
           meta={[
@@ -38,7 +38,8 @@ class TemplateWrapper extends React.Component {
         <div
           style={{
             margin: '0 auto',
-            maxWidth: 860,
+            maxWidth: '860px',
+            minWidth: '95vw',
             padding: '0px 1.0875rem 1.45rem',
             paddingTop: 0,
           }}

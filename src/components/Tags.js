@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Tag from './Tag'
 
-import s from  './Tag.module.scss'
+import s from  './Tag.module.css'
 
 const Tags = ({ tags = [], styles = {}, className = '' } = {}) =>
     <ul className={`${s.articleTags} ${className}`}>

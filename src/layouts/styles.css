@@ -1,13 +1,10 @@
-@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+@import "../../node_modules/font-awesome/css/font-awesome.css";
+@import "./variables.css";
 @import "reset";
-@import "variables";
 @import "mixins";
 @import "button";
-// @import "tag";
-// @import "header";
 @import "remark";
 @import "article";
-// @import "bio";
 
 h1,h2,h3,h4,h5,h6,div,p {
   font-family: 'Noto Sans Japanese', sans-serif;
@@ -15,17 +12,19 @@ h1,h2,h3,h4,h5,h6,div,p {
 
 code[class*=language-] span, 
 pre[class*=language-] span {
-    color: #f8f8f2;
+    color: var(--color-secondary-light);
     text-shadow: 0 1px rgba(0,0,0,.3);
     font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
     font-size: 0.95rem;
     line-height: 1.3;
 }
 
-footer {
-  background: $color-secondary-dark;
-  color: #fff;
-  padding: 20px;
+.footer {
+  --padding: 20px;
+  background-color: var(--color-secondary-dark);
+  color: var(--color-secondary-light);
+  display: flex;
+  align-items: center;
 }
 
 .container {
@@ -33,11 +32,17 @@ footer {
   min-height: calc(100vh - 137px);
 }
 
+.page {
+  display: grid;
+  grid-template-rows: 60px 1fr minmax(60px, auto);
+  min-height: 100vh;
+}
+
 .index {
-  ul {
+  & ul {
     font-size: 120%;
   }
-  li {
+  & li {
     margin-bottom: 35px;
   }
 }
@@ -57,7 +62,12 @@ footer {
 }
 
 .pointable {
-  @include hover-effect(0.85);
+  @apply --hover-effect;
+
+  &:hover {
+    opacity: 0.75;
+    @apply --hover-effect;
+  }
 }
 
 .main-column {
@@ -65,3 +75,4 @@ footer {
   max-width: var(--main-column-max-width);
   min-width: var(--main-column-min-width);
 }
+

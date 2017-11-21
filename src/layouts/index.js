@@ -48,7 +48,6 @@ class TemplateWrapper extends React.Component {
             margin: '0 auto',
             width: '95vw',
             maxWidth: '860px',
-            padding: '0px 1.0875rem 1.45rem',
             paddingTop: 0,
           }}
         >

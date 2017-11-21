@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `技術メモR`,
-    description: 'r-tamura\'s Tech Blog',
+    title: `Rの技術メモ`,
+    description: '主にWeb業界で働くエンジニアの忘備録ブログです。',
     siteUrl: `https://rtam.xyz`,
     authorName: `r-tamura`,
     authorDetail: `Web関連多めのソフトウェアエンジニアです。`,

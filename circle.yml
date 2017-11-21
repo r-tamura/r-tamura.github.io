@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 7.9.0
+    version: 8.9.1
 dependencies:
   override:
     - yarn install
@@ -17,3 +17,8 @@ general:
   branches:
     ignore:
       - master
+experimental:
+  notify:
+    branches:
+      ignore:
+        - master

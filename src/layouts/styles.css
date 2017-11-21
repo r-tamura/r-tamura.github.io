@@ -6,21 +6,7 @@
 @import "remark";
 @import "article";
 
-h1,h2,h3,h4,h5,h6,div,p {
-  font-family: 'Noto Sans Japanese', sans-serif;
-}
-
-code[class*=language-] span, 
-pre[class*=language-] span {
-    color: var(--color-secondary-light);
-    text-shadow: 0 1px rgba(0,0,0,.3);
-    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-    font-size: 0.95rem;
-    line-height: 1.3;
-}
-
 .footer {
-  --padding: 20px;
   background-color: var(--color-secondary-dark);
   color: var(--color-secondary-light);
   display: flex;

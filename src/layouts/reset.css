@@ -20,7 +20,21 @@ a {
   }
 }
 
-/* TypographyJS Reset */
+h1,h2,h3,h4,h5,h6,div,p {
+  font-family: 'Noto Sans Japanese', sans-serif;
+}
+
+code[class*=language-] span, 
+pre[class*=language-] span {
+    text-shadow: 0 1px rgba(0,0,0,.3);
+    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+/* TypographyJS Reset 
+ * Why not: TypographyJSのAPIからではMedia query利用のスタイルを変更できないのでCSSでオーバーライド
+ */
 @media only screen and (max-width: 480px) {
   ul, ol {
     margin-left: 0;

@@ -20,11 +20,19 @@ class TemplateWrapper extends React.Component {
           meta={[
             { name: 'description', content: 'r-tamura Tech Blog' },
             { name: 'keywords', content: 'Blog, Web, JavaScript, Browser' },
-            { property: 'og:title', content: 'Home | ${title}' },
+            /* OpenGraph */
+            { property: 'og:title', content: `Home | ${title}` },
             { property: 'og:type', content: 'blog' },
             { property: 'og:url', content: `https://rtam.xyz${location.pathname}` },
-            { property: 'og:image', content: 'https://rtam.xyz/favicons/fox_48x48.png' },
+            { property: 'og:image', content: 'https://rtam.xyz/favicons/fox_144x144.png' },
             { property: 'og:description', content: 'r-tamura Tech Blog' },
+
+            /* Twitter Card 
+             * 参考: https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started
+             */
+            { name: 'twitter:card', content: 'summary' },
+            { name: 'twitter:site', content: '@r_tamura' },
+            { name: 'twitter:creator', content: '@r_tamura' },
           ]}
           link={[
             { "rel": "stylesheet", "href": "https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" },
@@ -38,8 +46,8 @@ class TemplateWrapper extends React.Component {
         <div
           style={{
             margin: '0 auto',
+            width: '95vw',
             maxWidth: '860px',
-            minWidth: '95vw',
             padding: '0px 1.0875rem 1.45rem',
             paddingTop: 0,
           }}

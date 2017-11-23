@@ -18,11 +18,19 @@ jobs:
           command: |
             npm run clean
             npm run build
+  test:
+    docker: 
+      - images: circleci/node:9.2
+    steps:
       - run:
-          name: "Test"
+          name: "Unit test"
           command: "npm test"
+  deploy:
+    docker: 
+      - images: circleci/node:9.2
+    steps:
       - deploy:
-          name: 'Deploy Souce to GitHub Pages'
+          name: 'Deploy to GitHub Pages'
           command: |
             if [[ "${CIRCLE_BRANCH}" == "source" ]]
             then
@@ -30,9 +38,19 @@ jobs:
             fi
 workflows:
   version: 2
-  build_and_test:
+  build-test-and-approval-deploy:
     jobs:
       - build:
+          filters:
+            branches:
+              only:
+                - source
+      - test:
+          requires: 
+            - build
+      - deploy:
+          requires:
+            - test
           filters:
             branches:
               only:

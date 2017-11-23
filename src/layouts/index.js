@@ -12,7 +12,7 @@ class TemplateWrapper extends React.Component {
   
   render() {
     const { data, props, children, location } = this.props
-    const title = data.site.siteMetadata.title
+    const { title, twitterId }= data.site.siteMetadata
     return (
       <div className="page">
         <Helmet
@@ -31,8 +31,8 @@ class TemplateWrapper extends React.Component {
              * 参考: https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started
              */
             { name: 'twitter:card', content: 'summary' },
-            { name: 'twitter:site', content: '@r_tamura' },
-            { name: 'twitter:creator', content: '@r_tamura' },
+            { name: 'twitter:site', content: `@${twitterId}` },
+            { name: 'twitter:creator', content: `@${twitterId}` },
           ]}
           link={[
             { "rel": "stylesheet", "href": "https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" },
@@ -74,6 +74,7 @@ query  titleQuery {
       title
       copyright
       description
+      twitterId
     }
   }
 }

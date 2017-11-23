@@ -60,12 +60,9 @@ workflows:
             branches:
               ignore:
                 - master
-      - test:
-          requires: 
-            - build
       - deploy:
           requires:
-            - test
+            - build
           filters:
             branches:
               only:

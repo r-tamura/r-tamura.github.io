@@ -19,9 +19,10 @@ jobs:
             npm run clean
             npm run build
   test:
-    docker: 
+    docker:
       - image: circleci/node:9.2
     steps:
+      - checkout
       - run:
           name: "Unit test"
           command: "npm test"
@@ -29,6 +30,7 @@ jobs:
     docker: 
       - image: circleci/node:9.2
     steps:
+      - checkout
       - deploy:
           name: 'Deploy to GitHub Pages'
           command: |
@@ -38,13 +40,13 @@ jobs:
             fi
 workflows:
   version: 2
-  build-test-and-approval-deploy:
+  build-test-and-deploy:
     jobs:
       - build:
           filters:
             branches:
-              only:
-                - source
+              ignore:
+                - master
       - test:
           requires: 
             - build

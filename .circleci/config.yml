@@ -20,14 +20,14 @@ jobs:
             npm run build
   test:
     docker: 
-      - images: circleci/node:9.2
+      - image: circleci/node:9.2
     steps:
       - run:
           name: "Unit test"
           command: "npm test"
   deploy:
     docker: 
-      - images: circleci/node:9.2
+      - image: circleci/node:9.2
     steps:
       - deploy:
           name: 'Deploy to GitHub Pages'

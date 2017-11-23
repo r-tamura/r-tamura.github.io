@@ -48,7 +48,7 @@ module.exports = {
           require(`postcss-import`)(),
           /* cssnextから各プラグインを導入する形式に変更する可能性あり */
           require(`postcss-cssnext`)(),
-          require(`postcss-apply`)
+          require(`postcss-apply`)(),
         ],
         // precision: 8 // SASS default: 5
       }

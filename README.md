@@ -1,5 +1,5 @@
 # Blog
-https://r-tamura.github.io/
+https://rtam.xyz
 
 # Stack
  - SSG: GatsbyJS v1
@@ -18,15 +18,20 @@ https://r-tamura.github.io/
 - [x] Service Worker
 - [x] manifest.json (Add To Home Screen)
 - [x] Migrate Gatsby v0 to v1
+- [ ] Test articles with textlint
+- [ ] schema.org (JSON-LD)
+- [ ] About me page
+- [ ] Tag filter
+- [ ] Monthly and Yearly article count
 
 ## Optional
 - [ ] Introduce markdown lint tool
 - [ ] Customize Theme
 - [ ] Check page speed
-- [ ] RSS Feed
+- [x] RSS Feed
 - [ ] Push Notification
-- [ ] OGP
-- [ ] Circle CI 2.0
+- [x] OGP
+- [x] Circle CI 2.0
 
 # Installation
 

@@ -1,5 +1,5 @@
 /**
- * 
+ * 全ての記事内にあるタグの件数をタグ毎に集計します
  * @param {*} edges 
  */
 exports.countTags = function countTags(edges) {

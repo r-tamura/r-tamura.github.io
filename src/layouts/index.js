@@ -5,7 +5,20 @@ import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import './styles.css'
+
+/*
+ * Workaround
+ * #001 本番向けビルド版でスタイルシート読み込みエラー
+ * See: https://github.com/gatsbyjs/gatsby/issues/1086#issuecomment-324605081 
+ */
+// import './styles.css'
+if (
+  process.env.NODE_ENV === `development` ||
+  (process.env.NODE_ENV === `production` && process.browser !== true)
+) {
+  require('./styles.css')
+}
+
 import 'prismjs/themes/prism-okaidia.css'
 
 class TemplateWrapper extends React.Component {
@@ -20,7 +33,7 @@ class TemplateWrapper extends React.Component {
           meta={[
             { name: 'description', content: 'r-tamura Tech Blog' },
             { name: 'keywords', content: 'Blog, Web, JavaScript, Browser' },
-            /* OpenGraph */
+            /* Open Graph */
             { property: 'og:title', content: `Home | ${title}` },
             { property: 'og:type', content: 'blog' },
             { property: 'og:url', content: `https://rtam.xyz${location.pathname}` },

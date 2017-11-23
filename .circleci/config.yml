@@ -14,10 +14,13 @@ jobs:
             git config --global user.name "CircleCI"
             git config --global user.email "rtamura30@gmail.com"
       - run:
-          name: 'Building'
+          name: 'Build app'
           command: |
             npm run clean
             npm run build
+      - run:
+        name: "Test"
+        command: "npm test"
       - deploy:
           name: 'Deploy Souce to GitHub Pages'
           command: |
@@ -30,8 +33,8 @@ workflows:
   build_and_test:
     jobs:
       - build:
-          filters:
-            branches:
-              only:
-                - source
+        filters:
+          branches:
+            only:
+              - source
 

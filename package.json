@@ -3,6 +3,10 @@
   "description": "Rtam's tech blog",
   "version": "1.2.1",
   "author": "rtamura30 <rtamura30@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r-tamura/r-tamura.github.io.git"
+  },
   "dependencies": {
     "font-awesome": "^4.7.0",
     "gatsby": "^1.9.73",

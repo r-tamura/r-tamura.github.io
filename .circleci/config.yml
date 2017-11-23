@@ -1,41 +1,54 @@
 version: 2
+
 jobs:
   build:
     docker:
       - image: circleci/node:9.2
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run: 
           name: 'Install dependencies' 
           command: yarn install
-      - run:
-          name: 'Set git user'
-          command: |
-            git config --global user.name "CircleCI"
-            git config --global user.email "rtamura30@gmail.com"
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - run:
           name: 'Build app'
           command: |
             npm run clean
             npm run build
-  test:
-    docker:
-      - image: circleci/node:9.2
-    steps:
-      - checkout
       - run:
           name: "Unit test"
           command: "npm test"
+
   deploy:
     docker: 
       - image: circleci/node:9.2
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: 
+          name: 'Install dependencies' 
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: 'Set git user'
+          command: |
+            git config --global user.name "CircleCI"
+            git config --global user.email "rtamura30@gmail.com"
       - deploy:
           name: 'Deploy to GitHub Pages'
           command: |
             if [[ "${CIRCLE_BRANCH}" == "source" ]]
             then
+              npm run build
               npm run deploy
             fi
 workflows:

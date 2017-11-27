@@ -1,27 +1,29 @@
 import React from "react"
 import Helmet from 'react-helmet';
 import Bio from '../components/Bio'
-import Tags from '../components/Tags'
+import TagLinkList from '../components/TagLinkList'
+
+import s from '../components/Article.module.css'
 
 export default ({ data }) => {
   const post = data.markdownRemark
   const site = data.site
   return (
-    <main className="article">
+    <main className={`${s.article}`}>
       <Helmet
         meta={[
-          { property: 'og:title', content: `${post.frontmatter.title} | 技術忘備録` },
+          { property: 'og:title', content: `${post.frontmatter.title} | ${site.title}` },
         ]}
       >
         <title>{post.frontmatter.title}</title>
       </Helmet>
       <div>{post.frontmatter.date}</div>
-      <h1 className="article__title">{post.frontmatter.title}</h1>
-      <Tags
+      <h1 className={`${s.articleTitle}`}>{post.frontmatter.title}</h1>
+      <TagLinkList
         tags={ post.frontmatter.tags || ['No tags'] }
       />
       <div className="remark" dangerouslySetInnerHTML={{ __html: post.html }} />
-      <div className={`article-bio-wrapper`}>
+      <div className={`${s.articleBioWrapper}`}>
         <Bio {...site.siteMetadata} />
       </div>
     </main>
@@ -32,6 +34,7 @@ export const query = graphql`
   query BlogArticleQuery($slug: String!) {
     site {
       siteMetadata {
+        title
         authorName
         authorDetail
         githubId

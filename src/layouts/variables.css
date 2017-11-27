@@ -15,6 +15,12 @@
   --main-column-max-width: 860px;
   --main-column-min-width: 320px;
 
+  --mxxs: 5px;
+  --mxs: 10px;
+  --ms:  20px;
+  --mm:  35px;
+  --ml:  50px;
+
   /* margin-bottom */
   --mb-xs: 10px;
   --mb-s: 20px;

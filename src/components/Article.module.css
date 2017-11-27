@@ -1,26 +1,32 @@
-@import "mixins";
+@import "../layouts/mixins.css";
+@import "../layouts/variables.css";
 
 .article {
   padding: 10px 10px 0 10px;
 }
 
-.article-list {
+.articleList {
   padding-top: 15px;
+  margin-bottom: var(--mb-l);
+
+  & li, & ul, & ol {
+    margin-bottom: 0;
+  };
 }
 
-.article-list__item {
+.articleListItem {
   position: relative;
   margin-bottom: 20px;
 }
 
-.article__title {
+.articleTitle {
   display: block;
   margin-top: 10px;
   margin-bottom: 10px;
   color: var(--color-strong);
 }
 
-.article__abstract {
+.articleAbstract {
   margin-bottom: 0;
 }
 
@@ -28,7 +34,7 @@
   text-decoration: underline;
 }
 
-.article-bio-wrapper {
+.articleBioWrapper {
   @apply --center;
   max-width: 450px;
 }

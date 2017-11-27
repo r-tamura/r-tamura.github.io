@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { countTags } from '../utils/markdown-utils';
 
+/**
+ * 全ての記事で使用されているタグ一覧を表示するページ
+ */
 class TagsPage extends React.Component {
   render() {
 

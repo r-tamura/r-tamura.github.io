@@ -4,7 +4,6 @@
 @import "mixins";
 @import "button";
 @import "remark";
-@import "article";
 
 .footer {
   background-color: var(--color-secondary-dark);
@@ -57,6 +56,7 @@
 }
 
 .main-column {
+  @apply --center;
   width: 95vw;
   max-width: var(--main-column-max-width);
   min-width: var(--main-column-min-width);

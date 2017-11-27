@@ -7,7 +7,7 @@ const Footer = ({
 } = {}) => {
   return (
       <footer className={`footer`}>
-        <div className={`section`}>
+        <div className={`section main-column`}>
           <div className={`inner`}>
             <span>&copy; {copyright} r-tamura</span>
             <span>&emsp; Built using Gatsby.js</span>

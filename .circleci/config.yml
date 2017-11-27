@@ -39,6 +39,11 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: 'Build app'
+          command: |
+            npm run clean
+            npm run build
+      - run:
           name: 'Set git user'
           command: |
             git config --global user.name "CircleCI"

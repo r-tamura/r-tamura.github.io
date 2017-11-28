@@ -38,11 +38,9 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: 'Build app'
-          command: |
-            npm run clean
-            npm run build
+      - add_ssh_keys:
+          fingerprints:
+            - "a0:ee:8c:e8:46:4a:c2:9c:55:b8:68:35:b6:b0:eb:d1"
       - run:
           name: 'Set git user'
           command: |
@@ -51,11 +49,8 @@ jobs:
       - deploy:
           name: 'Deploy to GitHub Pages'
           command: |
-            if [[ "${CIRCLE_BRANCH}" == "source" ]]
-            then
-              npm run build
-              npm run deploy
-            fi
+            npm run build
+            npm run deploy
 workflows:
   version: 2
   build-test-and-deploy:
@@ -72,4 +67,5 @@ workflows:
             branches:
               only:
                 - source
+
 

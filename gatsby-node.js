@@ -1,8 +1,22 @@
 require("babel-register")
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
-const { kebabCase } = require('./src/utils/helper')
+const { promisify } = require(`util`)
+const ncp = require(`ncp`)
+const { kebabCase } = require(`./src/utils/helper`)
+const fs = require(`fs`)
 
+exports.onPostBuild = async (_) => {
+  const source = path.resolve(__dirname, '.circleci', 'config.yml')
+  const dest = path.join(__dirname, 'public', '.circleci')
+  const copyFile = promisify(fs.copyFile)
+  const mkdir = promisify(fs.mkdir)
+
+  await mkdir(dest).catch(_ => console.log(`"${dest}" already exists`))
+  
+  await copyFile(source, path.join(dest, 'config.yml'))
+  console.log(`"config.yml" copied`)
+}
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators
@@ -67,3 +81,5 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
     )
   })
 }
+
+

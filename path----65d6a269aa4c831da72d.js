@@ -1,2 +1,0 @@
-webpackJsonp([60335399758886],{181:function(t,a){t.exports={data:{site:{siteMetadata:{title:"Rtam Tech Blog",copyright:"2017",description:"r-tamura Tech Blog"}}},layoutContext:{}}}});
-//# sourceMappingURL=path----65d6a269aa4c831da72d.js.map

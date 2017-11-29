@@ -44,8 +44,8 @@
   "devDependencies": {
     "ava": "^0.23.0",
     "gh-pages": "^1.0.0",
+    "luxon": "^0.2.3",
     "mkdirp": "^0.5.1",
-    "moment": "^2.19.1",
     "prettier": "^1.7.4",
     "rimraf": "^2.6.2"
   },

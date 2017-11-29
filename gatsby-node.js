@@ -15,7 +15,7 @@ exports.onPostBuild = async (_) => {
   await mkdir(dest).catch(_ => console.log(`"${dest}" already exists`))
   
   await copyFile(source, path.join(dest, 'config.yml'))
-  console.log(`"config.yml" copied`)
+  console.log(`"${source}" ==> "${dest}/config.yml" copied`)
 }
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {

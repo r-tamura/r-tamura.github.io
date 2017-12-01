@@ -37,4 +37,5 @@
 .articleBioWrapper {
   @apply --center;
   max-width: 450px;
+  margin-bottom: var(--mb-l);
 }

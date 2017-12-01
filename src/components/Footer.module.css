@@ -1,0 +1,11 @@
+@import '../layouts/variables.css';
+
+.footer {
+  background-color: var(--color-secondary-dark);
+  color: var(--color-secondary-light);
+  display: flex;
+  align-items: center;
+  & a {
+    color: var(--color-primary-xlight);
+  }
+}

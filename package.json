@@ -24,6 +24,9 @@
     "gatsby-transformer-remark": "^1.7.17",
     "postcss-apply": "^0.8.0",
     "postcss-cssnext": "2.8.0",
+    "react": "^16.2.0",
+    "react-disqus-comments": "^1.1.1",
+    "react-dom": "^16.2.0",
     "typography-theme-sutro": "^0.15.10"
   },
   "keywords": [

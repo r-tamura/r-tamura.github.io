@@ -1,4 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sat, 06 Jan 2018 10:49:36 GMT</lastBuildDate><item><title><![CDATA[The pixel pipeline]]></title><description><![CDATA[ブラウザがHTMLをレンダリングする際に何を行っているか The pixel pipeline ブラウザがレンダリングをする際に行っていることは、大きく分けると次の5つになる:  JavaScript : DOM操作で画面の見た目を変更にかかわるスクリプトの処理。 Style…]]></description><link>https://rtam.xyz/articles/2017/06/browser-pixel-pipeline/</link><guid isPermaLink="false">https://rtam.xyz/articles/2017/06/browser-pixel-pipeline/</guid><pubDate>Sat, 17 Jun 2017 18:23:51 GMT</pubDate><content:encoded>&lt;p&gt;ブラウザがHTMLをレンダリングする際に何を行っているか&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sat, 17 Feb 2018 15:50:16 GMT</lastBuildDate><item><title><![CDATA[HTTP Varyヘッダについて]]></title><description><![CDATA[HTTP Varyヘッダとはクライアントとサーバ間(以下 オリジンサーバ)にCDN等のキャッシュサーバへキャッシュの扱い方を指定するためのフィールドです。 背景と問題 同じURLへのアクセスでもリクエストに含まれるAccept-Language…]]></description><link>https://rtam.xyz/articles/2018/02/about-http-vary-field/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/02/about-http-vary-field/</guid><pubDate>Sat, 17 Feb 2018 20:43:14 GMT</pubDate><content:encoded>&lt;p&gt;HTTP Varyヘッダとはクライアントとサーバ間(以下 オリジンサーバ)にCDN等のキャッシュサーバへキャッシュの扱い方を指定するためのフィールドです。&lt;/p&gt;
+&lt;h1&gt;背景と問題&lt;/h1&gt;
+&lt;p&gt;同じURLへのアクセスでもリクエストに含まれるAccept-Languageヘッダによって言語ごとに異なるレスポンスをサーバが返す場合、
+キャッシュサーバが&lt;strong&gt;URLのみ&lt;/strong&gt;で  「キャッシュを利用するか」/「オリジンサーバへ問い合わせをするか」を判断してしまうと、
+Accept-Languageヘッダで指定された言語にオリジンサーバが対応しているにもかかわらず、
+キャッシュサーバが間違ったレスポンスを返してしまう可能性がある。これを解決するのが&lt;code&gt;Vary&lt;/code&gt;フィールドです。&lt;/p&gt;
+&lt;h1&gt;Varyフィールド&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Vary&lt;/strong&gt;フィールドは&lt;a href=&quot;https://tools.ietf.org/html/rfc7231#section-7.1.4&quot;&gt;RFC7231&lt;/a&gt;で定義されています。&lt;br&gt;
+以下の図はVaryフィールドを使った異なる言語に対するレスポンスの振り分けの例です。&lt;br&gt;
+クライアントから3回リクエストが送信されていますが、Varyフィールドで言語ごとのレスポンスをキャッシュサーバへキャッシュしています。&lt;/p&gt;
+&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 650px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 138.93333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAAACXBIWXMAAAsSAAALEgHS3X78AAADTUlEQVRIx61WW0gUYRRWK+y2WlhtEGmy5FMo2UsERVEWvUdQIT0EUuaj0gVKAzGI3MXdst3K27iXcV2lh1KyJnOJIFvX3JGdnZ3ZmdmZ2VndsF4WepzOv8zKVls42oGPOZxz/u8//+X8cwoKfhNRFF/JskwkEglCURQiGAzuEgThKrIhIBvP81dIktyDdEmSMrEw7kVBPoGgdDKZVCFQTaVSaigUKge9E+xqLBZTYTDydYTD4f3Ij2wwoQr+pWUSXnbfjLB9Y7zkHBOTQ5MU4zrf3d1t6Orq2oz8Vqt1A9KztpGRkfUWi6Uw12Y2mzctEzKC82gkNlDPia56UcHrhQReNTo6ug5chYBiwAYUp9l+kXy2P4SXPXUzc/a2TzOP773/YL7v/2jpCMw9aQ2ST1tZwVOmmxAybQhRz72zpAMXZBe+sDScgfLV642wzr26CfMFRmJ48cvxBzU9/TcO3Wm7fPzm7UsnLdamw/1Y+5nPs727dRNGOedBOLR0lB9IswKWXvzmy+KHtDBk1k2IpLKyshQ+CPsAuwDb/H5/ncPh2KSbkGKwA5zkpGmunw4zvbSY9NCwrzRkCDp+VxdhXMFPy4tDD2FpU1ISnxJkTzvgBAIruE7RscEqXYSQTecsaVcptldNffepcNodazplNu68BgdBMAL2DpZNwBKv/JNwgni05fVb2/YsxiesxUajcSe4dgDKAUaAoba2dvOKKkVIuHFGGFDFpFtd/Daswn41rrTM8hI2NzcXtbS0rMvCZrMVVlRUbNMy3KtlWWoymUpWVctI8i25urp6y4oIY6LTEo720uiewQmie3VxTUtm4+4qXvIcySLKuXZrgcVaZRgARat+vpBoe4iISjQYtNJDslWbaP2qXxsk2h4acva11OfzncUwbONqXhsTST1/EyTtRDBkJ+YjPQTF9BE0h03Cb6NBFyG84DVCwnOdk1xTUR6bIiM9dtAblZS3UV70NnGS+5juWv4yb1dpru//1HI84WnlxEGFjQ8mRcWtQLa31nKx9wB26qrlXInH48+gQ8AAg+g7PT1dBp3ChVwb/NjPQedgzLXBuO6/dg6oO4DWItM5BAKBChjQiWwsyy53DhRFZToHhmFUmHC5c/gJwFqI8j8H3wQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;vary-flow-diagram&quot;
+        title=&quot;&quot;
+        src=&quot;/static/vary-flow-diagram-0cc8ac3ce135855d81980eb6fb4ef1cc-83a8b.png&quot;
+        srcset=&quot;/static/vary-flow-diagram-0cc8ac3ce135855d81980eb6fb4ef1cc-8992e.png 163w,
+/static/vary-flow-diagram-0cc8ac3ce135855d81980eb6fb4ef1cc-ae0a7.png 325w,
+/static/vary-flow-diagram-0cc8ac3ce135855d81980eb6fb4ef1cc-83a8b.png 650w,
+/static/vary-flow-diagram-0cc8ac3ce135855d81980eb6fb4ef1cc-ea5b0.png 750w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&gt; 1回目のリクエスト&lt;br&gt;
+キャッシュサーバにキャッシュがない状態ですのでキャッシュサーバからオリジンサーバへ問い合わせが発生します。その際、オリジンサーバは&lt;code&gt;Vary: Accept-Language&lt;/code&gt;をレスポンスに付加することで、キャッシュサーバはURLだけでなく、URL + &lt;code&gt;Accept-Language: ja&lt;/code&gt;をキーとしてレスポンスをキャッシュします。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Content-Language: ja
+Vary: Accept-Language&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&gt; 2回目のリクエスト&lt;br&gt;
+キャッシュサーバに&lt;code&gt;Accept-Language: ja&lt;/code&gt;のリクエストが来ましたが、すでにキャッシュに登録されているためキャッシュのレスポンスをクライアントへ返します。&lt;strong&gt;オリジンサーバへのリクエストは発生しません&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&gt; 3回目のリクエスト
+&lt;code&gt;Accept-Language: en&lt;/code&gt;のリクエストが来ましたが、キャッシュサーバにはenのキャッシュはないので、オリジンサーバへ問い合わせ、帰ってきたレスポンスをenでキャッシュして、クライアントへ返します。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;まとめ&lt;/h1&gt;
+&lt;p&gt; 言語によるレスポンス振り分けにおけるキャッシュサーバのキャッシュ制御についての例を確認しました。Varyフィールドは&lt;code&gt;Accept-Language&lt;/code&gt;だけでなく、他のフィールド指定や複数のフィールドをカンマで区切ってしていすることもできます。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Vary: Accept-Encoding, Accept-Language&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt; なお、Varyヘッダではオリジンサーバの対応する形式などをキャッシュサーバへ伝えることができないので、それをできるようにする仕様HTTP Variantsというものも提案されています。&lt;br&gt;
+そちらについても今後調べてみたいと思います。&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://asnokaze.hatenablog.com/entry/2017/10/01/015550&quot;&gt;キャッシュサーバの効率を改善するHTTP Variantsという提案仕様 - ASnoKaze blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[The pixel pipeline]]></title><description><![CDATA[ブラウザがHTMLをレンダリングする際に何を行っているか The pixel pipeline ブラウザがレンダリングをする際に行っていることは、大きく分けると次の5つになる:  JavaScript : DOM操作で画面の見た目を変更にかかわるスクリプトの処理。 Style…]]></description><link>https://rtam.xyz/articles/2017/06/browser-pixel-pipeline/</link><guid isPermaLink="false">https://rtam.xyz/articles/2017/06/browser-pixel-pipeline/</guid><pubDate>Sat, 17 Jun 2017 18:23:51 GMT</pubDate><content:encoded>&lt;p&gt;ブラウザがHTMLをレンダリングする際に何を行っているか&lt;/p&gt;
 &lt;h2&gt;The pixel pipeline&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;ブラウザがレンダリングをする際に行っていることは、大きく分けると次の5つになる: &lt;/p&gt;

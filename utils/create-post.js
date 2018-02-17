@@ -1,10 +1,23 @@
 /* eslint no-console: 0 */
+/** 
+ * create-postスクリプト
+ * 新しい記事のボイラープレートを作成するスクリプトです
+ * スペースは使えません。代わりにハイフン"-"を使ってください。
+ * 
+ * @syntax
+ * npm run <post-title>
+ * 
+ * @example <caption>Create a post titled "new-post"</caption>
+ * npm run create-post new-post
+ */
 const fs = require('fs')
 const path = require('path')
-const mkdirp = require('mkdirp')
+const { promisify } = require("util")
+const mkdirp = promisify(require('mkdirp'))
+const writeFile = promisify(fs.writeFile)
 
 // コマンド引数から記事名を取得
-const [,,article] = process.argv
+const [article] = process.argv.slice(2)
 
 try {
   createNewArticle(article)
@@ -32,6 +45,22 @@ function validateArticle(article) {
   return /[^a-zA-Z0-9\-_]/.test(article)
 }
 
+function now() {
+  const date = new Date()
+
+  // const digit2 = number => `00${number}`.slice(-2)
+  const digit2 = number => number.toString().padStart(2, "0")
+
+  return {
+    year: String(date.getFullYear()),
+    month: digit2(date.getMonth() + 1),
+    date: digit2(date.getDate()),
+    hour: digit2(date.getHours()),
+    minute: digit2(date.getMinutes()),
+    second: digit2(date.getSeconds()),
+  }
+}
+
 /**
  * 記事のfront-matterを作成します
  *
@@ -40,7 +69,7 @@ function validateArticle(article) {
  * @param {string} path サイト内のパス
  * @return {string} front-matter文字列
  */
-function createFrontMatter(title, created, path) {
+function createFrontMatter({title, created, path}) {
   return `---
 title: ${title}
 date: ${created}
@@ -69,37 +98,17 @@ function createNewArticle(article) {
   //  - 年、月をブログのディレクトリ名に設定
   //  - 時間をブログ作成日に設定
   const { year, month, date, hour, minute, second } = now()
-  const dir = path.resolve(__dirname, '..', 'pages', 'blog', year, month, article)
-  mkdirp(dir, err => {
-    if (err) {
-      throw err
-    }
-    const content =
-      createFrontMatter(
-        article,
-        `${year}-${month}-${date} ${hour}:${minute}:${second}`,
-        `blog/${year}/${month}/${article}`
-      )
-    fs.writeFile(path.resolve(dir, "index.md"), content, err => {
-      if (err) {
-        throw err
-      }
-      console.log(`[${article}] was saved!`)
+  const dir = path.resolve(__dirname, `..`, `src`, `pages`, `articles`, year, month, article)
+  mkdirp(dir)
+    .then(() => {
+      const content = createFrontMatter({
+        title: article,
+        created: `${year}-${month}-${date} ${hour}:${minute}:${second}`,
+        path: `blog/${year}/${month}/${article}`,
+      })
+      writeFile(path.resolve(dir, "index.md"), content)
     })
-  })
-}
-
-function now() {
-  const date = new Date()
-
-  const digit2 = number => `00${number}`.slice(-2)
-
-  return {
-    year: String(date.getFullYear()),
-    month: digit2(date.getMonth() + 1),
-    date: digit2(date.getDate()),
-    hour: digit2(date.getHours()),
-    minute: digit2(date.getMinutes()),
-    second: digit2(date.getSeconds()),
-  }
+    .then(() => {
+      console.log(`[${article}] was saved!`)
+    })     
 }

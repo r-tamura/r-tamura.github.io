@@ -1,13 +1,86 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sat, 17 Feb 2018 15:50:16 GMT</lastBuildDate><item><title><![CDATA[HTTP Varyヘッダについて]]></title><description><![CDATA[HTTP Varyヘッダとはクライアントとサーバ間(以下 オリジンサーバ)にCDN等のキャッシュサーバへキャッシュの扱い方を指定するためのフィールドです。 背景と問題 同じURLへのアクセスでもリクエストに含まれるAccept-Language…]]></description><link>https://rtam.xyz/articles/2018/02/about-http-vary-field/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/02/about-http-vary-field/</guid><pubDate>Sat, 17 Feb 2018 20:43:14 GMT</pubDate><content:encoded>&lt;p&gt;HTTP Varyヘッダとはクライアントとサーバ間(以下 オリジンサーバ)にCDN等のキャッシュサーバへキャッシュの扱い方を指定するためのフィールドです。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sat, 31 Mar 2018 02:36:38 GMT</lastBuildDate><item><title><![CDATA[「人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか」を読んで]]></title><description><![CDATA[人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか を読んで面白かった部分のメモと感想。 各章メモ…]]></description><link>https://rtam.xyz/articles/2018/03/how-to-make-an-artificial-intelligence/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/03/how-to-make-an-artificial-intelligence/</guid><pubDate>Sat, 31 Mar 2018 10:05:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;http://gihyo.jp/book/2017/978-4-7741-8627-6&quot;&gt;人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか&lt;/a&gt;を読んで面白かった部分のメモと感想。&lt;br&gt;
+&lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 160px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 141.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAMCBAUB/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAEDBP/aAAwDAQACEAMQAAAB1Y2MqNIWFBXZ6ctkSJ//xAAbEAACAwEBAQAAAAAAAAAAAAABAgADERITIf/aAAgBAQABBQI2/PYQOuMByQLBRnFtrPE7iF61yA4S5M//xAAYEQEAAwEAAAAAAAAAAAAAAAABAAMQEf/aAAgBAwEBPwHC5jY9n//EABcRAQADAAAAAAAAAAAAAAAAAAAQERL/2gAIAQIBAT8BjKn/xAAfEAACAgEEAwAAAAAAAAAAAAAAAQIRISAiMUEyUZH/2gAIAQEABj8CxFm9NGFL4M46OeylOl6okvK1RWHo/8QAHhABAAMAAgIDAAAAAAAAAAAAAQARITFBUWFxgaH/2gAIAQEAAT8h1WE9M6LRaxm8w82gVQClYl4Va1hFWya2F6rmCBR9BUwHuuUjXH7EOj4n/9oADAMBAAIAAwAAABDsMs//xAAZEQEBAQADAAAAAAAAAAAAAAABABEhMaH/2gAIAQMBAT8QDZIvD1amL5f/xAAXEQEBAQEAAAAAAAAAAAAAAAABABAR/9oACAECAQE/EHEweX//xAAgEAEAAwABBAMBAAAAAAAAAAABABEhMUFRYZFxgaGx/9oACAEBAAE/EHFYHkhpPGc+40gnA3rtkRYfQOP3Uv4gKPlfz8hgCzoUc5fki1rhbgxcAVB7bDg22gWNSH0p0Ot9/wCRvutu4Se06CxlkaAoBQT/2Q==&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;image&quot;
+        title=&quot;&quot;
+        src=&quot;/static/title-94b943af8e45cbe71e982fda3c15fdd8-222ea.jpg&quot;
+        srcset=&quot;/static/title-94b943af8e45cbe71e982fda3c15fdd8-222ea.jpg 160w&quot;
+        sizes=&quot;(max-width: 160px) 100vw, 160px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;h1&gt;各章メモ&lt;/h1&gt;
+&lt;h2&gt;1章  知能って何だろう&lt;/h2&gt;
+&lt;p&gt;前半は「知能」を様々な角度から定義している「自分の内部と外部の境界にあるもので、内部を守るものである」
+「体と環境も関係を取り持つもの」、「生き物に共通する性質である」、「宇宙の対義語」、「言葉を操り、記憶と推論の能力を有するもの (西洋の人工知能の大きな流れ)」
+「環境に適応させながら体を目的に向かって運動させるもの (上記のの反対)」など。&lt;br&gt;
+後半はゲームの知能の歴史について記述されている。
+初期のゲームでは知能というよりギミックのレベルであり、2Dゲームから3Dゲームへの変化によりAIの方向性に違いが出てくる。
+日本では「ゲームデザインの工夫によりAIの役割を絞り込み作りこむ」、海外では「環境を認識するようなAI作りをしていた」という違いもあるが、
+それらのノウハウを業界全体で共有するという方向性が日本には欠けていた。他律型AIではスケールが大きくなると対応できなくなるので、
+ウェイポイントデータなどの知識表現をキャラクターに与え、「知識x思考」で自律的に判断するAIを作成することが重要。&lt;/p&gt;
+&lt;h2&gt;2章  知性を表現する手法 ~ ゲームAI 基礎概念&lt;/h2&gt;
+&lt;p&gt;AIを表現する簡易的なモデルについて書かれている。
+グラフィックスの進化に伴い現実感のない行動をするキャラクターに対して違和感を感じる「不気味の谷」を超えるために、
+人間の当たり前をAIができるように作りこまなければならない。例では、NPCなどの「キャラクターAI」に加え、
+キャラクターAIのサポートを行う「ナビゲーションAI」、ゲームの流れを作る「メタAI」の3つのAI連携、「メタ思考」・「メタ知識」の連携、ブラックボードアーキテクチャの応用等について。&lt;/p&gt;
+&lt;h2&gt;3章  人工知能の根底にあるもの ~ AIの根本概念&lt;/h2&gt;
+&lt;p&gt;「フレーム」を人間が定義することでAIは世界をとらえることができ、問題を解くことができるがフレームを伸縮させることはできない。
+実際の世界は「無限の情報」、「連続的」、「状態が流動的に変化する」という特徴をもっており、全体の中化から最適解を選択するのではなく、想像する力がAIには必要である。&lt;/p&gt;
+&lt;h2&gt;4章  キャラクターの意志はどう決められるか ~ 意思決定のアルゴリズム&lt;/h2&gt;
+&lt;p&gt;ゲームでは人間がどのようなプロセスで意思決定をしているかということについて、ゲームでで使われる7つのモデルがまとめられている。
+それぞれのモデルには得意・不得意な状況があり、「対局を判定」 &gt; 「具体的な行動を決定」をそれぞれ別のモデルで行うなど複数のモデルを組み合わせて解決する。
+ここで紹介されているのはあくまでコンセプトであり、実際にはこれらを深く掘り下げていったアルゴリズムが使われている。&lt;/p&gt;
+&lt;h2&gt;5章  ゲームAIは世界をどう認識するか ~ ゲームAI基礎概念(深部)&lt;/h2&gt;
+&lt;p&gt;AIは物や出来事に対する「知識表現」を通して世界を認識することができる。
+空間を理解する場合は、空間の特徴的な点を結ぶ「ウェイポイント・グラフ」、三角形ごとに地形の情報を持たせる「ナビゲーション・グラフ」を使ったりする。
+AIどおしで情報をやりとする決まりを決めておく「メッセージング」、また、団体では直接情報をやりとりせずに「レイノルズの群れアルゴリズム」を用いて一定の距離内に存在するAIの情報をもとに行動を決定したりする。&lt;/p&gt;
+&lt;h2&gt;6章  成長するAI ~ 学術・ゲームにおける共通概念&lt;/h2&gt;
+&lt;p&gt;AIが学習する方法ついて書かれている。1AIの学習では、情報とその信頼度を使い情報を調整して保持する方法があり、
+AIが織りなす社会的な側面ではそれぞれのAI関係をグラフにした「ソーシャル・ネットワーク・グラフ」を使って情報を伝達していく。
+後半は、自らを現在の環境に最適な状態とする適応、行動とその結果から次の行動を調整する学習、
+複数の学習したAIからより優位なAIどうしを交叉させて次の世代を生み出す進化を行うことでAIが成長していくことが説明されている。
+ニューラルネットワークはゲームを作成する側が調整することが難しいため、実際のゲームでは余り採用されていないらしい。&lt;/p&gt;
+&lt;h2&gt;7章  身体とAI ~ 身体感覚をつなぐインターフェース&lt;/h2&gt;
+&lt;p&gt;キャラクターAIの知能は体抜きに作るのは不可能であり、知能には「自分の行動と世界の変化を同時に想像できる」こと、「ある程度、想像通りに身体を動かせる」ことが求められる。
+自身の「内部状態」、環境の「外部状態」、物に対しての「アフォーダンス」をもとに行動を決定していく。さらに、環境側からキャラクターを制御するような、
+環境とキャラクターが相互に情報をやりとりし機能を実現する「分散人工知能」で機能を実現していく。&lt;/p&gt;
+&lt;h2&gt;8章  集団の知能を表現するテクニック ~ 群衆AIの技術&lt;/h2&gt;
+&lt;p&gt;モブ(群衆)が自然に行動しているように見せる技術について書かれている。
+街の群衆を表現する例を使って、プレイヤーの距離と密度、イベント発生点と距離による群衆の行動、LODとAIの詳細度などについて述べられている。
+その他は、セルベース、階層型チームプランニング、合議制アルゴリズム、トークンを使ったターゲティング、プレイヤーレベルに合わせたスロットによる配置など。&lt;/p&gt;
+&lt;h2&gt;9章  人間らしさの作り方 ~ ゲームを面白くするためのAI&lt;/h2&gt;
+&lt;p&gt;NPC等の「キャラクターAI」、地形・レベルの自動生成技術「プロシージャル」、それらをいつ配置するかを判断する「メタAI」が組み合わせることで
+質の高いゲームの自動生成がかのうとなるので、これからはこれらをブラッシュアップしていくことで全体な質を高められる。&lt;/p&gt;
+&lt;h1&gt;感想&lt;/h1&gt;
+&lt;p&gt;ゲーム開発者はゲームAIをどのように考えており、設計・実装しているのかが気になったのでこの本を読んだ。&lt;br&gt;
+最近はニューラルネットワークなどの機械学習が話題となっており、その結果得られたものがAIであると錯覚してしまっていたが、
+この本を読んで、人工知能を通して知能とはなんであるかということを探求することから始まり、改めてAIがどういうものであるか、どのように作られているかを認識できたことが大きい。&lt;br&gt;
+「不気味の谷」についてはゲームをプレイしているときにもよく感じていたことで、いかに違和感をプレイヤーに感じさせないことがゲームAIでは重要だと思う。
+それについて、近年のゲームで使われているAIコンセプト・モデル・テクニックだったりがたくさん学べてよかった。群衆のLODについてグラフィックだけでなくAIの行動にも適応されているテクニックが特に面白かった。&lt;/p&gt;
+&lt;p&gt;別だけど、以下はゲームAIをどのように学習させているかや、ボットの置き換えだけでなくデバッグ用やプロシージャルなど様々な場所で使われているという話。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.ea.com/news/teaching-ai-agents-battlefield-1&quot;&gt;Teaching AI-agents to Play Battlefield 1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[HTTP Varyヘッダについて]]></title><description><![CDATA[HTTP Varyヘッダとはクライアントとサーバ間(以下 オリジンサーバ)にCDN等のキャッシュサーバへキャッシュの扱い方を指定するためのフィールド。 背景と問題 同じURLへのアクセスでもリクエストに含まれるAccept-Language…]]></description><link>https://rtam.xyz/articles/2018/02/about-http-vary-field/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/02/about-http-vary-field/</guid><pubDate>Sat, 17 Feb 2018 20:43:14 GMT</pubDate><content:encoded>&lt;p&gt;HTTP Varyヘッダとはクライアントとサーバ間(以下 オリジンサーバ)にCDN等のキャッシュサーバへキャッシュの扱い方を指定するためのフィールド。&lt;/p&gt;
 &lt;h1&gt;背景と問題&lt;/h1&gt;
 &lt;p&gt;同じURLへのアクセスでもリクエストに含まれるAccept-Languageヘッダによって言語ごとに異なるレスポンスをサーバが返す場合、
 キャッシュサーバが&lt;strong&gt;URLのみ&lt;/strong&gt;で  「キャッシュを利用するか」/「オリジンサーバへ問い合わせをするか」を判断してしまうと、
 Accept-Languageヘッダで指定された言語にオリジンサーバが対応しているにもかかわらず、
-キャッシュサーバが間違ったレスポンスを返してしまう可能性がある。これを解決するのが&lt;code&gt;Vary&lt;/code&gt;フィールドです。&lt;/p&gt;
+キャッシュサーバが間違ったレスポンスを返してしまう可能性がある。これを解決するのが&lt;code&gt;Vary&lt;/code&gt;フィールド。&lt;/p&gt;
 &lt;h1&gt;Varyフィールド&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Vary&lt;/strong&gt;フィールドは&lt;a href=&quot;https://tools.ietf.org/html/rfc7231#section-7.1.4&quot;&gt;RFC7231&lt;/a&gt;で定義されています。&lt;br&gt;
-以下の図はVaryフィールドを使った異なる言語に対するレスポンスの振り分けの例です。&lt;br&gt;
-クライアントから3回リクエストが送信されていますが、Varyフィールドで言語ごとのレスポンスをキャッシュサーバへキャッシュしています。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vary&lt;/strong&gt;フィールドは&lt;a href=&quot;https://tools.ietf.org/html/rfc7231#section-7.1.4&quot;&gt;RFC7231&lt;/a&gt;で定義されている。
+以下の図はVaryフィールドを使った異なる言語に対するレスポンスの振り分けの例。&lt;br&gt;
+クライアントから3回リクエストが送信されていますが、Varyフィールドで言語ごとのレスポンスをキャッシュサーバへキャッシュしている。&lt;/p&gt;
 &lt;p&gt;
   &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
@@ -34,7 +107,7 @@ Accept-Languageヘッダで指定された言語にオリジンサーバが対�
   &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&gt; 1回目のリクエスト&lt;br&gt;
-キャッシュサーバにキャッシュがない状態ですのでキャッシュサーバからオリジンサーバへ問い合わせが発生します。その際、オリジンサーバは&lt;code&gt;Vary: Accept-Language&lt;/code&gt;をレスポンスに付加することで、キャッシュサーバはURLだけでなく、URL + &lt;code&gt;Accept-Language: ja&lt;/code&gt;をキーとしてレスポンスをキャッシュします。&lt;/li&gt;
+キャッシュサーバにキャッシュがない状態ですのでキャッシュサーバからオリジンサーバへ問い合わせが発生する。その際、オリジンサーバは&lt;code&gt;Vary: Accept-Language&lt;/code&gt;をレスポンスに付加することで、キャッシュサーバはURLだけでなく、URL + &lt;code&gt;Accept-Language: ja&lt;/code&gt;をキーとしてレスポンスをキャッシュする。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Content-Language: ja
@@ -43,20 +116,19 @@ Vary: Accept-Language&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&gt; 2回目のリクエスト&lt;br&gt;
-キャッシュサーバに&lt;code&gt;Accept-Language: ja&lt;/code&gt;のリクエストが来ましたが、すでにキャッシュに登録されているためキャッシュのレスポンスをクライアントへ返します。&lt;strong&gt;オリジンサーバへのリクエストは発生しません&lt;/strong&gt;。&lt;/p&gt;
+キャッシュサーバに&lt;code&gt;Accept-Language: ja&lt;/code&gt;のリクエストが来ましたが、すでにキャッシュに登録されているためキャッシュのレスポンスをクライアントへ返する。&lt;strong&gt;オリジンサーバへのリクエストは発生しません&lt;/strong&gt;。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&gt; 3回目のリクエスト
-&lt;code&gt;Accept-Language: en&lt;/code&gt;のリクエストが来ましたが、キャッシュサーバにはenのキャッシュはないので、オリジンサーバへ問い合わせ、帰ってきたレスポンスをenでキャッシュして、クライアントへ返します。&lt;/p&gt;
+&lt;code&gt;Accept-Language: en&lt;/code&gt;のリクエストが来ましたが、キャッシュサーバにはenのキャッシュはないので、オリジンサーバへ問い合わせ、帰ってきたレスポンスをenでキャッシュして、クライアントへ返する。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1&gt;まとめ&lt;/h1&gt;
-&lt;p&gt; 言語によるレスポンス振り分けにおけるキャッシュサーバのキャッシュ制御についての例を確認しました。Varyフィールドは&lt;code&gt;Accept-Language&lt;/code&gt;だけでなく、他のフィールド指定や複数のフィールドをカンマで区切ってしていすることもできます。&lt;/p&gt;
+&lt;p&gt; 言語によるレスポンス振り分けにおけるキャッシュサーバのキャッシュ制御についての例を確認しました。Varyフィールドは&lt;code&gt;Accept-Language&lt;/code&gt;だけでなく、他のフィールド指定や複数のフィールドをカンマで区切って指定することもできる。&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot;&gt;
       &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;Vary: Accept-Encoding, Accept-Language&lt;/code&gt;&lt;/pre&gt;
       &lt;/div&gt;
-&lt;p&gt; なお、Varyヘッダではオリジンサーバの対応する形式などをキャッシュサーバへ伝えることができないので、それをできるようにする仕様HTTP Variantsというものも提案されています。&lt;br&gt;
-そちらについても今後調べてみたいと思います。&lt;/p&gt;
+&lt;p&gt; なお、Varyヘッダではオリジンサーバの対応する形式などをキャッシュサーバへ伝えることができないので、それをできるようにする仕様HTTP Variantsというものも提案されている。  &lt;/p&gt;
 &lt;h1&gt;参考&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://asnokaze.hatenablog.com/entry/2017/10/01/015550&quot;&gt;キャッシュサーバの効率を改善するHTTP Variantsという提案仕様 - ASnoKaze blog&lt;/a&gt;&lt;/li&gt;

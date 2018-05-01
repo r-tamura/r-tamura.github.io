@@ -27,6 +27,8 @@ const server = http.createServer((request, response) => {
   const reqUrl = url.parse(request.url).pathname
   let filepath = path.join(context, reqUrl)
 
+  console.log(`${request.method} ${reqUrl}`)
+
   fs.exists(filepath, exists => {
     if (!exists) {
       response.writeHead(404, { "Content-Type": "text/plain" })

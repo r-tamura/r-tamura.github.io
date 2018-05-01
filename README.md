@@ -46,7 +46,7 @@ npm i
 // Generate HTML for publish
 npm run build
 
-// Clean directory for publish
+// Clean publish directory
 npm run clean
 
 // Run dev server(http://localhost:8000/)
@@ -54,4 +54,10 @@ npm run develop
 
 // Deploy
 npm run deploy
+
+// Docker run
+docker-compose up -d
+
+// Stop container
+docker-compose down
 ```

@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  node:
+    build: .
+    image: rt/node10
+    container_name: node10
+    volumes:
+      - .:/usr/src/app:rw
+    stdin_open: true
+    tty: true
+    privileged: true
+    ports:
+      - "8000:8000"

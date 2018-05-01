@@ -17,6 +17,7 @@ const mkdirp = promisify(require('mkdirp'))
 const writeFile = promisify(fs.writeFile)
 
 // コマンド引数から記事名を取得
+// @param <string> article 記事名
 const [article] = process.argv.slice(2)
 
 try {
@@ -110,5 +111,5 @@ function createNewArticle(article) {
     })
     .then(() => {
       console.log(`[${article}] was saved!`)
-    })     
+    })
 }

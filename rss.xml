@@ -1,11 +1,142 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sat, 31 Mar 2018 02:36:38 GMT</lastBuildDate><item><title><![CDATA[「人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか」を読んで]]></title><description><![CDATA[人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか を読んで面白かった部分のメモと感想。 各章メモ…]]></description><link>https://rtam.xyz/articles/2018/03/how-to-make-an-artificial-intelligence/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/03/how-to-make-an-artificial-intelligence/</guid><pubDate>Sat, 31 Mar 2018 10:05:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;http://gihyo.jp/book/2017/978-4-7741-8627-6&quot;&gt;人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか&lt;/a&gt;を読んで面白かった部分のメモと感想。&lt;br&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sat, 12 May 2018 14:55:39 GMT</lastBuildDate><item><title><![CDATA[1.1.1.1のSSL]]></title><description><![CDATA[2018/4/1からCDNのCloudflareがIPアドレス 1.1.1.1 をDNSサーバとして運用を開始した。
+ 1.1.1.1 ではWebサーバも公開されており、アクセスしてみた際にドメインではなくで  https://1.1.1.1  という IPアドレスでSSL…]]></description><link>https://rtam.xyz/articles/2018/05/ssl-san-ipaddress/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/05/ssl-san-ipaddress/</guid><pubDate>Sat, 12 May 2018 12:00:00 GMT</pubDate><content:encoded>&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 650px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 51.935788479697834%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAChElEQVQozx2TyW7TUBSG/QBILEBFFAQkgdLQzMEZiWtnNJmcxJndxknsDB3UCaKWFkFhB+IJeNmPK3Z3ce4/nf9I53aNjWtws+qw6OWppIPIfg+RnVdEdz3IgbekQn56hTSrtoapxalmItiDAu68zrnT4MY1ObV0ziY1pE9ui+tVl/WwzOXUEIAhAt7npIKvefvyKY10mEUlw6KQ4mrSppeXSQoiU5eZWCrLjsp0P85KiOmX4khXTof1qMKsnuVI/8BHAeB9toXn6WO2Hj6gFHrDeX2fdSXHQInRzQZRBJmhyaxGJYygj3E+zpXT/i9Ksowsp+MybluhuufBysXwbm/he/aETHiPajLEUVXhtJFnKGzbgrSZDpALehnkIjQiXq6XJj8/T7m/mCAtZnXmQ41Fv0AnF2KU9JPZ8xF97eHu6py11eP3Zs33Y5s/txf8/XXPtdPFSOzSiO8IdRFulm028yaXYh/StJtnLqS7h01ss0Aj6qGdCeDffkSvpLAydTaHBs7HHN+WY34cH3AmrDl6imrYw0RPsO5rzBppFl0NaTko/vd+NBJLcTv01Bh2KYkusiyHfRwUZGZFmZHIbq6n2dhNjoSIqXhbYnbdK+KaKmNB0C8nkE4Oqtyejrg9HvJVZHBiG7i1LEuzTEuRWTZVjkVdFjWFSSnF3bzDF1ETt66wNBTcboVDQ6NVTNLWYkjuQMMSC3GFbccqMWxmMFI74kNO9LLO5ajGrJximIszLWc5MfLY2nuqwReMizGKCT9KzIv63kdLjSI5VpFRX2XSFz0yMlSUAK39MNOSzELPcqgKIAEwyAQxE3u0E+9Q32xTi/rEMYy5dAbUxHwlvYtVTfEPJpV3PQcQSmkAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;1.1.1.1_web&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1.1.1.1_web-c0f6796e1f605dccbcc075c30c02a16b-83a8b.png&quot;
+        srcset=&quot;/static/1.1.1.1_web-c0f6796e1f605dccbcc075c30c02a16b-8992e.png 163w,
+/static/1.1.1.1_web-c0f6796e1f605dccbcc075c30c02a16b-ae0a7.png 325w,
+/static/1.1.1.1_web-c0f6796e1f605dccbcc075c30c02a16b-83a8b.png 650w,
+/static/1.1.1.1_web-c0f6796e1f605dccbcc075c30c02a16b-50453.png 975w,
+/static/1.1.1.1_web-c0f6796e1f605dccbcc075c30c02a16b-8b09e.png 1059w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;p&gt;2018/4/1からCDNのCloudflareがIPアドレス&lt;code&gt;1.1.1.1&lt;/code&gt;をDNSサーバとして運用を開始した。
+&lt;code&gt;1.1.1.1&lt;/code&gt;ではWebサーバも公開されており、アクセスしてみた際にドメインではなくで &lt;a href=&quot;https://1.1.1.1&quot;&gt;https://1.1.1.1&lt;/a&gt; という&lt;strong&gt;IPアドレスでSSL接続していた&lt;/strong&gt;ことに疑問を覚えたので仕組みを調べてみた。&lt;/p&gt;
+&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 279px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 13.261648745519713%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAg0lEQVQI132MwQ6CMBBE+f9fNBpB2912KW0BEz09oeHARSd5mdnJZDsVJWjAomEhIiKIF+KW9y6o4pzDe48/fN+0+8hnuuvYM4QHmpQhOl6fN8uSubg7N+nJOTHa/rwwpcQyV/6pi5Ohpg2xwFQKtRZ8FAZ5YmaUrcu5NJ9rZV3Xn3wBwJfio7QHz90AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;url&quot;
+        title=&quot;&quot;
+        src=&quot;/static/url-8329cec74d5dca11ddfedecae489e414-5222b.png&quot;
+        srcset=&quot;/static/url-8329cec74d5dca11ddfedecae489e414-c4632.png 163w,
+/static/url-8329cec74d5dca11ddfedecae489e414-5222b.png 279w&quot;
+        sizes=&quot;(max-width: 279px) 100vw, 279px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;h1&gt;証明書の中身を確認&lt;/h1&gt;
+&lt;p&gt;CN, SANで&lt;code&gt;1.1.1.1&lt;/code&gt;という値が指定されているはずと考えられるので、まずはブラウザから証明書の中身を確認してみる。&lt;/p&gt;
+&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 650px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 61.79401993355482%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAA7DAAAOwwHHb6hkAAACDElEQVQoz4VTyXKbUBDk/78oSeWSQ3JyLiljC8QidgESy2OJA0Kd6ZFJ+ZapevUWtXpmehrr8PqCJEmR5wWyLMf5XKIsS9nP+sa77/t4sZ8RRTGqqtLf6rrW9biXstfwPA9WGJ4wDAOyNFUiYwa0bYtxHLGuK+53oCgKJR2GEangSND3RnAdxmnGsqzYtrvirCLPMU+TEkyydx1BE263m5DdIXyPDrJMcAPGoceftwmmbyWBnH9PwH3TxFmawQp8D97RRRInWCVTJVXyz1VZaQIGW/U9H59+xPj8NOC7A3x56vD1Z4tvz29wckm8bQiDENZB+nbcI1zHxTzPQpbDPTiSxEPbtEp4lHMQHGG/HhHEFbpxQ5SIZmGOojYY5kVa3uC6Liw/DGDbtorKuF4uWm0hA9krDPwAXuBL67H8dpJqVjSXCqmck+gkMph/nchQQsRxjFoIKbQxRgCjaGRU10UGk4o24SnUJGmS6TsX8RwoEy/LogOzWKbzekAcRaobCef3obANBm1CDc/FWRL1+q4De18fcVYsZbJN+okDuYi3mutVLbMHgZThf1GKnaxduz1oGRq2l0qaptE9SRL1KGOvju9MRJsRx51eti5S3Q5UQtHmKhVypz6cPLVhEgbJGNSNRA+ckbs4RDxtEcyvo+t6XTzvZBSdlbliK1bJL+Ujjnfiro1RO/2yPfwFxtqKyYVU7dEAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;san.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/san-52e3606eea7346562ba3b5a92b5ec8a2-83a8b.png&quot;
+        srcset=&quot;/static/san-52e3606eea7346562ba3b5a92b5ec8a2-8992e.png 163w,
+/static/san-52e3606eea7346562ba3b5a92b5ec8a2-ae0a7.png 325w,
+/static/san-52e3606eea7346562ba3b5a92b5ec8a2-83a8b.png 650w,
+/static/san-52e3606eea7346562ba3b5a92b5ec8a2-50453.png 975w,
+/static/san-52e3606eea7346562ba3b5a92b5ec8a2-215a8.png 1204w&quot;
+        sizes=&quot;(max-width: 650px) 100vw, 650px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;p&gt;SANのところで&lt;code&gt;IP Address=1.1.1.1&lt;/code&gt;という項目があり、他にも&lt;code&gt;1.0.0.1&lt;/code&gt;やIPv6形式のアドレスもあることがわかる。
+確かに証明書の中にはIPアドレスで指定されているようだ。そこで、実際に証明書の仕様を確認してみる。&lt;/p&gt;
+&lt;h1&gt;RFC仕様&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;RFC5280&lt;/a&gt;のSANの構造を見てみると以下のようになっている。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;  SubjectAltName ::= GeneralNames
+
+  GeneralNames ::= SEQUENCE SIZE (1..MAX) OF GeneralName
+
+  GeneralName ::= CHOICE {  
+    otherName                       [0]     OtherName,  
+    rfc822Name                      [1]     IA5String,  
+    dNSName                         [2]     IA5String,  
+    x400Address                     [3]     ORAddress,  
+    directoryName                   [4]     Name,  
+    ediPartyName                    [5]     EDIPartyName,  
+    uniformResourceIdentifier       [6]     IA5String,  
+    iPAddress                       [7]     OCTET STRING,  
+    registeredID                    [8]     OBJECT IDENTIFIER 
+  }  &lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;SANには[7]で&lt;strong&gt;IPアドレス&lt;/strong&gt;も指定できることがわかる。他にもいろいろなものが指定できることも確認できる。仕様がわかったので、次はパケットの中身をみてみる。&lt;/p&gt;
+&lt;h1&gt;パケットキャプチャをしてみる&lt;/h1&gt;
+&lt;p&gt;WiresharkでSSLハンドシェイク時のパケットをキャプチャし、サーバからのレスポンスCertificateのSAN部分のバイナリデータとWireshark上で見える内容を確認してみる。&lt;/p&gt;
+&lt;p&gt;
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 609px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 102.79146141215105%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAD0klEQVQ4y32USXPbRhCF+Y9VysWKE5cWH3Pzzbdck7NsSa6SpaRSkiNuIEiQBMAFGwkC3Elwkbi8vB5atpKKNFVdAAn0hzfdryc1HA7R6/XQ7/cRxzEq1QrS6TTK5TJKpSKq/J3P5ZDP5/Dl9oZXDb7nwmk20Ww0UKvV0Ol0MJslOHj1Cin8Z61WD3BdD1a9CbvuoNsfwvVbaHViPKy3WD6skcyXGE9njDn6wzGWq43KPTw+2QE3mw222y02Eps14sEIutlAWiujHsQwrCa0so2a30E4SBCPFxgvt0hWUDFabLAk5/Wbox1QYI8haz6bwbQJzBfhBB3U3QB6xUbDa8Nrx/zgBNPlCgvC5g9bzO4piHk/H74A1Gwf1zkTWTuE1ujirtpCNUxQ792jNQP8CeCNtwzAHW0Q3QM/vH4B2Ap82JaJiAXvxhFcx8EsmWLNGu/W9vt1u6vh8fEzQOmY03TYZQMhgfVaHbYt3YyQ8GPL5RLf84D1Zgc8OvofoMSMSQ4VlY2yAopFbNojaLHbjOl0SjesvkE3zwEf1yxJ4PsePVlVQNdpwrJt2slFm8DxhE2ZJi8DH+0jX5Ya+h6BFQLDEB5BNoGe7yOKOhgMhphMps8Dv/mQV5kYSRT3y/YE4BBoWZYCJWzMaDRS783nC5W3Xq//DXy61usVt+sT4qHbjdHlWC4WC4JmvM4JmfM+gYys3D9dJyfHSHmerxrgOO7XcGCaJmfYRIOz2mRDRPHTkA8GQQuSK88bjDDsYH9/HylJKhQK6kAoFHTouo5MJotisQSDXdb5n6ZpyGSzfFZEjgdFnTm9Xp9lsOEHgaqvcA4OfkQqiiKqqcKiKnnBskxVr8bXk6ReFw9aqkGWVds1in6UMkjuYDCg2gBR3KWxuWXZolaggnRGqRK1mlZAifdyhIniXC6LXOYOTcuAbeQRBh6BS+UA8adtVjGK2ziWpoTtNv+0WbeqmoaaujeVMjnvJKFOhX9yrn+9auL9mYF0rY/xoEdv1hCFLaR1C6daFz+9OURK5Op6AdlsjrXLQMvn1SEq6qQUorpc0nH+VwHvTsv45fc0/ijS3MMeqqYF323i6jaP326CHVDqUGGybNUwDIIMQoq7urKWAjaZWDMrCBoVOFYRUdtXdpJytbhDmaRxr00fEijHfokAqZWA8lSYplIZO/mAdFieFdjhcoXHWS7PmW7T3EP6tKu8OOEo9voD+vAtUjc3Nzg/P8eni0+4/PyZ1wv+vsDV1TUuLy9x9vEjzs7OVFzw2YcPp7i9/aJEXF9f4++7O2U5EbO3t4d/AO3P8itz9xn4AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;captured_san.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/captured_san-acfc1b249fe07c5e6342a95b3413d600-d6c9d.png&quot;
+        srcset=&quot;/static/captured_san-acfc1b249fe07c5e6342a95b3413d600-df0dd.png 163w,
+/static/captured_san-acfc1b249fe07c5e6342a95b3413d600-239af.png 325w,
+/static/captured_san-acfc1b249fe07c5e6342a95b3413d600-d6c9d.png 609w&quot;
+        sizes=&quot;(max-width: 609px) 100vw, 609px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;/p&gt;
+&lt;p&gt;バイナリ部分の&lt;code&gt;87 04&lt;/code&gt;が何を意味しているはわからないが、IPアドレスがオクテット形式でデーター多として見える。&lt;/p&gt;
+&lt;h1&gt;まとめ&lt;/h1&gt;
+&lt;p&gt;SSL証明書のサブジェクトにIPアドレスが使えることが分かった。今回はRFCを読み、実際にパケットをキャプチャしてみることで仕組みを理解することができた。インターネット上の仕様はいろいろなサイトで解説されているが、全てがRFCを元としているので、わからないことがあったら今後はRFCまで調査するように心がけていきたい。&lt;/p&gt;
+&lt;h1&gt;参考&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.cloudflare.com/announcing-1111/&quot;&gt;Announcing 1.1.1.1: the fastest, privacy-first consumer DNS service&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;rfc5280&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[「人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか」を読んで]]></title><description><![CDATA[人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか を読んで面白かった部分のメモと感想。 各章メモ…]]></description><link>https://rtam.xyz/articles/2018/03/how-to-make-an-artificial-intelligence/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/03/how-to-make-an-artificial-intelligence/</guid><pubDate>Sat, 31 Mar 2018 10:05:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;http://gihyo.jp/book/2017/978-4-7741-8627-6&quot;&gt;人工知能の作り方 ―「おもしろい」ゲームAIはいかにして動くのか&lt;/a&gt;を読んで面白かった部分のメモと感想。&lt;br&gt;
 &lt;span
     class=&quot;gatsby-resp-image-wrapper&quot;
     style=&quot;position: relative; display: block; ; max-width: 160px; margin-left: auto; margin-right: auto;&quot;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 141.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAMCBAUB/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAEDBP/aAAwDAQACEAMQAAAB1Y2MqNIWFBXZ6ctkSJ//xAAbEAACAwEBAQAAAAAAAAAAAAABAgADERITIf/aAAgBAQABBQI2/PYQOuMByQLBRnFtrPE7iF61yA4S5M//xAAYEQEAAwEAAAAAAAAAAAAAAAABAAMQEf/aAAgBAwEBPwHC5jY9n//EABcRAQADAAAAAAAAAAAAAAAAAAAQERL/2gAIAQIBAT8BjKn/xAAfEAACAgEEAwAAAAAAAAAAAAAAAQIRISAiMUEyUZH/2gAIAQEABj8CxFm9NGFL4M46OeylOl6okvK1RWHo/8QAHhABAAMAAgIDAAAAAAAAAAAAAQARITFBUWFxgaH/2gAIAQEAAT8h1WE9M6LRaxm8w82gVQClYl4Va1hFWya2F6rmCBR9BUwHuuUjXH7EOj4n/9oADAMBAAIAAwAAABDsMs//xAAZEQEBAQADAAAAAAAAAAAAAAABABEhMaH/2gAIAQMBAT8QDZIvD1amL5f/xAAXEQEBAQEAAAAAAAAAAAAAAAABABAR/9oACAECAQE/EHEweX//xAAgEAEAAwABBAMBAAAAAAAAAAABABEhMUFRYZFxgaGx/9oACAEBAAE/EHFYHkhpPGc+40gnA3rtkRYfQOP3Uv4gKPlfz8hgCzoUc5fki1rhbgxcAVB7bDg22gWNSH0p0Ot9/wCRvutu4Se06CxlkaAoBQT/2Q==&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 141.25%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAIDBAX/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQME/9oADAMBAAIQAxAAAAHVWxlRpEYUYGfTmsEYn//EABsQAAMBAAMBAAAAAAAAAAAAAAECAwAREhMz/9oACAEBAAEFAjXeowdeGC9SBQQ+dqu+Qtpl5rxlPUlzv//EABkRAQACAwAAAAAAAAAAAAAAAAEAAxARMf/aAAgBAwEBPwHBcxsd9n//xAAXEQEAAwAAAAAAAAAAAAAAAAAAEBES/9oACAECAQE/AYyp/8QAHhAAAgEDBQAAAAAAAAAAAAAAAAERAiExEiAiQZH/2gAIAQEABj8CsjmoLT4Mx0ZIpqSRUo1SoIaWz//EABwQAQEBAQEAAwEAAAAAAAAAAAERACExQVFxYf/aAAgBAQABPyFY1Z/HWI1LOObRY/InCuARXPZ4qriELUe98wilek7hifSCTVFr26clDv7kPgfm/9oADAMBAAIAAwAAABDMPD//xAAZEQADAAMAAAAAAAAAAAAAAAAAAREhMaH/2gAIAQMBAT8QSoxXD0WI3D//xAAYEQEBAAMAAAAAAAAAAAAAAAABABARMf/aAAgBAgEBPxBcJg65f//EAB8QAQACAgICAwAAAAAAAAAAAAERIQAxUWFBgXGh8P/aAAgBAQABPxATKJ2AwhxW8TAtBbHFXW83R8Bn3GIksCD5X6MAkFRNgbkHvzkshSUJcYOI4GXa8XikEGjfZWC09MO5/R6y2QhmcGtIqNEyhDKAVn//2Q==&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -88,7 +219,7 @@ Accept-Languageヘッダで指定された言語にオリジンサーバが対�
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 138.93333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAAACXBIWXMAAAsSAAALEgHS3X78AAADTUlEQVRIx61WW0gUYRRWK+y2WlhtEGmy5FMo2UsERVEWvUdQIT0EUuaj0gVKAzGI3MXdst3K27iXcV2lh1KyJnOJIFvX3JGdnZ3ZmdmZ2VndsF4WepzOv8zKVls42oGPOZxz/u8//+X8cwoKfhNRFF/JskwkEglCURQiGAzuEgThKrIhIBvP81dIktyDdEmSMrEw7kVBPoGgdDKZVCFQTaVSaigUKge9E+xqLBZTYTDydYTD4f3Ij2wwoQr+pWUSXnbfjLB9Y7zkHBOTQ5MU4zrf3d1t6Orq2oz8Vqt1A9KztpGRkfUWi6Uw12Y2mzctEzKC82gkNlDPia56UcHrhQReNTo6ug5chYBiwAYUp9l+kXy2P4SXPXUzc/a2TzOP773/YL7v/2jpCMw9aQ2ST1tZwVOmmxAybQhRz72zpAMXZBe+sDScgfLV642wzr26CfMFRmJ48cvxBzU9/TcO3Wm7fPzm7UsnLdamw/1Y+5nPs727dRNGOedBOLR0lB9IswKWXvzmy+KHtDBk1k2IpLKyshQ+CPsAuwDb/H5/ncPh2KSbkGKwA5zkpGmunw4zvbSY9NCwrzRkCDp+VxdhXMFPy4tDD2FpU1ISnxJkTzvgBAIruE7RscEqXYSQTecsaVcptldNffepcNodazplNu68BgdBMAL2DpZNwBKv/JNwgni05fVb2/YsxiesxUajcSe4dgDKAUaAoba2dvOKKkVIuHFGGFDFpFtd/Daswn41rrTM8hI2NzcXtbS0rMvCZrMVVlRUbNMy3KtlWWoymUpWVctI8i25urp6y4oIY6LTEo720uiewQmie3VxTUtm4+4qXvIcySLKuXZrgcVaZRgARat+vpBoe4iISjQYtNJDslWbaP2qXxsk2h4acva11OfzncUwbONqXhsTST1/EyTtRDBkJ+YjPQTF9BE0h03Cb6NBFyG84DVCwnOdk1xTUR6bIiM9dtAblZS3UV70NnGS+5juWv4yb1dpru//1HI84WnlxEGFjQ8mRcWtQLa31nKx9wB26qrlXInH48+gQ8AAg+g7PT1dBp3ChVwb/NjPQedgzLXBuO6/dg6oO4DWItM5BAKBChjQiWwsyy53DhRFZToHhmFUmHC5c/gJwFqI8j8H3wQAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 138.93333333333334%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,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&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -143,7 +274,7 @@ Vary: Accept-Language&lt;/code&gt;&lt;/pre&gt;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 14.102564102564102%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsSAAALEgHS3X78AAAAqklEQVQI12NgYGDQIQJbA7E5EerMGf7vZ9z//wDz/t+72ba3hyzY0xm+aH976IL9QPb+1qD5W2FsEF1aWLohcKPs/tDNSvtBNBDvDtmssAPK3h+4Xu4gw7/TBv//ndL7/2C166eOsIX/ZxWs/z89Z+3/9tCFf4EGfZ6asfr/nOKN/yckrfif2R7+Gqjxf+F+9//x2/X/A9mfYrfp/C896PO/YL/r//TdVv8BbsNf91XBBwoAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 14.102564102564102%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsSAAALEgHS3X78AAAAzklEQVQI12NgYGBQB2JlIFZBopGxEhCbAbEelK2CA4PkjBjebRe58Gm38JHHqyT3NQRMPNQeM/9Ya+TsY7V+Uw8B8d6W8NnHO+LmHmzzW3Q0tTh2h/ca8cOxawyPBqxQOOa1VGJ/yCq1g1FrdI9FrtE5HrBY+SDD/2t6///fVPt/b7nb746Q5f8Xlmz/Pzdvy//O0MX/O0IX/ZuTu/n/oort/6dGb/6f3O/1PfSQ1P+Sox7/4/dp//fdKPE7Zb/R/9LjHv9Lz7j9T9pt9BQA/Upf4NlWTtUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -225,7 +356,7 @@ Vary: Accept-Language&lt;/code&gt;&lt;/pre&gt;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 137.83783783783784%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAAAAQBAgX/xAAXAQEBAQEAAAAAAAAAAAAAAAABAgAD/9oADAMBAAIQAxAAAAHtbSMAdLMDE4L/AP/EABwQAAICAgMAAAAAAAAAAAAAAAABAhEDIRATMf/aAAgBAQABBQKOo2jJuTyUdg3fDVk9Msn7/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAEQ/9oACAEDAQE/AUyP/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAGhAAAQUBAAAAAAAAAAAAAAAAAAEQICExof/aAAgBAQAGPwJGopDOPsf/xAAdEAADAQACAwEAAAAAAAAAAAAAAREhMYFRYXGh/9oACAEBAAE/IcZ64ZWfhyvAczVehPNZMJlvn5BWLSCNusFivRcKGvU//9oADAMBAAIAAwAAABDnND//xAAYEQADAQEAAAAAAAAAAAAAAAAAATEQIf/aAAgBAwEBPxDqZGQf/8QAFxEBAQEBAAAAAAAAAAAAAAAAAREAEP/aAAgBAgEBPxAFLm9//8QAHRABAAIDAQADAAAAAAAAAAAAAQARITFBUWGBof/aAAgBAQABPxBmPpusxNpY4WfyFK4MKSnbE6E0w1/ZSTWKlNrp5CWpVHI4CF7apWDfyz1g6HkaL8jEsf/Z&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 137.83783783783784%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAcABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAAAAEEBf/EABcBAQEBAQAAAAAAAAAAAAAAAAECAAP/2gAMAwEAAhADEAAAAe3cjBB02yxjMov/xAAcEAACAQUBAAAAAAAAAAAAAAABAiEAAxAREjH/2gAIAQEAAQUCEL1FyWLtXZoneCN1cg4f3//EABYRAQEBAAAAAAAAAAAAAAAAAAABEP/aAAgBAwEBPwFMj//EABQRAQAAAAAAAAAAAAAAAAAAACD/2gAIAQIBAT8BH//EABsQAAEEAwAAAAAAAAAAAAAAAAEAAhAhIDGR/9oACAEBAAY/AgJpq0eTeP8A/8QAHRABAAICAgMAAAAAAAAAAAAAAQARITFBgRBhcf/aAAgBAQABPyFm4Q4lMqfk2DEAoj1CvJMYi7rkqF0ZmkoMPrwrM+s//9oADAMBAAIAAwAAABA37TL/xAAYEQADAQEAAAAAAAAAAAAAAAAAATEQIf/aAAgBAwEBPxDqZGQf/8QAFxEBAAMAAAAAAAAAAAAAAAAAAQAQEf/aAAgBAgEBPxAFNjf/xAAcEAEAAwEAAwEAAAAAAAAAAAABABExIUFxsdH/2gAIAQEAAT8QUXBGEUmRwWzHIQ48SGwjHPyNrbdL8lsCaHwQGy56lcQl+GpSh5+mW0F5BF3Emu0n/9k=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -248,7 +379,7 @@ Vary: Accept-Language&lt;/code&gt;&lt;/pre&gt;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 110.98901098901099%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAWABQDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAAAAEDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAACAwD/2gAMAwEAAhADEAAAAe3NDatA11BSzg1//8QAGhAAAwEBAQEAAAAAAAAAAAAAAAECEhEDIf/aAAgBAQABBQJM6enXWaM0NM2jaLr7/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAExEP/aAAgBAwEBPwEUxQ//xAAUEQEAAAAAAAAAAAAAAAAAAAAg/9oACAECAQE/AR//xAAYEAACAwAAAAAAAAAAAAAAAAAAMhAgMf/aAAgBAQAGPwIyGGr/AP/EABwQAQADAAIDAAAAAAAAAAAAAAEAETEhYRCBkf/aAAgBAQABPyGgDeN8RsWnGRZWvyVl0fULV1k6mdTCTuT/2gAMAwEAAgADAAAAEIPwP//EABgRAAIDAAAAAAAAAAAAAAAAAAAxARAR/9oACAEDAQE/EMkVSj//xAAYEQEAAwEAAAAAAAAAAAAAAAABABAxYf/aAAgBAgEBPxAOx2nZ/8QAIBABAAICAQQDAAAAAAAAAAAAAQARIUFhMVGh0XGB4f/aAAgBAQABPxAXBoB7mb15QF+iMFAjmrYl30TTt8xCz5BNvMMeng9zr7eD3FwMKZ+5/9k=&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 110.98901098901099%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAWABQDASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAAAAEDBAX/xAAWAQEBAQAAAAAAAAAAAAAAAAACAwD/2gAMAwEAAhADEAAAAe3NDagG+oKGYG//xAAaEAACAwEBAAAAAAAAAAAAAAAAAQIREwMS/9oACAEBAAEFArLOquWbPDqSaeqNUdJXL//EABcRAAMBAAAAAAAAAAAAAAAAAAACMRD/2gAIAQMBAT8BFmLD/8QAFREBAQAAAAAAAAAAAAAAAAAAESD/2gAIAQIBAT8BI//EABkQAAIDAQAAAAAAAAAAAAAAAAAyECAxof/aAAgBAQAGPwIyGG5X/8QAHBAAAwACAwEAAAAAAAAAAAAAAAERIUExUWHB/9oACAEBAAE/IVOIWH3swUvyNewKCb10eDPBibJPg//aAAwDAQACAAMAAAAQoNAA/8QAGBEAAgMAAAAAAAAAAAAAAAAAADEBEBH/2gAIAQMBAT8QyRNIP//EABgRAAMBAQAAAAAAAAAAAAAAAAABMRBh/9oACAECAQE/EF0O46f/xAAcEAEBAAIDAQEAAAAAAAAAAAABEQAhMUFxUWH/2gAIAQEAAT8QgKIAXLWB/LgFpxq37ihDLudcUI9eI3hIK10zt4/M0pz+YEAIN5//2Q==&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
@@ -574,7 +705,7 @@ Allow write access: チェックする&lt;/code&gt;&lt;/pre&gt;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 15.983606557377051%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAADABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB3qAH/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQABBQJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJ//8QAFRABAQAAAAAAAAAAAAAAAAAAEEH/2gAIAQEAAT8hj//aAAwDAQACAAMAAAAQA8//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAXEAEAAwAAAAAAAAAAAAAAAAABABAh/9oACAEBAAE/ECAwr//Z&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 15.983606557377051%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAADABQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAEF/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEAMQAAAB3qAH/8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQABBQJ//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAwEBPwE//8QAFBEBAAAAAAAAAAAAAAAAAAAAEP/aAAgBAgEBPwE//8QAFBABAAAAAAAAAAAAAAAAAAAAEP/aAAgBAQAGPwJ//8QAFRABAQAAAAAAAAAAAAAAAAAAEEH/2gAIAQEAAT8hj//aAAwDAQACAAMAAAAQA8//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAEDAQE/ED//xAAUEQEAAAAAAAAAAAAAAAAAAAAQ/9oACAECAQE/ED//xAAXEAEAAwAAAAAAAAAAAAAAAAABABAh/9oACAEBAAE/ECAwa//Z&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;

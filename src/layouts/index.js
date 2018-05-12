@@ -48,7 +48,7 @@ class TemplateWrapper extends React.Component {
           ]}
           link={[
             { "rel": "stylesheet", "href": "https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" },
-            { "rel": "icon", "type": "image/png", "href": "favicons/favicon.ico" },
+            { "rel": "icon", "type": "image/png", "href": "/favicons/favicon.ico" },
           ]}
           
         >

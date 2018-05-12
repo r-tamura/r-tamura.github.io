@@ -2,7 +2,7 @@
 title: SQLでのRandom Selection
 date: 2017-06-09 00:34:24
 path: "blog/2017/06/sql-randam-selection"
-tags: [SQL, MySQL]
+tags: [sql, mysql]
 ---
 MySQLでランダムなデータを取得する場合によく利用されるのがorder by rand()だが、これはインデックスが適用されないので、代替え方法をいくつか調査したまとめ
 

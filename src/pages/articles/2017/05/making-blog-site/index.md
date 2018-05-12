@@ -2,7 +2,7 @@
 title: Gatsby+GitHub Pages+Cloudflareで静的Webサイト構築
 date: 2017-05-04 13:12:00
 path: "/blog/2017/05/making-blog-site"
-tags: [Gatsby, GitHub, Cloudflare, CircleCI, SSL]
+tags: [gatsbyjs, github, cloudflare, circleci, ssl]
 ---
 Gatsbyを使って静的WebサイトをMarkdownで作成し、CircleCI経由でGitHub Pagesにデプロイ。GitHub Pagesはカスタムドメインを設定し、Cloudflare経由でSSLアクセスを可能にする。
 

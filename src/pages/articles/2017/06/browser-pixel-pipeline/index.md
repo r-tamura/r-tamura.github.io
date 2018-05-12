@@ -2,7 +2,7 @@
 title: The pixel pipeline
 date: 2017-06-17 18:23:51
 path: "blog/2017/06/browser-pixel-pipeline"
-tags: [Browser, CSS, HTML]
+tags: [browser, css, html]
 ---
 ブラウザがHTMLをレンダリングする際に何を行っているか
 

@@ -37,23 +37,28 @@ https://rtam.xyz
 
 ```
 git clone https://github.com/r-tamura/r-tamura.github.io.git
-npm i
+yarn i
+```
+
+# Write a post
+```
+yarn create-post
 ```
 
 # Scripts
 
 ```
 // Generate HTML for publish
-npm run build
+yarn run build
 
 // Clean publish directory
-npm run clean
+yarn run clean
 
 // Run dev server(http://localhost:8000/)
-npm run develop
+yarn run develop
 
 // Deploy
-npm run deploy
+yarn run deploy
 
 // Docker run
 docker-compose up -d

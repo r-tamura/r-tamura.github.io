@@ -1,14 +1,106 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Sun, 25 Nov 2018 06:17:45 GMT</lastBuildDate><item><title><![CDATA[WebAssembly's post-MVP futureを読んで Part1]]></title><description><![CDATA[ここ数年、Webに多数の機能が追加されているが、自分は最近WebAssemblyについて改めて調べることが多くなってきており、そんな中、WebAssemblyに求められるものについて分かりやすく書かれていた WebAssembly's post-MVP future: A…]]></description><link>https://rtam.xyz/articles/2018/11/webassembly-post-mvp-part1/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/11/webassembly-post-mvp-part1/</guid><pubDate>Sun, 25 Nov 2018 13:06:31 GMT</pubDate><content:encoded>&lt;p&gt;ここ数年、Webに多数の機能が追加されているが、自分は最近WebAssemblyについて改めて調べることが多くなってきており、そんな中、WebAssemblyに求められるものについて分かりやすく書かれていた&lt;a href=&quot;https://hacks.mozilla.org/2018/10/webassemblys-post-mvp-future/&quot;&gt;WebAssembly&apos;s post-MVP future: A cartoon skill tree - Mozilla Hacks - the Web developer blog&lt;/a&gt;という記事を見つけたので、その記事を中心にしてWebAssemblyについてメモをしていく。そちらの記事自体が長いため数パートに分けて書いていこうと思う。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Rの技術メモ]]></title><description><![CDATA[主にWeb業界で働くエンジニアの忘備録ブログです。]]></description><link>https://rtam.xyz</link><generator>RSS for Node</generator><lastBuildDate>Fri, 18 Jan 2019 14:50:49 GMT</lastBuildDate><item><title><![CDATA[Unixのwaitコマンド]]></title><description><![CDATA[2019年最初の記事はUnixの wait コマンドについて。 wait コマンドはLinuxに通常built-inで組み込まれているコマンドで、機能は 実行されている他のプロセスの終了を待つ こと。 コマンド引数には待つ対象のプロセスID…]]></description><link>https://rtam.xyz/articles/2019/01/unix-wait-command/</link><guid isPermaLink="false">https://rtam.xyz/articles/2019/01/unix-wait-command/</guid><pubDate>Fri, 18 Jan 2019 21:20:26 GMT</pubDate><content:encoded>&lt;p&gt;2019年最初の記事はUnixの&lt;code&gt;wait&lt;/code&gt;コマンドについて。&lt;code&gt;wait&lt;/code&gt;コマンドはLinuxに通常built-inで組み込まれているコマンドで、機能は&lt;strong&gt;実行されている他のプロセスの終了を待つ&lt;/strong&gt;こと。 コマンド引数には待つ対象のプロセスIDを指定することができ、もし引数を指定しない場合は全ての子プロセスの終了を待つ。&lt;code&gt;wait&lt;/code&gt;は現在の実行環境のジョブテーブルを参照するため、&lt;code&gt;cd&lt;/code&gt;のようにシェルビルトインとして実装されている。(シェルビルトインは外部プログラムではなくシェル自体に組み込まれているコマンド&lt;a href=&quot;https://en.wikipedia.org/wiki/Shell_builtin&quot;&gt;1&lt;/a&gt;)&lt;/p&gt;
+&lt;h1&gt;基本的な使い方&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;wait&lt;/code&gt;コマンドこシンタックスは以下だ。 自分は複数の重い処理をバックグラウンドで同時に実行した場合の全プロセスの完了同期をするときに使う。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-none&quot;&gt;&lt;code&gt;wait [n]
+
+# n    : 待つ対象の プロセスID or ジョブID (現在実行されているバックグラウンドプロセスのジョブID)&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;例1 指定したプロセスを待つ&lt;/h3&gt;
+&lt;h4&gt;サンプルプログラム1&lt;/h4&gt;
+&lt;p&gt;子プロセスが終了するまで、プロセスがブロッキングし、 子プロセスの返り値を自身の返り値とする。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sh&quot;&gt;&lt;code&gt;#!/usr/bin/env bash
+
+success_process () {
+  sleep 3
+  true
+}
+
+fail_process () {
+  sleep 3
+  return 100
+}
+
+success_process &amp;
+pid1=$!
+echo &quot;waiting process 1&quot;
+wait $pid1
+echo &quot;process 1 exited with $?&quot;
+
+fail_process &amp;
+pid2=$!
+echo &quot;waiting process 2...&quot;
+wait $pid2
+echo &quot;process 2 exited with $?&quot;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;Output&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sh&quot;&gt;&lt;code&gt;$ bash wait_1.sh
+waiting process 1
+process 1 exited with 0    # 3秒後に0を返す
+waiting process 2...
+process 2 exited with 100  # 3秒後に100を返す&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;例2 全ての子プロセスの終了を待つ&lt;/h3&gt;
+&lt;h4&gt;サンプルプログラム2&lt;/h4&gt;
+&lt;p&gt;子プロセスが終了するまで、プロセスがブロッキングし、 子プロセスの返り値を自身の返り値とする。
+重たいプロセスを想定した関数を5つ呼び出す。&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sh&quot;&gt;&lt;code&gt;#!/usr/bin/env bash
+heavey_process () {
+  sleep $1
+}
+
+for i in {1..5}
+do
+  # Run command in background
+  heave5_process $i &amp;
+done
+
+wait
+echo &quot;all process finished&quot;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;Output&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sh&quot;&gt;&lt;code&gt;$ bash wait_2.sh
+all process finished   # ほぼ5秒後に終了&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h3&gt;例3 子プロセスが存在しない場合&lt;/h3&gt;
+&lt;h4&gt;サンプルプログラム3&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sh&quot;&gt;&lt;code&gt;#!/usr/bin/env bash
+
+sleep 5 &amp;
+pid=$1
+kill $1
+wait $1
+echo $1 was terminated. exited with $?&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;h4&gt;Output&lt;/h4&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-sh&quot;&gt;&lt;code&gt;$ bash wait_3.sh
+wait_3.sh: line 6:    79 Terminated              sleep 5
+79 was terminated. exited with 143               # すぐに終了&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;どうやら今回の環境ではプロセスが存在しない場合は143を返すよう。&lt;/p&gt;
+&lt;h1&gt;カーネルの観点から&lt;/h1&gt;
+&lt;p&gt;子プロセスは正常終了・異常終了にかかわらず、プロセスを終了するときに自身の親プロセスへSIGCHILDシグナルを送信する。親プロセスはシグナルを無視するかシグナルハンドラーを実行するかを選択できるが、デフォルト動作は無視となっている。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://linuxhint.com/wait_command_linux/&quot;&gt;Wait Command in Linux – Linux Hint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.gnu.org/software/bash/manual/bashref.html#index-wait&quot;&gt;Bash Reference Manual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[&lt;a href=&quot;https://en.wikipedia.org/wiki/Shell_builtin&quot;&gt;Shell builtin - Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[WebAssembly's post-MVP futureを読んで Part1]]></title><description><![CDATA[ここ数年、Webに多数の機能が追加されているが、自分は最近WebAssemblyについて改めて調べることが多くなってきており、そんな中、WebAssemblyに求められるものについて分かりやすく書かれていた WebAssembly's post-MVP future: A…]]></description><link>https://rtam.xyz/articles/2018/11/webassembly-post-mvp-part1/</link><guid isPermaLink="false">https://rtam.xyz/articles/2018/11/webassembly-post-mvp-part1/</guid><pubDate>Sun, 25 Nov 2018 13:06:31 GMT</pubDate><content:encoded>&lt;p&gt;ここ数年、Webに多数の機能が追加されているが、自分は最近WebAssemblyについて改めて調べることが多くなってきており、そんな中、WebAssemblyに求められるものについて分かりやすく書かれていた&lt;a href=&quot;https://hacks.mozilla.org/2018/10/webassemblys-post-mvp-future/&quot;&gt;WebAssembly&apos;s post-MVP future: A cartoon skill tree - Mozilla Hacks - the Web developer blog&lt;/a&gt;という記事を見つけたので、その記事を中心にしてWebAssemblyについてメモをしていく。そちらの記事自体が長いため数パートに分けて書いていこうと思う。&lt;/p&gt;
 &lt;p&gt;その記事では以下のような内容が書かれている。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;MVP (Minimum Viable Product)&lt;/li&gt;
-&lt;li&gt;これから必要となる/実装されている機能&lt;/li&gt;
-&lt;li&gt;他の言語機能との比較&lt;/li&gt;
-&lt;li&gt;ブラウザの外側&lt;/li&gt;
-&lt;li&gt;Node.js&lt;/li&gt;
-&lt;li&gt;CDN, Serverless and Edge Computing&lt;/li&gt;
-&lt;li&gt;Portable CLI tools&lt;/li&gt;
-&lt;li&gt;Internet of Things&lt;/li&gt;
+&lt;li&gt;・MVP (Minimum Viable Product)&lt;/li&gt;
+&lt;li&gt;・これから必要となる/実装されている機能&lt;/li&gt;
+&lt;li&gt;・他の言語機能との比較&lt;/li&gt;
+&lt;li&gt;・ブラウザの外側&lt;/li&gt;
+&lt;li&gt;・Node.js&lt;/li&gt;
+&lt;li&gt;・CDN, Serverless and Edge Computing&lt;/li&gt;
+&lt;li&gt;・Portable CLI tools&lt;/li&gt;
+&lt;li&gt;・Internet of Things&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;WebAssemblyという名前ではあるが、ブラウザの中だけでなく、Node.jsやJavaScriptのエコシステムなどの関わり合いについて求められるものがまとめられているようだ。&lt;/p&gt;
 &lt;h3&gt;WebAssembly&lt;/h3&gt;

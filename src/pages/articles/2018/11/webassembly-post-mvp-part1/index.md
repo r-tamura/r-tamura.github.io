@@ -8,14 +8,14 @@ tags: [web, javascript, webassembly, mvp]
 ここ数年、Webに多数の機能が追加されているが、自分は最近WebAssemblyについて改めて調べることが多くなってきており、そんな中、WebAssemblyに求められるものについて分かりやすく書かれていた[WebAssembly's post-MVP future: A cartoon skill tree - Mozilla Hacks - the Web developer blog][1]という記事を見つけたので、その記事を中心にしてWebAssemblyについてメモをしていく。そちらの記事自体が長いため数パートに分けて書いていこうと思う。
 
 その記事では以下のような内容が書かれている。
- - MVP (Minimum Viable Product)
- - これから必要となる/実装されている機能
- - 他の言語機能との比較
- - ブラウザの外側
- - Node.js
- - CDN, Serverless and Edge Computing
- - Portable CLI tools
- - Internet of Things
+ - ・MVP (Minimum Viable Product)
+ - ・これから必要となる/実装されている機能
+ - ・他の言語機能との比較
+ - ・ブラウザの外側
+ - ・Node.js
+ - ・CDN, Serverless and Edge Computing
+ - ・Portable CLI tools
+ - ・Internet of Things
 
 WebAssemblyという名前ではあるが、ブラウザの中だけでなく、Node.jsやJavaScriptのエコシステムなどの関わり合いについて求められるものがまとめられているようだ。
 

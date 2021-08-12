@@ -1,5 +1,5 @@
-@import "../layouts/mixins.css";
-@import "../layouts/variables.css";
+@import "../layouts/mixins.scss";
+@import "../layouts/variables.scss";
 
 .article {
   padding: 10px 10px 0 10px;
@@ -9,9 +9,11 @@
   padding-top: 15px;
   margin-bottom: var(--mb-l);
 
-  & li, & ul, & ol {
+  & li,
+  & ul,
+  & ol {
     margin-bottom: 0;
-  };
+  }
 }
 
 .articleListItem {

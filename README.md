@@ -1,15 +1,18 @@
 # Blog
+
 https://rtam.xyz
 
-# Stack
- - SSG: GatsbyJS v1
- - Hosting: GitHub Pages
- - CDN: Cloudflare
- - CI: CircleCI
+## Stack
 
-# Todos
+- SSG: GatsbyJS v1
+- Hosting: GitHub Pages
+- CDN: Cloudflare
+- CI: CircleCI
 
-## Required
+## Todos
+
+### Required
+
 - [x] Deploy Gatsby version
 - [x] Deploy via CircleCI
 - [x] Set up Custom domain name
@@ -24,7 +27,8 @@ https://rtam.xyz
 - [ ] Tag filter
 - [ ] Monthly and Yearly article count
 
-## Optional
+### Optional
+
 - [ ] Introduce markdown lint tool
 - [ ] Customize Theme
 - [ ] Check page speed
@@ -33,21 +37,22 @@ https://rtam.xyz
 - [x] OGP
 - [x] Circle CI 2.0
 
-# Installation
+## Installation
 
-```
+```sh
 git clone https://github.com/r-tamura/r-tamura.github.io.git
-yarn i
+yarn install
 ```
 
-# Write a post
-```
+## Create a post
+
+```sh
 yarn create-post
 ```
 
-# Scripts
+## Scripts
 
-```
+```sh
 // Generate HTML for publish
 yarn run build
 
@@ -55,7 +60,7 @@ yarn run build
 yarn run clean
 
 // Run dev server(http://localhost:8000/)
-yarn run develop
+yarn dev
 
 // Deploy
 yarn run deploy

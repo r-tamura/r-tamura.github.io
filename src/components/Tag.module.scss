@@ -1,4 +1,4 @@
-@import '../layouts/variables.css';
+@import "../layouts/variables.scss";
 
 .articleTagLinkList {
   display: flex;
@@ -8,7 +8,6 @@
   & .articleTagIcon {
     margin: 0;
   }
-
 }
 
 .articleTagLinkWrapper {

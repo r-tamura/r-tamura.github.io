@@ -1,11 +1,11 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import Link from "gatsby-link";
+import React from "react";
+import * as styles from "./Tag.module.scss";
 
-import s from  './Tag.module.css'
-
-const TagLink = ({ children = '', to } = {}) =>
-  <Link to={to} className={s.articleTag}>
+const TagLink = ({ children = null, to } = {}) => (
+  <Link to={to} className={styles.articleTag}>
     {children}
   </Link>
+);
 
-export default TagLink
+export default TagLink;

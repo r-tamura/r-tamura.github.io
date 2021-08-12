@@ -1,4 +1,4 @@
-@import '../layouts/variables.css';
+@import "../layouts/variables.scss";
 
 .appBar {
   position: sticky;
@@ -8,7 +8,7 @@
   background: var(--color-primary);
   color: var(--color-secondary-light);
   height: 60px;
-  box-shadow: 0 2px 5px rgba(0,0,0,.26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 
   & .inner {
     height: 100%;
@@ -29,4 +29,3 @@
 .navIcon {
   color: var(--color-secondary-light);
 }
-

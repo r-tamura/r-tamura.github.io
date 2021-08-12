@@ -1,8 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import React from 'react'
+import * as s from './Footer.module.css'
 
-import s from './Footer.module.css'
 
 const Footer = ({
   copyright = new Date().getFullYear(),

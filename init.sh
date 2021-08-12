@@ -11,4 +11,4 @@
 # EOF
 
 # bashプロセスを起動し、自プロセスは終了する
-exec /usr/bin/yarn develop
+exec /usr/bin/yarn dev

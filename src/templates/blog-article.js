@@ -1,35 +1,42 @@
-import React from "react"
-import Helmet from 'react-helmet';
-import Bio from '../components/Bio'
-import TagLinkList from '../components/TagLinkList'
-import Disqus from '../components/Disqus'
+import { graphql } from "gatsby";
+import React from "react";
+import Helmet from "react-helmet";
+import * as styles from "../components/Article.module.scss";
+import Bio from "../components/Bio";
+import TagLinkList from "../components/TagLinkList";
+import Layout from "../layouts";
 
-import s from '../components/Article.module.css'
-
-export default ({ data }) => {
-  const article = data.markdownRemark
-  const site = data.site
+export default function BlogArticle({ data, location }) {
+  const { markdownRemark: article, site } = data;
   return (
-    <main className={`${s.article}`}>
-      <Helmet
-        meta={[
-          { property: 'og:title', content: `${article.frontmatter.title} | ${site.title}` },
-        ]}
-      >
-        <title>{article.frontmatter.title}</title>
-      </Helmet>
-      <div>{article.frontmatter.date}</div>
-      <h1 className={`${s.articleTitle}`}>{article.frontmatter.title}</h1>
-      <TagLinkList
-        tags={ article.frontmatter.tags || ['No tags'] }
-      />
-      <div className="remark" dangerouslySetInnerHTML={{ __html: article.html }} />
-      <div className={`${s.articleBioWrapper}`}>
-        <Bio {...site.siteMetadata} />
-      </div>
-      {/* <Disqus siteUrl={site.siteMetadata.siteUrl} articleId={article.fields.slug} title={article.frontmatter.title}/> */}
-    </main>
-  )
+    <Layout location={location}>
+      <main className={styles.article}>
+        <Helmet
+          meta={[
+            {
+              property: "og:title",
+              content: `${article.frontmatter.title} | ${site.title}`,
+            },
+          ]}
+        >
+          <title>{article.frontmatter.title}</title>
+        </Helmet>
+        <div>{article.frontmatter.date}</div>
+        <h1 className={`${styles.articleTitle}`}>
+          {article.frontmatter.title}
+        </h1>
+        <TagLinkList tags={article.frontmatter.tags || ["No tags"]} />
+        <div
+          className="remark"
+          dangerouslySetInnerHTML={{ __html: article.html }}
+        />
+        <div className={`${styles.articleBioWrapper}`}>
+          <Bio {...site.siteMetadata} />
+        </div>
+        {/* <Disqus siteUrl={site.siteMetadata.siteUrl} articleId={article.fields.slug} title={article.frontmatter.title}/> */}
+      </main>
+    </Layout>
+  );
 }
 
 export const query = graphql`
@@ -56,4 +63,4 @@ export const query = graphql`
       }
     }
   }
-  `
+`;

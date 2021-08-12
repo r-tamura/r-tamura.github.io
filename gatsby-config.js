@@ -20,6 +20,7 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -41,18 +42,19 @@ module.exports = {
         pathToConfigModule: `src/utils/typography.js`,
       }
     },
-    {
-      resolve: `gatsby-plugin-postcss-sass`,
-      options: {
-        postCssPlugins: [
-          require(`postcss-import`)(),
-          /* cssnextから各プラグインを導入する形式に変更する可能性あり */
-          require(`postcss-cssnext`)(),
-          require(`postcss-apply`)(),
-        ],
-        // precision: 8 // SASS default: 5
-      }
-    },
+    'gatsby-plugin-sass',
+    // {
+    //   resolve: `gatsby-plugin-postcss-sass`,
+    //   options: {
+    //     postCssPlugins: [
+    //       require(`postcss-import`)(),
+    //       /* cssnextから各プラグインを導入する形式に変更する可能性あり */
+    //       require(`postcss-cssnext`)(),
+    //       require(`postcss-apply`)(),
+    //     ],
+    //     // precision: 8 // SASS default: 5
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -83,10 +85,10 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: 'UA-98640169-1',
-      },      
+      },
     },
     {
-      resolve: `gatsby-plugin-feed`,      
+      resolve: `gatsby-plugin-feed`,
     },
   ],
 }

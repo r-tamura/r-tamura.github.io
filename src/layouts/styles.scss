@@ -1,6 +1,6 @@
 @import "../../node_modules/font-awesome/css/font-awesome.css";
 @import "variables";
-@import "reset";
+@import "reset.scss";
 @import "mixins";
 @import "button";
 @import "remark";
@@ -54,4 +54,3 @@
   max-width: var(--main-column-max-width);
   min-width: var(--main-column-min-width);
 }
-

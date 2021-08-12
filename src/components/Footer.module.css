@@ -1,4 +1,4 @@
-@import '../layouts/variables.css';
+@import "../layouts/variables.scss";
 
 .footer {
   background-color: var(--color-secondary-dark);

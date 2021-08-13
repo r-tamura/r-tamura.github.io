@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Rの技術メモ`,
-    description: '主にWeb業界で働くエンジニアの忘備録ブログです。',
+    description: "主にWeb業界で働くエンジニアの忘備録ブログです。",
     siteUrl: `https://rtam.xyz`,
     authorName: `r-tamura`,
     authorDetail: `Web関連多めのソフトウェアエンジニアです。`,
@@ -26,23 +26,29 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              rel: "nofollow",
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               linkImagesToOriginal: false,
             },
           },
           `gatsby-remark-prismjs`,
-        ]
-      }
+        ],
+      },
     },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography.js`,
-      }
+      },
     },
-    'gatsby-plugin-sass',
+    "gatsby-plugin-sass",
     // {
     //   resolve: `gatsby-plugin-postcss-sass`,
     //   options: {
@@ -68,13 +74,13 @@ module.exports = {
           {
             src: `/favicons/fox_48x48.png`,
             type: `image/png`,
-            sizes: `48x48`
+            sizes: `48x48`,
           },
           {
             src: `/favicons/fox_144x144.png`,
             type: `image/png`,
-            sizes: `144x144`
-          }
+            sizes: `144x144`,
+          },
         ],
       },
     },
@@ -84,11 +90,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-98640169-1',
+        trackingId: "UA-98640169-1",
       },
     },
     {
       resolve: `gatsby-plugin-feed`,
     },
   ],
-}
+};

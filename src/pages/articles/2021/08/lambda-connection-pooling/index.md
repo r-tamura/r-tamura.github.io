@@ -106,7 +106,7 @@ sqlalchemy.create_engine(
 
 #### SQL 実行時に接続確認をするようにする
 
-実際に SQL を実行する前にコネクションが有効かをチェックする、いわゆる[悲観的な方法](https://docs.sqlalchemy.org/en/14/core/pooling.html#disconnect-handling-pessimistic)。これも、[create\*engine のオプション 'pool_pre_ping'](https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine.params.pool_pre_ping)で設定することができる。デフォルトは無効。毎回接続確認のため、DB へアクセスするのでパフォーマンスへの影響はあると思う。タイムアウトを手動で設定しなくてよいので、データベース側のタイムアウト値をアプリケーションが気にしなくて良くなる。
+実際に SQL を実行する前にコネクションが有効かをチェックする、いわゆる[悲観的な方法](https://docs.sqlalchemy.org/en/14/core/pooling.html#disconnect-handling-pessimistic)。これも、[create\_\*engine のオプション 'pool_pre_ping'](https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine.params.pool_pre_ping)で設定することができる。デフォルトは無効。毎回接続確認のため、DB へアクセスするのでパフォーマンスへの影響はあると思う。タイムアウトを手動で設定しなくてよいので、データベース側のタイムアウト値をアプリケーションが気にしなくて良くなる。
 
 ```python
 import sqlalchemy
@@ -119,7 +119,7 @@ sqlalchemy.create_engine(
 
 ### 最終的に選んだもの
 
-最初は Lambda はステートレスにするのが良いかなと思っていたのでコネクションプールをアプリケーション側で持たない方法を採用しようと思っていたが、[Lambda のベストプラクティス](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/optimizing-your-code.html)このように書かれている。
+最初は Lambda はステートレスにするのが良いかなと思っていたのでコネクションプールをアプリケーション側で持たない方法を採用しようと思っていたが、[Lambda のベストプラクティス](https://docs.aws.amazon.com/whitepapers/latest/serverless-architectures-lambda/optimizing-your-code.html)にはこのように書かれている。
 
 > Keep alive and reuse connections (HTTP, database, etc.) that were established during a previous invocation.
 

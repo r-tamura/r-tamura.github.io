@@ -40,7 +40,7 @@ jobs:
             - ./node_modules
       - add_ssh_keys:
           fingerprints:
-            - "a0:ee:8c:e8:46:4a:c2:9c:55:b8:68:35:b6:b0:eb:d1"
+            - "f6:f8:8f:0d:a2:b9:84:41:69:86:bc:d2:f4:b2:91:80"
       - run:
           name: 'Set git user'
           command: |

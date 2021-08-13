@@ -2,7 +2,7 @@
 title: AWS Lambdaとコネクションプール
 date: 2021-08-13 12:26:23
 path: "blog/2021/08/lambda-connection-pooling"
-tags: [aws, lambda, rds]
+tags: [aws, lambda, rds, python, sqlalchemy]
 ---
 
 Lambda (Python + SQLAlchemy) + RDS Proxy + RDS for MySQL 環境でデータベースコネクションプールが関連してデータベースに接続できなくなる問題に遭遇したので、理解できた問題点と対応策について書いていく。

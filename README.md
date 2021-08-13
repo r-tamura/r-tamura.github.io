@@ -4,7 +4,7 @@ https://rtam.xyz
 
 ## Stack
 
-- SSG: GatsbyJS v1
+- SSG: GatsbyJS v3
 - Hosting: GitHub Pages
 - CDN: Cloudflare
 - CI: CircleCI

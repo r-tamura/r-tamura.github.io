@@ -3,13 +3,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.2
+      - image: circleci/node:14.17.3
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run: 
-          name: 'Install dependencies' 
+      - run:
+          name: 'Install dependencies'
           command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -25,14 +25,14 @@ jobs:
           command: "npm test"
 
   deploy:
-    docker: 
-      - image: circleci/node:9.2
+    docker:
+      - image: circleci/node:14.17.3
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
-      - run: 
-          name: 'Install dependencies' 
+      - run:
+          name: 'Install dependencies'
           command: yarn install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}

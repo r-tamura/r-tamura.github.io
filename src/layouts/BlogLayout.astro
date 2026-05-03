@@ -190,12 +190,23 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
   }
   article table {
     border-collapse: collapse;
-    margin: 1rem 0;
+    margin: 1.25rem 0;
+    width: 100%;
+    font-size: 0.9375rem;
   }
   article th,
   article td {
-    border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent);
-    padding: 0.4rem 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--fg) 35%, transparent);
+    padding: 0.5rem 0.85rem;
+    text-align: left;
+  }
+  article thead th {
+    background: color-mix(in srgb, var(--fg) 10%, transparent);
+    font-weight: 600;
+    border-bottom-width: 2px;
+  }
+  article tbody tr:nth-child(even) {
+    background: color-mix(in srgb, var(--fg) 4%, transparent);
   }
   .toc {
     font-size: 0.875rem;

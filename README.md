@@ -4,38 +4,12 @@ https://rtam.xyz
 
 ## Stack
 
-- SSG: GatsbyJS v3
+- SSG: Astro 6
 - Hosting: GitHub Pages
 - CDN: Cloudflare
-- CI: CircleCI
-
-## Todos
-
-### Required
-
-- [x] Deploy Gatsby version
-- [x] Deploy via CircleCI
-- [x] Set up Custom domain name
-- [x] Set up Cloudflare
-- [x] HTTPS
-- [x] Service Worker
-- [x] manifest.json (Add To Home Screen)
-- [x] Migrate Gatsby v0 to v1
-- [ ] Test articles with textlint
-- [ ] schema.org (JSON-LD)
-- [ ] About me page
-- [ ] Tag filter
-- [ ] Monthly and Yearly article count
-
-### Optional
-
-- [ ] Introduce markdown lint tool
-- [ ] Customize Theme
-- [ ] Check page speed
-- [x] RSS Feed
-- [ ] Push Notification
-- [x] OGP
-- [x] Circle CI 2.0
+- CI/CD: GitHub Actions
+- Package manager: pnpm 10
+- Runtime: Node.js 24 (managed by mise)
 
 ## Installation
 
@@ -44,24 +18,37 @@ git clone https://github.com/r-tamura/r-tamura.github.io.git
 pnpm install
 ```
 
-## Create a post
-
-```sh
-pnpm create-post
-```
-
 ## Scripts
 
 ```sh
-// Generate HTML for publish
-pnpm build
-
-// Clean publish directory
-pnpm clean
-
-// Run dev server(http://localhost:8000/)
+# Run dev server (http://localhost:4321/)
 pnpm dev
 
-// Deploy
-pnpm deploy
+# Generate HTML for publish
+pnpm build
+
+# Preview built site
+pnpm preview
+
+# Type check Astro components
+pnpm check
+
+# Lint and format
+pnpm lint
+pnpm format
 ```
+
+## Create a post
+
+Add a new directory under `src/content/articles/YYYY/MM/<slug>/` containing
+an `index.md` with frontmatter:
+
+```markdown
+---
+title: 記事のタイトル
+date: 2026-05-03 12:00:00
+tags: [tag1, tag2]
+---
+```
+
+Place co-located images alongside `index.md` and reference them with relative paths.

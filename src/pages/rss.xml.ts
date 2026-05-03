@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
     description: "主にWeb業界で働くエンジニアの忘備録ブログです。",
     site: context.site!,
     items: posts
-      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+      .toSorted((a, b) => b.data.date.getTime() - a.data.date.getTime())
       .map((post) => ({
         title: post.data.title,
         pubDate: post.data.date,

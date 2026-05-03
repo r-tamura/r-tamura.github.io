@@ -1,13 +1,12 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "ignorePatterns": [
-    ".cache/",
+    "dist/",
+    ".astro/",
     "public/",
-    "static/",
     ".claude/",
-    "src/pages/articles/**/*.md",
-    "src/**/*.scss",
-    "src/**/*.css",
+    "src/content/articles/**/*.md",
+    "**/*.astro",
     "**/*.yml",
     "**/*.yaml"
   ]

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("articles")).sort(
+const posts = (await getCollection("articles")).toSorted(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 ---

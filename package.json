@@ -1,64 +1,41 @@
 {
   "name": "rtam-tech-blog",
-  "version": "1.4.0",
+  "version": "2.0.0",
+  "private": true,
   "description": "Rtam's tech blog",
-  "keywords": [
-    "gatsby"
-  ],
   "license": "ISC",
   "author": "rtamura30 <rtamura30@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/r-tamura/r-tamura.github.io.git"
   },
-  "main": "main",
+  "type": "module",
   "scripts": {
-    "create-post": "node utils/create-post",
-    "build": "gatsby build",
-    "dev": "gatsby develop",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
     "lint": "oxlint",
     "format": "oxfmt .",
-    "format:check": "oxfmt --check .",
-    "test": "vitest run",
-    "clean": "node ./utils/clean.js",
-    "serve": "gatsby serve"
+    "format:check": "oxfmt --check ."
   },
   "dependencies": {
-    "font-awesome": "^4.7.0",
-    "gatsby": "^3.11.1",
-    "gatsby-link": "^3.11.0",
-    "gatsby-plugin-feed": "^3.11.0",
-    "gatsby-plugin-google-analytics": "^3.11.0",
-    "gatsby-plugin-manifest": "^3.11.0",
-    "gatsby-plugin-offline": "^4.11.0",
-    "gatsby-plugin-react-helmet": "^4.11.0",
-    "gatsby-plugin-sass": "^4.11.0",
-    "gatsby-plugin-sharp": "^3.11.0",
-    "gatsby-plugin-typography": "^3.11.0",
-    "gatsby-remark-external-links": "^0.0.4",
-    "gatsby-remark-images": "^5.8.0",
-    "gatsby-remark-prismjs": "^5.8.0",
-    "gatsby-source-filesystem": "^3.11.0",
-    "gatsby-transformer-remark": "^4.8.0",
-    "postcss-apply": "^0.12.0",
-    "postcss-cssnext": "2.8.0",
-    "postcss-import": "^14.0.2",
-    "prismjs": "^1.24.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0",
-    "react-typography": "^0.16.20",
-    "sass": "^1.37.5",
-    "typography": "^0.16.21",
-    "typography-theme-sutro": "^0.16.19"
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.2.1",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "luxon": "^2.0.2",
-    "mkdirp": "^1.0.4",
+    "@astrojs/check": "^0.9.9",
     "oxfmt": "^0.47.0",
     "oxlint": "^1.62.0",
-    "rimraf": "^3.0.2",
-    "vitest": "^4.1.5"
+    "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@10.33.2"
+  "packageManager": "pnpm@10.33.2",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
 }

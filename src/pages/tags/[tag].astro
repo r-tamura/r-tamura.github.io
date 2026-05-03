@@ -14,11 +14,11 @@ export async function getStaticPaths() {
       tagToPosts.get(slug)!.posts.push(post);
     }
   }
-  return [...tagToPosts.entries()].map(([slug, { name, posts }]) => ({
+  return [...tagToPosts.entries()].map(([slug, { name, posts: tagPosts }]) => ({
     params: { tag: slug },
     props: {
       name,
-      posts: posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+      posts: tagPosts.toSorted((a, b) => b.data.date.getTime() - a.data.date.getTime()),
     },
   }));
 }

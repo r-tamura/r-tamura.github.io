@@ -36,14 +36,14 @@ jobs:
 
       - run: pnpm format:check
 
-      - run: pnpm test
+      - run: pnpm check
 
       - run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/source'
         with:
-          path: public
+          path: dist
 
   deploy:
     if: github.ref == 'refs/heads/source'

@@ -15,25 +15,42 @@ export default function rehypeImageZoom() {
         tagName: "button",
         properties: {
           type: "button",
-          popovertarget: id,
+          dataZoomTarget: id,
           className: ["zoom-trigger"],
           ariaLabel: "画像を拡大表示",
         },
         children: [node],
       };
-      const popoverImg = {
+      const dialogImg = {
         type: "element",
         tagName: "img",
         properties: { ...node.properties, alt: "", loading: "lazy" },
         children: [],
       };
-      const popover = {
+      const closeForm = {
         type: "element",
-        tagName: "span",
-        properties: { id, popover: "auto", className: ["zoom-popover"] },
-        children: [popoverImg],
+        tagName: "form",
+        properties: { method: "dialog", className: ["zoom-close-form"] },
+        children: [
+          {
+            type: "element",
+            tagName: "button",
+            properties: {
+              type: "submit",
+              className: ["zoom-close"],
+              ariaLabel: "閉じる",
+            },
+            children: [{ type: "text", value: "×" }],
+          },
+        ],
       };
-      parent.children.splice(index, 1, trigger, popover);
+      const dialog = {
+        type: "element",
+        tagName: "dialog",
+        properties: { id, className: ["zoom-dialog"] },
+        children: [closeForm, dialogImg],
+      };
+      parent.children.splice(index, 1, trigger, dialog);
       return index + 2;
     });
   };

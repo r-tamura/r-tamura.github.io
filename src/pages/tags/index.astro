@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { tagSlug } from "../../utils/tags";
 
 const posts = await getCollection("articles");
@@ -14,88 +15,56 @@ const tags = [...counts.entries()].toSorted(
 );
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>タグ一覧 | Rの技術メモ</title>
-    <link rel="alternate" type="application/rss+xml" title="Rの技術メモ" href="/rss.xml" />
-  </head>
-  <body>
-    <header><a href="/">Rの技術メモ</a></header>
-    <main>
-      <h1>タグ一覧</h1>
-      <ul class="tag-cloud">
-        {
-          tags.map(([tag, count]) => (
-            <li>
-              <a href={`/tags/${tagSlug(tag)}/`}>
-                #{tag}
-                <span class="count">({count})</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </main>
-    <style>
-      :root {
-        color-scheme: light dark;
-        --fg: #1a1a1a;
-        --bg: #fdfdfd;
+<BaseLayout title="タグ一覧 | Rの技術メモ">
+  <main>
+    <h1>タグ一覧</h1>
+    <ul class="tag-cloud">
+      {
+        tags.map(([tag, count]) => (
+          <li>
+            <a href={`/tags/${tagSlug(tag)}/`}>
+              #{tag}
+              <span class="count">({count})</span>
+            </a>
+          </li>
+        ))
       }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --fg: #eaeaea;
-          --bg: #16181d;
-        }
-      }
-      body {
-        margin: 0;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Meiryo",
-          sans-serif;
-        color: var(--fg);
-        background: var(--bg);
-      }
-      header {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
-      }
-      header a {
-        color: inherit;
-        text-decoration: none;
-        font-weight: 600;
-      }
-      main {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 2rem 1.25rem;
-      }
-      ul.tag-cloud {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-      ul.tag-cloud a {
-        display: inline-block;
-        padding: 0.35rem 0.8rem;
-        border-radius: 999px;
-        background: color-mix(in srgb, var(--fg) 8%, transparent);
-        color: inherit;
-        text-decoration: none;
-        font-size: 0.875rem;
-      }
-      ul.tag-cloud a:hover {
-        background: color-mix(in srgb, var(--fg) 16%, transparent);
-      }
-      .count {
-        opacity: 0.6;
-        margin-left: 0.25rem;
-      }
-    </style>
-  </body>
-</html>
+    </ul>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 1.5rem;
+  }
+  ul.tag-cloud {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  ul.tag-cloud a {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: var(--chip);
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  ul.tag-cloud a:hover {
+    background: var(--chip-hover);
+  }
+  .count {
+    opacity: 0.6;
+    margin-left: 0.25rem;
+  }
+</style>

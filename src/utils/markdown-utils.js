@@ -10,7 +10,7 @@ export function countTags(edges) {
     return [];
   }
 
-  const acc = H.flatten(edges.map((edge) => edge.node.frontmatter.tags)).reduce((acc, v) => {
+  const tagCounts = H.flatten(edges.map((edge) => edge.node.frontmatter.tags)).reduce((acc, v) => {
     if (acc[v]) {
       acc[v] = acc[v] + 1;
     } else {
@@ -19,5 +19,5 @@ export function countTags(edges) {
     return acc;
   }, {});
 
-  return Object.entries(acc).map(([name, count]) => ({ name, count }));
+  return Object.entries(tagCounts).map(([name, count]) => ({ name, count }));
 }

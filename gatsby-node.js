@@ -5,13 +5,13 @@ const { promisify } = require(`util`);
 const { kebabCase } = require(`./src/utils/helper`);
 const fs = require(`fs`);
 
-exports.onPostBuild = async (_) => {
+exports.onPostBuild = async () => {
   const source = path.resolve(__dirname, ".circleci", "config.yml");
   const dest = path.join(__dirname, "public", ".circleci");
   const copyFile = promisify(fs.copyFile);
   const mkdir = promisify(fs.mkdir);
 
-  await mkdir(dest).catch((_) => console.log(`"${dest}" already exists`));
+  await mkdir(dest).catch(() => console.log(`"${dest}" already exists`));
 
   await copyFile(source, path.join(dest, "config.yml"));
   console.log(`"${source}" ==> "${dest}/config.yml" copied`);
@@ -33,7 +33,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const blogTemplate = path.resolve(`./src/templates/blog-article.js`);
     const tagTemplate = path.resolve(`./src/templates/tag.js`);
     const tagSet = new Set();

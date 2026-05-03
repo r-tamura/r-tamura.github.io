@@ -1,4 +1,4 @@
-exports.wrapRootComponent = (Root) => {
+exports.wrapRootComponent = () => {
   // service workerの登録
   // - Service Worker スレッドを開始してリソースのダウンロードとキャッシュをバックグラウンドで実行すると
   //   ユーザが初めてアクセスした際のパフォーマンスが悪くなるので

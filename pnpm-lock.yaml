@@ -71,9 +71,6 @@ importers:
       react:
         specifier: ^17.0.2
         version: 17.0.2
-      react-disqus-comments:
-        specifier: ^1.4.0
-        version: 1.4.0(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       react-dom:
         specifier: ^17.0.2
         version: 17.0.2(react@17.0.2)
@@ -6189,12 +6186,6 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
-
-  react-disqus-comments@1.4.0:
-    resolution: {integrity: sha512-NkCNsnBSujliii5N2HbA6Wy5z2s6GtCtPaJ0D6GWNMSKnP8wmEtQ3u2qAeG9+xHJE2cMRFmfqMpDeJtBay38RA==}
-    peerDependencies:
-      react: '>=15.0.1 < 17.0.0'
-      react-dom: '>=15.0.1 < 17.0.0'
 
   react-dom@17.0.2:
     resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
@@ -15460,11 +15451,6 @@ snapshots:
       - eslint
       - supports-color
       - vue-template-compiler
-
-  react-disqus-comments@1.4.0(react-dom@17.0.2(react@17.0.2))(react@17.0.2):
-    dependencies:
-      react: 17.0.2
-      react-dom: 17.0.2(react@17.0.2)
 
   react-dom@17.0.2(react@17.0.2):
     dependencies:

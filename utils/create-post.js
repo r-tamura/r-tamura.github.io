@@ -18,10 +18,10 @@ const writeFile = promisify(fs.writeFile);
 
 // コマンド引数から記事名を取得
 // @param <string> article 記事名
-const [article] = process.argv.slice(2);
+const [articleName] = process.argv.slice(2);
 
 try {
-  createNewArticle(article);
+  createNewArticle(articleName);
 } catch (e) {
   console.error(e);
   process.exit(1);
@@ -70,11 +70,11 @@ function now() {
  * @param {string} path サイト内のパス
  * @return {string} front-matter文字列
  */
-function createFrontMatter({ title, created, path }) {
+function createFrontMatter({ title, created, urlPath }) {
   return `---
 title: ${title}
 date: ${created}
-path: "${path}"
+path: "${urlPath}"
 tags: []
 ---`;
 }
@@ -105,7 +105,7 @@ function createNewArticle(article) {
       const content = createFrontMatter({
         title: article,
         created: `${year}-${month}-${date} ${hour}:${minute}:${second}`,
-        path: `blog/${year}/${month}/${article}`,
+        urlPath: `blog/${year}/${month}/${article}`,
       });
       writeFile(path.resolve(dir, "index.md"), content);
     })

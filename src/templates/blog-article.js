@@ -28,7 +28,6 @@ export default function BlogArticle({ data, location }) {
         <div className={`${styles.articleBioWrapper}`}>
           <Bio {...site.siteMetadata} />
         </div>
-        {/* <Disqus siteUrl={site.siteMetadata.siteUrl} articleId={article.fields.slug} title={article.frontmatter.title}/> */}
       </main>
     </Layout>
   );

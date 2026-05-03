@@ -12,11 +12,16 @@ const posts = (await getCollection("articles")).sort(
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Rの技術メモ</title>
+    <link rel="alternate" type="application/rss+xml" title="Rの技術メモ" href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
     <main>
       <h1>Rの技術メモ</h1>
-      <p>主にWeb業界で働くエンジニアの忘備録ブログです。</p>
+      <p>
+        主にWeb業界で働くエンジニアの忘備録ブログです。
+        <a href="/rss.xml" class="rss-link">RSS</a>
+      </p>
       <ul>
         {
           posts.map((post) => (
@@ -51,6 +56,10 @@ const posts = (await getCollection("articles")).sort(
       }
       time {
         color: gray;
+        font-size: 0.875rem;
+      }
+      .rss-link {
+        margin-left: 0.5rem;
         font-size: 0.875rem;
       }
     </style>

@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches: [main]
-    tags: ["v*"]
+    tags: ["v*", "post-*"]
   pull_request:
   workflow_dispatch:
 
@@ -42,12 +42,12 @@ jobs:
       - run: pnpm build
 
       - uses: actions/upload-pages-artifact@v5
-        if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
         with:
           path: dist
 
   deploy:
-    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
     environment:

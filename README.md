@@ -56,17 +56,24 @@ Place co-located images alongside `index.md` and reference them with relative pa
 ## Deploy
 
 `main` への push では CI(lint / format:check / astro check / build)のみ走り、本番には反映されない。
-本番デプロイは `v*` タグの push、または GitHub Actions の workflow_dispatch から手動実行する。
+本番デプロイはタグの push、または GitHub Actions の workflow_dispatch から手動実行する。
+
+### コードや設計の変更を出す (semver)
 
 ```sh
-# 通常リリース (patch: x.y.Z)
-pnpm release
-
-# 中規模リリース (minor: x.Y.0)
-pnpm release:minor
-
-# メジャーリリース (major: X.0.0)
-pnpm release:major
+pnpm release         # patch (x.y.Z) — 微調整・バグ修正
+pnpm release:minor   # minor (x.Y.0) — 機能追加
+pnpm release:major   # major (X.0.0) — 大変更
 ```
 
-各スクリプトは package.json の version を bump し、`v<version>` タグを作成して push まで一気通貫で行う。タグ push をトリガーに `actions/deploy-pages` が dist を GitHub Pages に配信する。
+`v<version>` タグを作成・push する(package.json の version も bump される)。
+
+### 記事を公開する
+
+```sh
+pnpm release:post
+```
+
+`post-YYYYMMDD-HHmm` タグを作成・push する(version は据え置き)。
+
+タグ push をトリガーに `actions/deploy-pages` が dist を GitHub Pages に配信する。

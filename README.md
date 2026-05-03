@@ -59,9 +59,14 @@ Place co-located images alongside `index.md` and reference them with relative pa
 本番デプロイは `v*` タグの push、または GitHub Actions の workflow_dispatch から手動実行する。
 
 ```sh
-# 例: 記事公開やデザイン変更を本番に出す
-git tag v2.1.0
-git push origin v2.1.0
+# 通常リリース (patch: x.y.Z)
+pnpm release
+
+# 中規模リリース (minor: x.Y.0)
+pnpm release:minor
+
+# メジャーリリース (major: X.0.0)
+pnpm release:major
 ```
 
-タグ push をトリガーに `actions/deploy-pages` が dist を GitHub Pages に配信する。
+各スクリプトは package.json の version を bump し、`v<version>` タグを作成して push まで一気通貫で行う。タグ push をトリガーに `actions/deploy-pages` が dist を GitHub Pages に配信する。

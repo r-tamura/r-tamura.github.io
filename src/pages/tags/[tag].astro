@@ -33,7 +33,7 @@ const { name, posts } = Astro.props;
 ---
 
 <BaseLayout title={`#${name} | Rの技術メモ`}>
-  <main>
+  <main id="main">
     <h1>#{name}</h1>
     <p><a href="/tags/">← タグ一覧</a></p>
     <ul>
@@ -75,7 +75,7 @@ const { name, posts } = Astro.props;
   }
   time {
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-variant-numeric: tabular-nums;
   }
 </style>

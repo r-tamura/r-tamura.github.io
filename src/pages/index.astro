@@ -9,7 +9,7 @@ const posts = (await getCollection("articles")).toSorted(
 ---
 
 <BaseLayout title="Rの技術メモ" description="主にWeb業界で働くエンジニアの忘備録ブログです。">
-  <main>
+  <main id="main">
     <h1>Rの技術メモ</h1>
     <p class="lead">主にWeb業界で働くエンジニアの忘備録ブログです。</p>
     <ul>
@@ -54,15 +54,16 @@ const posts = (await getCollection("articles")).toSorted(
     display: grid;
     grid-template-columns: 1fr auto;
     column-gap: 1rem;
-    row-gap: 0.25rem;
+    row-gap: 0.35rem;
     align-items: baseline;
   }
   .title {
     font-weight: 500;
+    padding: 0.25rem 0;
   }
   time {
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
@@ -70,7 +71,7 @@ const posts = (await getCollection("articles")).toSorted(
     grid-column: 1 / -1;
     margin: 0;
     color: var(--muted);
-    font-size: 0.875rem;
-    line-height: 1.6;
+    font-size: 0.9375rem;
+    line-height: 1.7;
   }
 </style>

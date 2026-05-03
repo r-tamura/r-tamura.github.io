@@ -10,12 +10,12 @@
 
 ## リリースコマンド
 
-| コマンド | タグ形式 | version bump | 使うとき |
-|---------|---------|------------|---------|
-| `pnpm release` | `v2.0.1` | patch | 微調整・バグ修正 |
-| `pnpm release:minor` | `v2.1.0` | minor | 機能追加 |
-| `pnpm release:major` | `v3.0.0` | major | 大変更 |
-| `pnpm release:post` | `post-YYYYMMDD-HHmm` | なし | **記事公開** |
+| コマンド             | タグ形式             | version bump | 使うとき         |
+| -------------------- | -------------------- | ------------ | ---------------- |
+| `pnpm release`       | `v2.0.1`             | patch        | 微調整・バグ修正 |
+| `pnpm release:minor` | `v2.1.0`             | minor        | 機能追加         |
+| `pnpm release:major` | `v3.0.0`             | major        | 大変更           |
+| `pnpm release:post`  | `post-YYYYMMDD-HHmm` | なし         | **記事公開**     |
 
 `release:post` は `scripts/release-post.mjs` がタグ作成・push を行う(version 据え置き)。記事追加だけのときは必ずこちらを使う。コードや設計に手が入った場合は semver 系を選ぶ。
 
@@ -24,6 +24,7 @@
 `src/content/articles/<YYYY>/<MM>/<slug>/index.md` に置く。同ディレクトリに co-locate した画像は相対パス参照で WebP 変換される。
 
 frontmatter:
+
 ```yaml
 ---
 title: ...

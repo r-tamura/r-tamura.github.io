@@ -1,21 +1,6 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
-const { promisify } = require(`util`);
-// const ncp = require(`ncp`)
 const { kebabCase } = require(`./src/utils/helper`);
-const fs = require(`fs`);
-
-exports.onPostBuild = async () => {
-  const source = path.resolve(__dirname, ".circleci", "config.yml");
-  const dest = path.join(__dirname, "public", ".circleci");
-  const copyFile = promisify(fs.copyFile);
-  const mkdir = promisify(fs.mkdir);
-
-  await mkdir(dest).catch(() => console.log(`"${dest}" already exists`));
-
-  await copyFile(source, path.join(dest, "config.yml"));
-  console.log(`"${source}" ==> "${dest}/config.yml" copied`);
-};
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;

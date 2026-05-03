@@ -52,3 +52,16 @@ tags: [tag1, tag2]
 ```
 
 Place co-located images alongside `index.md` and reference them with relative paths.
+
+## Deploy
+
+`main` への push では CI(lint / format:check / astro check / build)のみ走り、本番には反映されない。
+本番デプロイは `v*` タグの push、または GitHub Actions の workflow_dispatch から手動実行する。
+
+```sh
+# 例: 記事公開やデザイン変更を本番に出す
+git tag v2.1.0
+git push origin v2.1.0
+```
+
+タグ push をトリガーに `actions/deploy-pages` が dist を GitHub Pages に配信する。

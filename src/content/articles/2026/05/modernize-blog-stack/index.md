@@ -1,6 +1,7 @@
 ---
 title: ブログ基盤を Gatsby から Astro 6 へ全面刷新
 date: 2026-05-03 14:00:00
+last_modified: 2026-05-03 17:30:00
 path: "blog/2026/05/modernize-blog-stack"
 tags: [astro, gatsby, migration, pnpm, mise, github-actions, oxlint]
 ---
@@ -43,7 +44,7 @@ tags: [astro, gatsby, migration, pnpm, mise, github-actions, oxlint]
 
 最初に手を付けたのはここ。Prettier は Rust 系の oxlint/oxfmt に置き換えた。`oxfmt` はまだ pre-1.0 (0.47.0) だが、個人ブログ用途では問題なし。
 
-```json title="package.json" {6-8}
+```json title="package.json" {3-5}
 {
   "scripts": {
     "lint": "oxlint",

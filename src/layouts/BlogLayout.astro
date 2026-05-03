@@ -54,6 +54,24 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
   </div>
 </BaseLayout>
 
+<script>
+  import mediumZoom from "medium-zoom";
+
+  const init = () => {
+    mediumZoom("article img:not(.no-zoom)", {
+      background: "color-mix(in srgb, black 85%, transparent)",
+      margin: 24,
+      scrollOffset: 40,
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>
+
 <style is:global>
   .container {
     max-width: 1100px;
@@ -84,6 +102,9 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
     margin-top: 2.5rem;
     padding-top: 0.5rem;
     border-top: 1px solid var(--border);
+  }
+  article img {
+    cursor: zoom-in;
   }
   article ul.tags {
     list-style: none;

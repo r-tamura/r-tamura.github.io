@@ -28,10 +28,20 @@ frontmatter:
 ```yaml
 ---
 title: ...
-date: 2026-05-03 12:00:00
+date: 2026-05-03 12:00:00 # 公開日(必須)
+last_modified: 2026-05-10 09:00:00 # 更新日(更新時のみ追記、任意)
 tags: [tag1, tag2]
 ---
 ```
+
+`last_modified` を入れた記事ページでは「公開: …」「更新: …」が並んで表示される(同日の場合は更新表記を省略)。
+
+## 記事の更新フロー
+
+新規公開も既存修正も同じ `pnpm release:post` で行う。コミットメッセージで区別:
+
+- 新規: `article(created): <slug>`
+- 更新: `article(updated): <slug>` + frontmatter に `last_modified` を追記
 
 ## 主要ディレクトリ
 

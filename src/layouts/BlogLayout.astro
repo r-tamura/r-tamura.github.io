@@ -6,16 +6,17 @@ import { tagSlug } from "../utils/tags";
 interface Props {
   title: string;
   date: Date;
+  lastModified?: Date;
   tags: string[];
   headings: MarkdownHeading[];
 }
 
-const { title, date, tags, headings } = Astro.props;
-const formatted = date.toLocaleDateString("ja-JP", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
+const { title, date, lastModified, tags, headings } = Astro.props;
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" });
+const formatted = formatDate(date);
+const formattedModified =
+  lastModified && lastModified.getTime() !== date.getTime() ? formatDate(lastModified) : null;
 const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 ---
 
@@ -24,7 +25,14 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
     <main id="main">
       <article>
         <h1>{title}</h1>
-        <time datetime={date.toISOString()}>{formatted}</time>
+        <p class="meta-dates">
+          <time datetime={date.toISOString()}>公開: {formatted}</time>
+          {
+            formattedModified && (
+              <time datetime={lastModified!.toISOString()}>更新: {formattedModified}</time>
+            )
+          }
+        </p>
         <ul class="tags">
           {
             tags.map((t) => (
@@ -90,9 +98,16 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
     line-height: 1.3;
     margin: 0 0 0.5rem;
   }
-  article > time {
+  article .meta-dates {
+    margin: 0 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     color: var(--muted);
     font-size: 0.875rem;
+  }
+  article .meta-dates time {
+    font-variant-numeric: tabular-nums;
   }
   article h2 {
     margin-top: 2.5rem;

@@ -17,6 +17,7 @@ const { Content, headings } = await render(post);
 <BlogLayout
   title={post.data.title}
   date={post.data.date}
+  lastModified={post.data.last_modified}
   tags={post.data.tags}
   headings={headings}
 >

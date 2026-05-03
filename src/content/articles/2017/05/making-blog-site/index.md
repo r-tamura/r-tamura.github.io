@@ -20,7 +20,7 @@ npm install -g gatsby
 
 config.tomlはgatsbyの設定ファイル
 
-```yml
+```toml title="config.toml"
 blogTitle = "技術忘備録"
 authorName = "r-tamura"
 authorDetail = "Web関連多めのソフトウェアエンジニアです。"
@@ -42,7 +42,7 @@ githubId = "r-tamura"
 ## CircleCI経由でのデプロイ
 
 CircleCIの設定ファイル`circle.yml`にデプロイ用設定を入力
-```yml circle.yml
+```yml title="circle.yml"
 machine:
   node:
     version: 7.9.0

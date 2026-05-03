@@ -3,4 +3,7 @@ import { defineEcConfig } from "astro-expressive-code";
 
 export default defineEcConfig({
   plugins: [pluginLineNumbers()],
+  defaultProps: {
+    wrap: true,
+  },
 });

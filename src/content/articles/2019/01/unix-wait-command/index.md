@@ -23,7 +23,7 @@ wait [n]
 
 子プロセスが終了するまで、プロセスがブロッキングし、 子プロセスの返り値を自身の返り値とする。
 
-```shell
+```shell title="wait_1.sh"
 #!/usr/bin/env bash
 
 success_process () {
@@ -66,7 +66,7 @@ process 2 exited with 100  # 3秒後に100を返す
 子プロセスが終了するまで、プロセスがブロッキングし、 子プロセスの返り値を自身の返り値とする。
 重たいプロセスを想定した関数を 5 つ呼び出す。
 
-```shell
+```shell title="wait_2.sh"
 #!/usr/bin/env bash
 heavey_process () {
   sleep $1
@@ -93,7 +93,7 @@ all process finished   # ほぼ5秒後に終了
 
 #### サンプルプログラム 3
 
-```shell
+```shell title="wait_3.sh"
 #!/usr/bin/env bash
 
 sleep 5 &

@@ -85,5 +85,6 @@
     "files": [
       "**/__test__/**/*.js"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.33.2"
 }

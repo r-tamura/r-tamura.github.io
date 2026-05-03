@@ -41,33 +41,27 @@ https://rtam.xyz
 
 ```sh
 git clone https://github.com/r-tamura/r-tamura.github.io.git
-yarn install
+pnpm install
 ```
 
 ## Create a post
 
 ```sh
-yarn create-post
+pnpm create-post
 ```
 
 ## Scripts
 
 ```sh
 // Generate HTML for publish
-yarn run build
+pnpm build
 
 // Clean publish directory
-yarn run clean
+pnpm clean
 
 // Run dev server(http://localhost:8000/)
-yarn dev
+pnpm dev
 
 // Deploy
-yarn run deploy
-
-// Docker run
-docker-compose up -d
-
-// Stop container
-docker-compose down
+pnpm deploy
 ```

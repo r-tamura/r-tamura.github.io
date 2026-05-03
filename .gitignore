@@ -3,4 +3,8 @@ dist/
 .astro/
 .DS_Store
 .claude/
-*.swp
+# Vim
+*.sw[a-z]
+*~
+.netrwhist
+Session.vim

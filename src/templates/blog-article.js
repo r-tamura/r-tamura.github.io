@@ -22,14 +22,9 @@ export default function BlogArticle({ data, location }) {
           <title>{article.frontmatter.title}</title>
         </Helmet>
         <div>{article.frontmatter.date}</div>
-        <h1 className={`${styles.articleTitle}`}>
-          {article.frontmatter.title}
-        </h1>
+        <h1 className={`${styles.articleTitle}`}>{article.frontmatter.title}</h1>
         <TagLinkList tags={article.frontmatter.tags || ["No tags"]} />
-        <div
-          className="remark"
-          dangerouslySetInnerHTML={{ __html: article.html }}
-        />
+        <div className="remark" dangerouslySetInnerHTML={{ __html: article.html }} />
         <div className={`${styles.articleBioWrapper}`}>
           <Bio {...site.siteMetadata} />
         </div>

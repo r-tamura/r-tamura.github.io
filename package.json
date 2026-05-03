@@ -1,11 +1,28 @@
 {
   "name": "rtam-tech-blog",
-  "description": "Rtam's tech blog",
   "version": "1.4.0",
+  "description": "Rtam's tech blog",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "ISC",
   "author": "rtamura30 <rtamura30@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/r-tamura/r-tamura.github.io.git"
+  },
+  "main": "main",
+  "scripts": {
+    "create-post": "node utils/create-post",
+    "build": "gatsby build",
+    "dev": "gatsby develop",
+    "lint": "oxlint",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "test": "ava",
+    "deploy": "node ./utils/deploy.js",
+    "clean": "node ./utils/clean.js",
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
@@ -37,41 +54,24 @@
     "typography": "^0.16.21",
     "typography-theme-sutro": "^0.16.19"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "ISC",
-  "main": "main",
-  "scripts": {
-    "create-post": "node utils/create-post",
-    "build": "gatsby build",
-    "dev": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
-    "test": "ava",
-    "deploy": "node ./utils/deploy.js",
-    "clean": "node ./utils/clean.js",
-    "serve": "gatsby serve"
-  },
   "devDependencies": {
     "@ava/babel": "^2.0.0",
     "ava": "^3.15.0",
     "gh-pages": "^3.2.3",
     "luxon": "^2.0.2",
     "mkdirp": "^1.0.4",
-    "prettier": "^2.3.2",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0",
     "rimraf": "^3.0.2"
   },
   "ava": {
-    "files": [
-      "**/__test__/**/*.js"
-    ],
     "babel": {
+      "compileAsTests": [
+        "src/**/*.js"
+      ],
       "extensions": [
         "js",
         "jsx"
-      ],
-      "compileAsTests": [
-        "src/**/*.js"
       ],
       "testOptions": {
         "plugins": [
@@ -81,6 +81,9 @@
           "@babel/preset-env"
         ]
       }
-    }
+    },
+    "files": [
+      "**/__test__/**/*.js"
+    ]
   }
 }

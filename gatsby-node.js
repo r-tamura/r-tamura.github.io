@@ -76,7 +76,7 @@ exports.createPages = ({ graphql, actions }) => {
             },
           });
         });
-      })
+      }),
     );
   });
 };

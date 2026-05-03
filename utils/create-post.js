@@ -50,7 +50,7 @@ function now() {
   const date = new Date();
 
   // const digit2 = number => `00${number}`.slice(-2)
-  const digit2 = number => number.toString().padStart(2, "0");
+  const digit2 = (number) => number.toString().padStart(2, "0");
 
   return {
     year: String(date.getFullYear()),
@@ -58,7 +58,7 @@ function now() {
     date: digit2(date.getDate()),
     hour: digit2(date.getHours()),
     minute: digit2(date.getMinutes()),
-    second: digit2(date.getSeconds())
+    second: digit2(date.getSeconds()),
   };
 }
 
@@ -92,31 +92,20 @@ function createNewArticle(article) {
 
   // 記事名のバリデーションで不正である場合はエラーを表示して終了
   if (validateArticle(article)) {
-    throw new Error(
-      'Only alphabets, numbers, "-" and "_" can be used in an article name'
-    );
+    throw new Error('Only alphabets, numbers, "-" and "_" can be used in an article name');
   }
 
   // 今日の日付(年、月)を取得する
   //  - 年、月をブログのディレクトリ名に設定
   //  - 時間をブログ作成日に設定
   const { year, month, date, hour, minute, second } = now();
-  const dir = path.resolve(
-    __dirname,
-    `..`,
-    `src`,
-    `pages`,
-    `articles`,
-    year,
-    month,
-    article
-  );
+  const dir = path.resolve(__dirname, `..`, `src`, `pages`, `articles`, year, month, article);
   mkdirp(dir)
     .then(() => {
       const content = createFrontMatter({
         title: article,
         created: `${year}-${month}-${date} ${hour}:${minute}:${second}`,
-        path: `blog/${year}/${month}/${article}`
+        path: `blog/${year}/${month}/${article}`,
       });
       writeFile(path.resolve(dir, "index.md"), content);
     })

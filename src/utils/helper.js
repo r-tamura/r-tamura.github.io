@@ -4,9 +4,9 @@
  * @return array 平坦化された配列
  */
 function flatten(xs) {
-  return [].concat(...xs)
+  return [].concat(...xs);
 }
-exports.flatten = flatten
+exports.flatten = flatten;
 
 /**
  * 文字列をwordごとの配列へ分割する
@@ -20,14 +20,14 @@ exports.flatten = flatten
  */
 function words(str) {
   return str
-    .replace(/([a-z])([A-Z])/g, '$1 $2')
-    .replace(/^[_]+/, '')
-    .replace(/[_]+$/, '')
-    .replace('_', ' ')
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/^[_]+/, "")
+    .replace(/[_]+$/, "")
+    .replace("_", " ")
     .trim()
-    .split(' ')
+    .split(" ");
 }
-exports.words = words
+exports.words = words;
 
 /**
  * 文字列をKebab Caseへ変換する
@@ -41,6 +41,8 @@ exports.words = words
  */
 function kebabCase(str) {
   console.assert(typeof str === "string");
-  return words(str.replace(/['\u2019]/g, '')).join('-').toLowerCase()
+  return words(str.replace(/['\u2019]/g, ""))
+    .join("-")
+    .toLowerCase();
 }
-exports.kebabCase = kebabCase
+exports.kebabCase = kebabCase;

@@ -1,13 +1,7 @@
 import React from "react";
 import * as styles from "./Bio.module.scss";
 
-export default function Bio({
-  authorName,
-  authorDetail,
-  twitterId,
-  facebookId,
-  githubId,
-} = {}) {
+export default function Bio({ authorName, authorDetail, twitterId, facebookId, githubId } = {}) {
   return (
     <div className={styles.bio}>
       <div className={styles.bioImage}>

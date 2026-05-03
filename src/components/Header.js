@@ -10,12 +10,7 @@ const Header = ({ title = "NO TITLE" } = {}) => {
         <Link className={`${styles.title} pointable`} to={"/"}>
           {title}
         </Link>
-        <a
-          href="/rss.xml"
-          target="_brank"
-          className={styles.navIcon}
-          title="RSSへ登録"
-        >
+        <a href="/rss.xml" target="_brank" className={styles.navIcon} title="RSSへ登録">
           <i className="fa fa-rss" aria-hidden="true"></i>
         </a>
       </div>

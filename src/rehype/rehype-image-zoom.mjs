@@ -24,7 +24,7 @@ export default function rehypeImageZoom() {
       const dialogImg = {
         type: "element",
         tagName: "img",
-        properties: { ...node.properties, alt: "", loading: "lazy" },
+        properties: { ...node.properties, loading: "lazy" },
         children: [],
       };
       const closeForm = {

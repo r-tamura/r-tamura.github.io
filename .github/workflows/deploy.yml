@@ -41,10 +41,60 @@ jobs:
 
       - run: pnpm build
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
       - uses: actions/upload-pages-artifact@v5
         if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
         with:
           path: dist
+
+  lighthouse:
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Serve dist
+        run: npx http-server dist -p 4321 -s &
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:4321/
+
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://localhost:4321/
+            http://localhost:4321/articles/2021/08/lambda-connection-pooling/
+            http://localhost:4321/articles/2026/05/modernize-blog-stack/
+            http://localhost:4321/tags/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+  a11y:
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Serve dist
+        run: npx http-server dist -p 4321 -s &
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:4321/
+
+      - run: npx pa11y-ci --sitemap http://localhost:4321/sitemap-0.xml --sitemap-find https://rtam.xyz --sitemap-replace http://localhost:4321
 
   deploy:
     if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'

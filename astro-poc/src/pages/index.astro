@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("articles")).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 ---
@@ -21,7 +21,7 @@ const posts = (await getCollection("blog")).sort(
         {
           posts.map((post) => (
             <li>
-              <a href={`/blog/${post.id.replace(/\/index$/, "")}`}>{post.data.title}</a>
+              <a href={`/articles/${post.id.replace(/\/index$/, "")}`}>{post.data.title}</a>
               <time datetime={post.data.date.toISOString()}>
                 {post.data.date.toLocaleDateString("ja-JP")}
               </time>

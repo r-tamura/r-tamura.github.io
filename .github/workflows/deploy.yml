@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [source]
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -41,12 +41,12 @@ jobs:
       - run: pnpm build
 
       - uses: actions/upload-pages-artifact@v3
-        if: github.ref == 'refs/heads/source'
+        if: github.ref == 'refs/heads/main'
         with:
           path: dist
 
   deploy:
-    if: github.ref == 'refs/heads/source'
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:

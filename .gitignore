@@ -3,6 +3,7 @@ dist/
 .astro/
 .DS_Store
 .claude/
+.pnpm-store/
 # Vim
 *.sw[a-z]
 *~

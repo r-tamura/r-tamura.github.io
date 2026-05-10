@@ -74,6 +74,73 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
       if (e.target === dialog) dialog.close();
     });
   }
+
+  function getMermaidZoomDialog(): HTMLDialogElement {
+    let dialog = document.getElementById("mermaid-zoom-dialog") as HTMLDialogElement | null;
+    if (dialog) return dialog;
+    dialog = document.createElement("dialog");
+    dialog.id = "mermaid-zoom-dialog";
+    dialog.className = "zoom-dialog";
+    const form = document.createElement("form");
+    form.method = "dialog";
+    form.className = "zoom-close-form";
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "submit";
+    closeBtn.className = "zoom-close";
+    closeBtn.setAttribute("aria-label", "閉じる");
+    closeBtn.textContent = "×";
+    form.appendChild(closeBtn);
+    const wrapper = document.createElement("div");
+    wrapper.className = "mermaid-zoom-content";
+    dialog.append(form, wrapper);
+    document.body.appendChild(dialog);
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    return dialog;
+  }
+
+  function attachMermaidZoom(block: HTMLElement) {
+    if (block.dataset.zoomReady) return;
+    const svg = block.querySelector("svg");
+    if (!svg) return;
+    block.dataset.zoomReady = "1";
+    block.style.cursor = "zoom-in";
+    block.setAttribute("role", "button");
+    block.setAttribute("aria-label", "図を拡大表示");
+    block.setAttribute("tabindex", "0");
+
+    const open = () => {
+      const dialog = getMermaidZoomDialog();
+      const wrapper = dialog.querySelector(".mermaid-zoom-content") as HTMLElement;
+      wrapper.innerHTML = "";
+      const clone = svg.cloneNode(true) as SVGElement;
+      clone.removeAttribute("width");
+      clone.removeAttribute("height");
+      clone.style.maxWidth = "none";
+      clone.style.width = "100%";
+      clone.style.height = "auto";
+      wrapper.appendChild(clone);
+      dialog.showModal();
+    };
+    block.addEventListener("click", open);
+    block.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open();
+      }
+    });
+  }
+
+  function scanMermaid() {
+    document
+      .querySelectorAll<HTMLElement>("pre.mermaid")
+      .forEach((b) => attachMermaidZoom(b));
+  }
+
+  scanMermaid();
+  const observer = new MutationObserver(() => scanMermaid());
+  observer.observe(document.body, { childList: true, subtree: true });
 </script>
 
 <style is:global>
@@ -145,6 +212,19 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
     height: 100%;
     object-fit: contain;
     display: block;
+  }
+  .zoom-dialog .mermaid-zoom-content {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: grid;
+    align-content: center;
+  }
+  .zoom-dialog .mermaid-zoom-content svg {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
   }
   .zoom-dialog::backdrop {
     background: color-mix(in srgb, black 90%, transparent);

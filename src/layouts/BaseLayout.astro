@@ -17,6 +17,15 @@ const { title, description } = Astro.props;
     <link rel="icon" href="/favicons/fox_48x48.png" />
     <link rel="alternate" type="application/rss+xml" title="Rの技術メモ" href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline>
+      (() => {
+        const m = window.matchMedia("(prefers-color-scheme: dark)");
+        const apply = () =>
+          document.documentElement.setAttribute("data-theme", m.matches ? "dark" : "light");
+        apply();
+        m.addEventListener("change", apply);
+      })();
+    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">本文へスキップ</a>
@@ -68,6 +77,24 @@ const { title, description } = Astro.props;
       *::before,
       *::after {
         box-sizing: border-box;
+      }
+      .mermaid svg :is(.node rect, .node polygon, .node circle, .node ellipse, .cluster rect) {
+        fill: var(--code-bg) !important;
+        stroke: var(--border) !important;
+      }
+      .mermaid svg :is(.nodeLabel, .edgeLabel, .cluster-label) {
+        color: var(--fg) !important;
+        background-color: transparent !important;
+      }
+      .mermaid svg .edgeLabel rect {
+        fill: var(--bg) !important;
+      }
+      .mermaid svg :is(.flowchart-link, .messageLine0, .messageLine1) {
+        stroke: var(--muted) !important;
+      }
+      .mermaid svg .arrowheadPath {
+        fill: var(--muted) !important;
+        stroke: var(--muted) !important;
       }
       html {
         font-size: 17px;

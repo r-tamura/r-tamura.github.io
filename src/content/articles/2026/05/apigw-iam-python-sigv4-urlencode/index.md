@@ -1,6 +1,7 @@
 ---
 title: IAM 認可付き API Gateway を Python から呼ぶときのクエリパラメータ URL エンコード問題
 date: 2026-05-09 16:56:00
+last_modified: 2026-05-11 10:28:00
 path: "blog/2026/05/apigw-iam-python-sigv4-urlencode"
 tags: [aws, api-gateway, python, sigv4, botocore]
 ---
@@ -12,9 +13,8 @@ tags: [aws, api-gateway, python, sigv4, botocore]
 - 解決策は 2 通り:
   1. `urlencode(params, quote_via=quote, safe="")` — `quote` を使い空白を `%20` にする (今回採用した方法)
   2. `AWSRequest(url=..., params=...)` で `params=` キーワードを使い、botocore に正規化を任せる
-- **botocore の `urlencode` は Python 標準の再エクスポートで実装は同じ**。違うのは "どの場面で何のオプションで呼ぶか"。
 
-検証用のソースコード一式 (CDK スタック・Python クライアント) は [r-tamura/aws-demo-execute-api-gateway-iam-authorization](https://github.com/r-tamura/aws-demo-execute-api-gateway-iam-authorization) に置いている。v
+検証用のソースコード一式 (CDK スタック・Python クライアント) は [r-tamura/aws-demo-execute-api-gateway-iam-authorization](https://github.com/r-tamura/aws-demo-execute-api-gateway-iam-authorization) に置いている。
 
 ---
 

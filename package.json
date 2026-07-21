@@ -24,7 +24,7 @@
     "release:post": "node scripts/release-post.mjs"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.4.6",
     "astro-mermaid": "^2.0.1",
